@@ -6,4 +6,20 @@
     <string name="text_notification">Text Notification</string>
     <string name="date">Date</string>
     <string name="sub_text">Sub Text</string>
+    <string name="cari_kursus_terbaik">Cari kursus terbaik...</string>
+    <string name="search">search</string>
+    <string name="topik_kelas">Topik Kelas</string>
+    <string name="filter">Filter</string>
+    <string name="semua_kelas">Semua kelas</string>
+    <string name="kelas_gratis">Kelas gratis</string>
+    <string name="kelas_premium">Kelas premium</string>
+    <string name="ui_ux_design">UI/UX Design</string>
+    <string name="membuat_ui_ux_design">Membuat UI/UX Design</string>
+    <string name="john_doe">John Doe</string>
+    <string name="beginner">Beginner</string>
+    <string name="_60_menit">60 Menit</string>
+    <string name="_10_modul">10 Modul</string>
+    <string name="_5_0">5.0</string>
+    <string name="mulai_kelas">Mulai kelas</string>
+    <string name="course_image">Course image</string>
 </resources>
