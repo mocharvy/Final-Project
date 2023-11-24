@@ -97,4 +97,9 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("com.github.appsfeature:otp-view:1.0")
+
+    //Media3 ExoPlayer
+    implementation ("androidx.media3:media3-exoplayer:1.2.0")
+    implementation ("androidx.media3:media3-exoplayer-dash:1.2.0")
+    implementation ("androidx.media3:media3-ui:1.2.0")
 }
