@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.programmer.finalproject.R
+import com.programmer.finalproject.databinding.FragmentBerandaBinding
 
 class BerandaFragment : Fragment() {
+    private lateinit var binding : FragmentBerandaBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_beranda, container, false)
+        binding = FragmentBerandaBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 
 }

@@ -16,21 +16,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navController = findNavController(R.id.nav_host)
+        setupBottomNav()
+    }
+    private fun setupBottomNav() {
+        binding.apply {
+            navController = findNavController(R.id.nav_host)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (
-                destination.id == R.id.homeFragment ||
-                destination.id == R.id.notifFragment ||
-                destination.id == R.id.kelasFragment ||
-                destination.id == R.id.kursusFragment ||
-                destination.id == R.id.profileFragment
-                ) {
-                binding.navBottom.setupWithNavController(navController)
-                binding.navBottom.visibility = View.VISIBLE
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                if (destination.id == R.id.kelasFragment || destination.id == R.id.berandaFragment || destination.id == R.id.notifikasiFragment||destination.id == R.id.akunFragment||destination.id == R.id.kursusFragment) {
+                    binding.navBottom.setupWithNavController(navController)
+                    binding.navBottom.visibility = View.VISIBLE
 
-            } else {
-                binding.navBottom.visibility = View.GONE
+                } else {
+                    binding.navBottom.visibility = View.GONE
+                }
             }
         }
     }
