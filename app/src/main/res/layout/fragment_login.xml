@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bglogin"
+    tools:context=".LoginFragment">
+
+    <TextView
+        android:id="@+id/txt_masuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunitobold"
+        android:text="Masuk"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Email/Nomor Telepon"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_masuk"/>
+
+    <EditText
+        android:id="@+id/colum_email1"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/colominput"
+        android:hint="Contoh: Belajar@gmail.com"
+        android:paddingLeft="10dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email"/>
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Password"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colum_email1" />
+
+    <EditText
+        android:id="@+id/colum_password1"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/colominput"
+        android:hint="Masukkan Password"
+        android:paddingLeft="10dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"/>
+
+    <TextView
+        android:id="@+id/txt_text"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Belum Punya Akun?"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colum_password1"/>
+    <TextView
+        android:id="@+id/txt_daftardisini"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/nunitoregular"
+        android:text="Daftar Disini"
+        android:layout_marginTop="55dp"
+        android:textColor="@color/purple_500"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toRightOf="@id/txt_text"
+        app:layout_constraintTop_toBottomOf="@id/colum_password1"/>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/nunitobold"
+        android:text="Masuk"
+        android:textColor="@color/bluesky"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_daftardisini"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
