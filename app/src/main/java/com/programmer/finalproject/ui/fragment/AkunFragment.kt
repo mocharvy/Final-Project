@@ -24,7 +24,7 @@ class AkunFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             tvAppsVersion.text = "Version 1.0"
-            tvAkun.setOnClickListener {
+            tvProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_akunFragment_to_editProfileFragment)
             }
             tvSetting.setOnClickListener {
