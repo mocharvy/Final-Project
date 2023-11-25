@@ -41,4 +41,8 @@
     <string name="intermediate">Intermediate</string>
     <string name="semua_level">Semua level</string>
     <string name="terapkan_filter">Terapkan Filter</string>
+    <string name="akun">Akun</string>
+    <string name="profile_saya">Profile Saya</string>
+    <string name="riwayat_pembayaran">Riwayat Pembayaran</string>
+    <string name="version">Version</string>
 </resources>
