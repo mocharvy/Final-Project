@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/riwayat_pembayaran"
+            android:text="@string/keluar"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
             app:layout_constraintStart_toEndOf="@+id/btn_logout"

@@ -45,4 +45,8 @@
     <string name="profile_saya">Profile Saya</string>
     <string name="riwayat_pembayaran">Riwayat Pembayaran</string>
     <string name="version">Version</string>
+    <string name="keluar">Keluar</string>
+    <string name="masukkan_password_baru">Masukkan Password Baru</string>
+    <string name="ulangi_password_baru">Ulangi Password Baru</string>
+    <string name="masukkan_password_lama">Masukkan Password Lama</string>
 </resources>
