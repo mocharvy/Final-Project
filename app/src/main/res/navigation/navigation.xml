@@ -33,10 +33,35 @@
         android:id="@+id/akunFragment"
         android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
         android:label="fragment_akun"
-        tools:layout="@layout/fragment_akun" />
+        tools:layout="@layout/fragment_akun" >
+        <action
+            android:id="@+id/action_akunFragment_to_historyPaymentFragment"
+            app:destination="@id/historyPaymentFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <dialog
         android:id="@+id/filterBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.FilterBottomSheet"
         android:label="filter_bottom_sheet"
         tools:layout="@layout/filter_bottom_sheet" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.programmer.finalproject.ui.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/historyPaymentFragment"
+        android:name="com.programmer.finalproject.ui.fragment.HistoryPaymentFragment"
+        android:label="fragment_history_payment"
+        tools:layout="@layout/fragment_history_payment" />
 </navigation>
