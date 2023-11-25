@@ -27,4 +27,18 @@
     <string name="tentang_kelas">Tentang Kelas</string>
     <string name="text_desc">Ini adalah penjelasan tentang kelas. Apa saja boleh ditulis disini asalkan rapih.</string>
     <string name="kelas_ini_ditujukan">Kelas ini ditujukan untuk</string>
+    <string name="rekomendasi">Rekomendasi</string>
+    <string name="terbaru">Terbaru</string>
+    <string name="terpopuler">Terpopuler</string>
+    <string name="promo">Promo</string>
+    <string name="kategori">Kategori</string>
+    <string name="web_development">Web Development</string>
+    <string name="android_development">Android Development</string>
+    <string name="data_science">Data Science</string>
+    <string name="business_intelligent">Business Intelligent</string>
+    <string name="level">Level</string>
+    <string name="advanced">Advanced</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="semua_level">Semua level</string>
+    <string name="terapkan_filter">Terapkan Filter</string>
 </resources>
