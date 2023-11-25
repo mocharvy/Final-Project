@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.programmer.finalproject.R
+import com.programmer.finalproject.databinding.FragmentAkunBinding
 
 class AkunFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding : FragmentAkunBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_akun, container, false)
+        binding = FragmentAkunBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 }
