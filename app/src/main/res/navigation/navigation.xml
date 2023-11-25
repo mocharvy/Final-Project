@@ -24,10 +24,19 @@
         android:id="@+id/kursusFragment"
         android:name="com.programmer.finalproject.ui.fragment.KursusFragment"
         android:label="fragment_kursus"
-        tools:layout="@layout/fragment_kursus" />
+        tools:layout="@layout/fragment_kursus" >
+        <action
+            android:id="@+id/action_kursusFragment_to_filterBottomSheet"
+            app:destination="@id/filterBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/akunFragment"
         android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
         android:label="fragment_akun"
         tools:layout="@layout/fragment_akun" />
+    <dialog
+        android:id="@+id/filterBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.FilterBottomSheet"
+        android:label="filter_bottom_sheet"
+        tools:layout="@layout/filter_bottom_sheet" />
 </navigation>
