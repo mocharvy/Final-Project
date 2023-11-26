@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_kursusFragment_to_filterBottomSheet"
             app:destination="@id/filterBottomSheet" />
+        <action
+            android:id="@+id/action_kursusFragment_to_detailPaymentFragment"
+            app:destination="@id/detailPaymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
@@ -64,4 +67,14 @@
         android:name="com.programmer.finalproject.ui.fragment.HistoryPaymentFragment"
         android:label="fragment_history_payment"
         tools:layout="@layout/fragment_history_payment" />
+    <activity
+        android:id="@+id/detailKelasActivity"
+        android:name="com.programmer.finalproject.ui.DetailKelasActivity"
+        android:label="activity_detail_kelas"
+        tools:layout="@layout/activity_detail_kelas" />
+    <fragment
+        android:id="@+id/detailPaymentFragment"
+        android:name="com.programmer.finalproject.ui.fragment.DetailPaymentFragment"
+        android:label="fragment_detail_payment"
+        tools:layout="@layout/fragment_detail_payment" />
 </navigation>

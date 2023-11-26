@@ -53,4 +53,22 @@
     <string name="nomor_telepon">Nomor Telepon</string>
     <string name="masukan_negara_tempat_tinggal">Masukan Negara tempat tinggal</string>
     <string name="simpan_profile_saya">Simpan Profile Saya</string>
+    <string name="harga">Harga</string>
+    <string name="rp">Rp.</string>
+    <string name="_123456">123456</string>
+    <string name="ppn_11">PPN 11%</string>
+    <string name="total">Total</string>
+    <string name="bank_transfer">Bank Transfer</string>
+    <string name="account_number">Account number</string>
+    <string name="_012345678">012345678</string>
+    <string name="account_name">Account name</string>
+    <string name="binar">Binar</string>
+    <string name="binar_bank">Binar Bank</string>
+    <string name="total_transfer">Total transfer</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="card_number">Card number</string>
+    <string name="card_holder_name">Card holder name</string>
+    <string name="cvv">CVV</string>
+    <string name="expire_date">Expire date</string>
+    <string name="bayar_dan_ikuti">Bayar dan Ikuti kelas selamanya</string>
 </resources>
