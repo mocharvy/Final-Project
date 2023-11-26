@@ -36,6 +36,10 @@ class KursusFragment : Fragment() {
             findNavController().navigate(R.id.action_kursusFragment_to_filterBottomSheet)
         }
 
+        binding.tvPremium.setOnClickListener {
+            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment)
+        }
+
 
         return binding.root
     }
