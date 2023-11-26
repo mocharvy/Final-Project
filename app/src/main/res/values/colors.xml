@@ -8,8 +8,10 @@
     <color name="bluesky">#6148FF</color>
     <color name="purple_500">#6148FF</color>
     <color name="dark_green">#9447CC64</color>
+    <color name="darker_green">#8038A14F</color>
     <color name="very_light_blue">#FDD5E1F6</color>
     <color name="light_blue">#EBF3FC</color>
+    <color name="red">#FD0A6E</color>
     <color name="light_gray">#F2F9F9F9</color>
     <color name="medium_gray">#D1D1D1</color>
 
