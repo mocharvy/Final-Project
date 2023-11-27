@@ -24,10 +24,57 @@
         android:id="@+id/kursusFragment"
         android:name="com.programmer.finalproject.ui.fragment.KursusFragment"
         android:label="fragment_kursus"
-        tools:layout="@layout/fragment_kursus" />
+        tools:layout="@layout/fragment_kursus" >
+        <action
+            android:id="@+id/action_kursusFragment_to_filterBottomSheet"
+            app:destination="@id/filterBottomSheet" />
+        <action
+            android:id="@+id/action_kursusFragment_to_detailPaymentFragment"
+            app:destination="@id/detailPaymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/akunFragment"
         android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
         android:label="fragment_akun"
-        tools:layout="@layout/fragment_akun" />
+        tools:layout="@layout/fragment_akun" >
+        <action
+            android:id="@+id/action_akunFragment_to_historyPaymentFragment"
+            app:destination="@id/historyPaymentFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/filterBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.FilterBottomSheet"
+        android:label="filter_bottom_sheet"
+        tools:layout="@layout/filter_bottom_sheet" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.programmer.finalproject.ui.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/historyPaymentFragment"
+        android:name="com.programmer.finalproject.ui.fragment.HistoryPaymentFragment"
+        android:label="fragment_history_payment"
+        tools:layout="@layout/fragment_history_payment" />
+    <activity
+        android:id="@+id/detailKelasActivity"
+        android:name="com.programmer.finalproject.ui.DetailKelasActivity"
+        android:label="activity_detail_kelas"
+        tools:layout="@layout/activity_detail_kelas" />
+    <fragment
+        android:id="@+id/detailPaymentFragment"
+        android:name="com.programmer.finalproject.ui.fragment.DetailPaymentFragment"
+        android:label="fragment_detail_payment"
+        tools:layout="@layout/fragment_detail_payment" />
 </navigation>
