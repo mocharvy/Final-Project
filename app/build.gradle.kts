@@ -102,4 +102,7 @@ dependencies {
     implementation ("androidx.media3:media3-exoplayer:1.2.0")
     implementation ("androidx.media3:media3-exoplayer-dash:1.2.0")
     implementation ("androidx.media3:media3-ui:1.2.0")
+
+    //Material Design
+    implementation ("com.google.android.material:material:1.10.0")
 }
