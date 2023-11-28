@@ -15,6 +15,7 @@
     <color name="light_gray">#F2F9F9F9</color>
     <color name="medium_gray">#D1D1D1</color>
     <color name="very_light_gray">#E5E5E5</color>
+    <color name="light_blue_alt">#489CFF</color>
 
 
     // Custom Chip Style
