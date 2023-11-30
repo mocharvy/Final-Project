@@ -11,6 +11,7 @@ import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentDetailPaymentBinding
+import com.programmer.finalproject.ui.bottomsheet.PurchasedBottomSheet
 
 class DetailPaymentFragment : Fragment() {
 
@@ -67,7 +68,13 @@ class DetailPaymentFragment : Fragment() {
             }
         }
 
-
+        binding.btPay.setOnClickListener {
+            val purchasedBottomSheet = PurchasedBottomSheet()
+            purchasedBottomSheet.show(
+                requireActivity().supportFragmentManager,
+                purchasedBottomSheet.tag
+            )
+        }
         return binding.root
     }
 
