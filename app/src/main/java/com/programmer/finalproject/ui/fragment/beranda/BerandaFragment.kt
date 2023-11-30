@@ -43,8 +43,11 @@ class BerandaFragment : Fragment() {
             listCoursesAdapter = CoursesAdapter()
 
             binding.rvCourses.adapter = listCoursesAdapter
-            binding.rvCourses.layoutManager = LinearLayoutManager(requireContext())
-
+            binding.rvCourses.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
             listCoursesAdapter.submitList(list?.data)
 
         }
