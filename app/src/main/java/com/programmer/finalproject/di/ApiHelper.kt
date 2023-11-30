@@ -5,5 +5,6 @@ import javax.inject.Inject
 
 class ApiHelper @Inject constructor(private val api: ApiService) {
     fun register(registerRequest: RegisterRequest) = api.registerUser(registerRequest)
+    fun getCourses() = api.getCourses()
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="255dp"
     android:elevation="20dp"
-    android:padding="5dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,7 +107,7 @@
             android:id="@+id/iv_module"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_module"
             app:layout_constraintStart_toEndOf="@id/tv_level"
@@ -152,7 +152,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_level" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_start_class"
+            android:id="@+id/bt_price"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
