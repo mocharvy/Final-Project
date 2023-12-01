@@ -8,5 +8,6 @@ class ApiHelper @Inject constructor(private val api: ApiService) {
     fun register(registerRequest: RegisterRequest) = api.registerUser(registerRequest)
     fun login(loginRequest: LoginRequest) = api.loginUser(loginRequest)
     fun getCourses() = api.getCourses()
+    fun getCategories() = api.getCategories()
 
 }
