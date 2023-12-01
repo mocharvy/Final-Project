@@ -1,5 +1,6 @@
 package com.programmer.finalproject.di
 
+import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
@@ -25,5 +26,8 @@ interface ApiService {
 
     @GET("courses")
     fun getCourses(): Call <CoursesResponse>
+
+    @GET("categories")
+    fun getCategories() : Call <CategoryResponse>
 
 }
