@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
+import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentBerandaBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +19,7 @@ class BerandaFragment : Fragment() {
     private lateinit var binding : FragmentBerandaBinding
     private val viewModel: BerandaViewModel by viewModels()
     private lateinit var listCoursesAdapter: CoursesAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +33,7 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCourse()
+        getCategories()
 
         binding.apply {
 
@@ -49,6 +53,19 @@ class BerandaFragment : Fragment() {
                 false
             )
             listCoursesAdapter.submitList(list?.data)
+
+        }
+    }
+
+    private fun getCategories() {
+        viewModel.getCategories()
+
+        viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
+            categoryAdapter = CategoryAdapter()
+
+            binding.rvCategory.adapter = categoryAdapter
+            binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
+            categoryAdapter.submitList(list?.data)
 
         }
     }
