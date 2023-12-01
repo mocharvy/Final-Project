@@ -9,5 +9,6 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
     fun login(loginRequest: LoginRequest) = apiHelper.login(loginRequest)
 
     fun getCourses() = apiHelper.getCourses()
+    fun getListCategory() = apiHelper.getCategories()
 
 }
