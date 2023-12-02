@@ -53,6 +53,10 @@ class LoginFragment : Fragment() {
             }
 
         }
+
+        binding.tvBypass.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
+        }
     }
 
     private fun verify() {

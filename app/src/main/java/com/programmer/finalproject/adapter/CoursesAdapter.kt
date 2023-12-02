@@ -33,8 +33,8 @@ class CoursesAdapter : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Di
                 tvDesc.text = courses.category.category
                 ivCourseImage.load(courses.category.image)
                 tvLevel.text= courses.level
-                tvModule.text = courses.total_chapter.toString() + " Module"
-                tvTime.text = courses.total_duration.toString() + " Menit"
+                tvModule.text = courses.total_chapter.toString()
+                tvTime.text = courses.total_duration.toString()
                 btPrice.text = "Beli Rp${courses.price}"
             }
 

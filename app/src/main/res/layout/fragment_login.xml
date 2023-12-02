@@ -118,4 +118,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_daftardisini"/>
 
+    <TextView
+        android:id="@+id/tv_bypass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bypass"
+        app:layout_constraintTop_toBottomOf="@id/txt_daftardisini"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
