@@ -3,9 +3,9 @@ package com.programmer.finalproject.model.courses
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class DataCourse(
     @SerializedName("category")
-    val category: CategoryX,
+    val category: CategoryCourse,
     @SerializedName("facilitator")
     val facilitator: String,
     @SerializedName("id")
