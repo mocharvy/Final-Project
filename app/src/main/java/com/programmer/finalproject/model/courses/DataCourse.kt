@@ -1,6 +1,5 @@
 package com.programmer.finalproject.model.courses
 
-
 import com.google.gson.annotations.SerializedName
 
 data class DataCourse(

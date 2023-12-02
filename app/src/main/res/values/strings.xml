@@ -65,4 +65,7 @@
     <string name="cvv">CVV</string>
     <string name="expire_date">Expire date</string>
     <string name="bayar_dan_ikuti">Bayar dan Ikuti kelas selamanya</string>
+    <string name="_10">10</string>
+    <string name="modul">Modul</string>
+    <string name="menit">Menit</string>
 </resources>
