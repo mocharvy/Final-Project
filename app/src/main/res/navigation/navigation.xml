@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_kelas" />
     <fragment
         android:id="@+id/kursusFragment"
-        android:name="com.programmer.finalproject.ui.fragment.KursusFragment"
+        android:name="com.programmer.finalproject.ui.fragment.kursus.KursusFragment"
         android:label="fragment_kursus"
         tools:layout="@layout/fragment_kursus" >
         <action

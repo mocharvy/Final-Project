@@ -107,7 +107,7 @@
             android:id="@+id/iv_module"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="40dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_module"
             app:layout_constraintStart_toEndOf="@id/tv_level"
@@ -121,10 +121,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/_10_modul"
+            android:text="@string/_10"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_module"
+            app:layout_constraintTop_toTopOf="@id/iv_level" />
+
+        <TextView
+            android:id="@+id/text_module"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/modul"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tv_module"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
 
 
@@ -143,9 +155,21 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/_10"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/text_time"
+            app:layout_constraintTop_toTopOf="@id/iv_level" />
+
+        <TextView
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/_60_menit"
+            android:text="@string/menit"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
