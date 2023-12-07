@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_masuk" />
 
     <EditText
-        android:id="@+id/colum_email1"
+        android:id="@+id/colum_email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -57,10 +57,10 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/colum_email1" />
+        app:layout_constraintTop_toBottomOf="@id/colum_email" />
 
     <EditText
-        android:id="@+id/colum_password1"
+        android:id="@+id/colum_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"

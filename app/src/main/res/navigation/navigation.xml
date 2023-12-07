@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
-        android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
+        android:name="com.programmer.finalproject.ui.fragment.akun.AkunFragment"
         android:label="fragment_akun"
         tools:layout="@layout/fragment_akun" >
         <action

@@ -9,22 +9,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
+import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
 import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class KursusFragment : Fragment() {
 
     private lateinit var binding: FragmentKursusBinding
-    private lateinit var allCursesAdapter: AllCourseAdapter
+    private lateinit var allCoursesAdapter: AllCourseAdapter
 
     private val kursusViewModel: KursusViewModel by viewModels()
 
@@ -35,10 +34,15 @@ class KursusFragment : Fragment() {
         binding = FragmentKursusBinding.inflate(inflater, container, false)
 
 
-        allCursesAdapter = AllCourseAdapter()
+        allCoursesAdapter = AllCourseAdapter { courseId ->
+            val intent = Intent(context, DetailKelasActivity::class.java)
+            intent.putExtra("courseId", courseId)
+            context?.startActivity(intent)
+        }
 
         setupRecyclerView()
-        readCourseFromDatabase()
+        //readCourseFromDatabase()
+        requestCourseFromApi()
 
         binding.tvTopikKelas.setOnClickListener {
             val intent = Intent(requireContext(), DetailKelasActivity::class.java)
@@ -59,14 +63,12 @@ class KursusFragment : Fragment() {
 
     private fun readCourseFromDatabase() {
         Log.d("Read course database", "read course database called")
-        lifecycleScope.launch {
-            kursusViewModel.readCourse.observe(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()) {
-                    allCursesAdapter.setData(database.first().listAllCoursesResponse)
-                    hideShimmerEffect()
-                } else {
-                    requestCourseFromApi()
-                }
+        kursusViewModel.readCourse.observe(viewLifecycleOwner) { database ->
+            if (database.isNotEmpty()) {
+                allCoursesAdapter.setData(database.first().listAllCoursesResponse)
+                hideShimmerEffect()
+            } else {
+                requestCourseFromApi()
             }
         }
     }
@@ -78,7 +80,14 @@ class KursusFragment : Fragment() {
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    response.data?.let { allCursesAdapter.setData(it) }
+                    Log.d("Call success", "api called successfully")
+                    response.data?.let {
+                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
+                        Log.d("Data debug", "${response.data}")
+                        allCoursesAdapter.setData(it)
+                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
+
+                    }
                 }
 
                 is NetworkResult.Error -> {
@@ -101,13 +110,13 @@ class KursusFragment : Fragment() {
     private fun loadCourseFromCache() {
         kursusViewModel.readCourse.observe(viewLifecycleOwner) { database ->
             if (database.isNotEmpty()) {
-                allCursesAdapter.setData(database.first().listAllCoursesResponse)
+                allCoursesAdapter.setData(database.first().listAllCoursesResponse)
             }
         }
     }
 
     private fun setupRecyclerView() {
-        binding.rvCourse.adapter = allCursesAdapter
+        binding.rvCourse.adapter = allCoursesAdapter
         binding.rvCourse.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
