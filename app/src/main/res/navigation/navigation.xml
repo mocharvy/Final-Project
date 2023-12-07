@@ -3,23 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/walkThroughFragment">
+
 
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
         android:label="fragment_beranda"
-        tools:layout="@layout/fragment_beranda" />
+        tools:layout="@layout/fragment_beranda" >
+        <action
+            android:id="@+id/action_berandaFragment_to_notifikasiFragment2"
+            app:destination="@id/notifikasiFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
         android:name="com.programmer.finalproject.ui.fragment.NotifikasiFragment"
         android:label="fragment_notifikasi"
-        tools:layout="@layout/fragment_notifikasi" />
+        tools:layout="@layout/fragment_notifikasi" >
+        <action
+            android:id="@+id/action_notifikasiFragment_to_kelasFragment2"
+            app:destination="@id/kelasFragment" />
+    </fragment>
     <fragment
         android:id="@+id/kelasFragment"
         android:name="com.programmer.finalproject.ui.fragment.KelasFragment"
         android:label="fragment_kelas"
-        tools:layout="@layout/fragment_kelas" />
+        tools:layout="@layout/fragment_kelas" >
+        <action
+            android:id="@+id/action_kelasFragment_to_detailKelasActivity2"
+            app:destination="@id/detailKelasActivity" />
+    </fragment>
     <fragment
         android:id="@+id/kursusFragment"
         android:name="com.programmer.finalproject.ui.fragment.kursus.KursusFragment"
@@ -110,5 +123,10 @@
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
         android:label="fragment_walk_through"
-        tools:layout="@layout/fragment_walk_through" />
+        tools:layout="@layout/fragment_walk_through" >
+        <action
+            android:id="@+id/action_walkThroughFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+    </fragment>
+
 </navigation>
