@@ -9,12 +9,15 @@
     <color name="dark_green">#9447CC64</color>
     <color name="darker_green">#8038A14F</color>
     <color name="very_light_blue">#FDD5E1F6</color>
+    <color name="bluesea">#6DB9EF</color>
+    <color name="bluelight">#DAF5FF</color>
     <color name="light_blue">#EBF3FC</color>
     <color name="red">#FD0A6E</color>
     <color name="light_gray">#F2F9F9F9</color>
     <color name="medium_gray">#D1D1D1</color>
     <color name="very_light_gray">#E5E5E5</color>
     <color name="light_blue_alt">#489CFF</color>
+    <color name="gray">#8d8f8f</color>
 
 
     // Custom Chip Style
