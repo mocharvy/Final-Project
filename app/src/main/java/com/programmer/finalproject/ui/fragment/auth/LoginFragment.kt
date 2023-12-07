@@ -43,20 +43,20 @@ class LoginFragment : Fragment() {
             txtDaftardisini.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
-            btnLogin.setOnClickListener {
+//            btn.setOnClickListener {
 //                    Toast.makeText(requireContext(), "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
 
                 login()
                 verify()
 
 
-            }
+//            }
 
         }
 
-        binding.tvBypass.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
-        }
+//        binding.tvBypass.setOnClickListener {
+//            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
+//        }
     }
 
     private fun verify() {
@@ -81,7 +81,7 @@ class LoginFragment : Fragment() {
         viewModel.login(loginRequest)
 
         viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
-            binding.pb.isVisible = isLoading
+//            binding.pb.isVisible = isLoading
         }
 
         viewModel.verified.observe(viewLifecycleOwner) {
