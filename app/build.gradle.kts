@@ -5,6 +5,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -76,6 +77,8 @@ dependencies {
     // Room
     implementation ("androidx.room:room-runtime:2.6.0")
     kapt("androidx.room:room-compiler:2.6.0")
+    implementation ("androidx.room:room-ktx:2.6.0")
+
 
     //Firebase crashlytics
     implementation("com.google.firebase:firebase-crashlytics:18.5.0")
@@ -102,4 +105,7 @@ dependencies {
     implementation ("androidx.media3:media3-exoplayer:1.2.0")
     implementation ("androidx.media3:media3-exoplayer-dash:1.2.0")
     implementation ("androidx.media3:media3-ui:1.2.0")
+
+    //Material Design
+    implementation ("com.google.android.material:material:1.10.0")
 }

@@ -5,9 +5,10 @@
     android:id="@+id/navigation"
     app:startDestination="@id/walkThroughFragment">
 
+
     <fragment
         android:id="@+id/berandaFragment"
-        android:name="com.programmer.finalproject.ui.fragment.BerandaFragment"
+        android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
         android:label="fragment_beranda"
         tools:layout="@layout/fragment_beranda" >
         <action
@@ -34,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/kursusFragment"
-        android:name="com.programmer.finalproject.ui.fragment.KursusFragment"
+        android:name="com.programmer.finalproject.ui.fragment.kursus.KursusFragment"
         android:label="fragment_kursus"
         tools:layout="@layout/fragment_kursus" >
         <action
@@ -90,6 +91,35 @@
         android:label="fragment_detail_payment"
         tools:layout="@layout/fragment_detail_payment" />
     <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.programmer.finalproject.ui.fragment.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.programmer.finalproject.ui.fragment.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.programmer.finalproject.OtpFragment"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" />
+    <fragment
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
         android:label="fragment_walk_through"
@@ -98,4 +128,5 @@
             android:id="@+id/action_walkThroughFragment_to_berandaFragment"
             app:destination="@id/berandaFragment" />
     </fragment>
+
 </navigation>

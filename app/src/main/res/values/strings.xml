@@ -1,13 +1,7 @@
 <resources>
     <string name="app_name">Final Project</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_notification">Title Notification</string>
-    <string name="text_notification">Text Notification</string>
-    <string name="date">Date</string>
-    <string name="sub_text">Sub Text</string>
     <string name="cari_kursus_terbaik">Cari kursus terbaik...</string>
-    <string name="search">search</string>
     <string name="topik_kelas">Topik Kelas</string>
     <string name="filter">Filter</string>
     <string name="semua_kelas">Semua kelas</string>
@@ -71,4 +65,7 @@
     <string name="cvv">CVV</string>
     <string name="expire_date">Expire date</string>
     <string name="bayar_dan_ikuti">Bayar dan Ikuti kelas selamanya</string>
+    <string name="_10">10</string>
+    <string name="modul">Modul</string>
+    <string name="menit">Menit</string>
 </resources>
