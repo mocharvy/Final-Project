@@ -2,34 +2,39 @@ package com.programmer.finalproject.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.programmer.finalproject.databinding.ItemCourseBinding
-import com.programmer.finalproject.model.courses.AllCoursesResponse
-import com.programmer.finalproject.model.courses.DataCourse
+import com.programmer.finalproject.model.courses.AllCoursesResponse2
+import com.programmer.finalproject.model.courses.DataItem
 import com.programmer.finalproject.utils.CourseDiffUtil
 
 class AllCourseAdapter(
-    private val listener: OnItemClickListener? = null
+    private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<AllCourseAdapter.MyViewHolder>() {
 
-    private var course = emptyList<DataCourse>()
+    private var course = emptyList<DataItem>()
 
     class MyViewHolder(private val binding: ItemCourseBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(dataCourse: DataCourse) {
+        fun bind(dataCourse: DataItem, onItemClick: (String) -> Unit) {
                 binding.apply {
-                    ivCourseImage.load(dataCourse.category.image)
+                    ivCourseImage.load(dataCourse.category?.image)
                     tvTitle.text = dataCourse.name
-                    tvDesc.text = dataCourse.category.category
+                    tvDesc.text = dataCourse.category?.category
                     tvAuthor.text = dataCourse.facilitator
                     tvTime.text = dataCourse.totalDuration.toString()
                     tvModule.text = dataCourse.totalChapter.toString()
                     tvLevel.text = dataCourse.level
                     btPrice.text = dataCourse.price.toString()
+
+                    itemView.setOnClickListener {
+                        dataCourse.id?.let { courseId ->
+                            onItemClick(courseId)
+                        }
+                    }
                 }
         }
 
@@ -52,17 +57,19 @@ class AllCourseAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentCourse = course[position]
-        holder.bind(currentCourse)
+        holder.bind(currentCourse, onItemClick)
     }
 
     override fun getItemCount(): Int {
         return course.size
     }
 
-    fun setData(newData: AllCoursesResponse) {
-        val courseDiffUtil = CourseDiffUtil(course, newData.data)
+    @Suppress("UNCHECKED_CAST")
+    fun setData(newData: AllCoursesResponse2) {
+        val newDataList = newData.data ?: emptyList<DataItem>()
+        val courseDiffUtil = CourseDiffUtil(course, newDataList)
         val diffUtilResult = DiffUtil.calculateDiff(courseDiffUtil)
-        course = newData.data
+        course = newDataList as List<DataItem>
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

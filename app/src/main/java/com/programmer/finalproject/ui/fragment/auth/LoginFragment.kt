@@ -3,6 +3,7 @@ package com.programmer.finalproject.ui.fragment.auth
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -47,7 +48,7 @@ class LoginFragment : Fragment() {
 //                    Toast.makeText(requireContext(), "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
 
                 login()
-                verify()
+                //verify()
 
 
             }
@@ -75,8 +76,8 @@ class LoginFragment : Fragment() {
         loginClicks += 1
 
         val loginRequest = LoginRequest(
-            email = binding.columEmail1.text.toString(),
-            password = binding.columPassword1.text.toString()
+            emailOrPhone = binding.columEmail.text.toString(),
+            password = binding.columPassword.text.toString()
         )
         viewModel.login(loginRequest)
 
@@ -88,7 +89,7 @@ class LoginFragment : Fragment() {
             if (it) {
 
                 saveLoginStatus(true)
-                Toast.makeText(requireContext(), "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
 
                 findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
             }

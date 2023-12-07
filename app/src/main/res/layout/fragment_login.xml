@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_masuk" />
 
     <EditText
-        android:id="@+id/colum_email1"
+        android:id="@+id/colum_email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/colominput"
@@ -58,10 +58,10 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/colum_email1" />
+        app:layout_constraintTop_toBottomOf="@id/colum_email" />
 
     <EditText
-        android:id="@+id/colum_password1"
+        android:id="@+id/colum_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/colominput"
@@ -91,7 +91,7 @@
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/colum_password1"/>
+        app:layout_constraintTop_toBottomOf="@id/colum_password"/>
     <TextView
         android:id="@+id/txt_daftardisini"
         android:layout_width="110dp"
@@ -103,7 +103,7 @@
         android:textColor="@color/purple_500"
         android:textSize="17sp"
         app:layout_constraintLeft_toRightOf="@id/txt_text"
-        app:layout_constraintTop_toBottomOf="@id/colum_password1"/>
+        app:layout_constraintTop_toBottomOf="@id/colum_password"/>
 
     <Button
         android:id="@+id/btn_login"
