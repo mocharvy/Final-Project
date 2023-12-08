@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.data.Repository
 import com.programmer.finalproject.database.course.Course
-import com.programmer.finalproject.model.courses.AllCoursesResponse
+import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -34,8 +35,10 @@ class KursusViewModel @Inject constructor(
             repository.local.insertCourse(course)
         }
 
+
     /** Retrofit **/
-    var listAllCoursesResponse: MutableLiveData<NetworkResult<AllCoursesResponse>> =
+
+    var listAllCoursesResponse: MutableLiveData<NetworkResult<AllCoursesResponse2>> =
         MutableLiveData()
 
     fun getListCourse() = viewModelScope.launch {
@@ -52,6 +55,8 @@ class KursusViewModel @Inject constructor(
                 val listCourse = listAllCoursesResponse.value!!.data
                 if (listCourse != null) {
                     offlineCacheCourse(listCourse)
+                } else {
+                    Log.d("Insert database", "INSERT FAILED")
                 }
             } catch (e: Exception) {
                 listAllCoursesResponse.value = NetworkResult.Error("Error: $e")
@@ -61,12 +66,12 @@ class KursusViewModel @Inject constructor(
         }
     }
 
-    private fun offlineCacheCourse(listCourse: AllCoursesResponse) {
+    private fun offlineCacheCourse(listCourse: AllCoursesResponse2) {
         val course = Course(listCourse)
         insertCourse(course)
     }
 
-    private fun handleAllCourseResponse(response: Response<AllCoursesResponse>): NetworkResult<AllCoursesResponse> {
+    private fun handleAllCourseResponse(response: Response<AllCoursesResponse2>): NetworkResult<AllCoursesResponse2> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")

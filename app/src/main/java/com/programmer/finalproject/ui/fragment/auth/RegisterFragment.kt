@@ -51,7 +51,7 @@ class RegisterFragment : Fragment() {
         )
         viewModel.register(registerRequest)
         viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
-            binding.pb.isVisible = isLoading
+//            binding.pb.isVisible = isLoading
         }
 
         viewModel.verified.observe(viewLifecycleOwner) {

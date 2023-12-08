@@ -12,6 +12,6 @@ interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCourses(course: Course)
 
-    @Query("SELECT * FROM courses_table ORDER BY id ASC")
+    @Query("SELECT * FROM courses_table_fix ORDER BY id ASC")
     fun readCourses(): Flow<List<Course>>
 }

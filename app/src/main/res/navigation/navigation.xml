@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
-
+    app:startDestination="@id/walkThroughFragment">
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
@@ -27,7 +26,11 @@
         android:id="@+id/notifikasiFragment"
         android:name="com.programmer.finalproject.ui.fragment.NotifikasiFragment"
         android:label="fragment_notifikasi"
-        tools:layout="@layout/fragment_notifikasi" />
+        tools:layout="@layout/fragment_notifikasi" >
+        <action
+            android:id="@+id/action_notifikasiFragment_to_kelasFragment"
+            app:destination="@id/kelasFragment" />
+    </fragment>
     <fragment
         android:id="@+id/kelasFragment"
         android:name="com.programmer.finalproject.ui.fragment.KelasFragment"
@@ -51,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
-        android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
+        android:name="com.programmer.finalproject.ui.fragment.akun.AkunFragment"
         android:label="fragment_akun"
         tools:layout="@layout/fragment_akun" >
         <action
@@ -127,5 +130,10 @@
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
         android:label="fragment_walk_through"
-        tools:layout="@layout/fragment_walk_through" />
+        tools:layout="@layout/fragment_walk_through" >
+<!--        <action-->
+<!--            android:id="@+id/action_walkThroughFragment_to_berandaFragment"-->
+<!--            app:destination="@id/berandaFragment" />-->
+    </fragment>
+
 </navigation>
