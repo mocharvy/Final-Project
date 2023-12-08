@@ -5,14 +5,22 @@
     android:id="@+id/navigation"
     app:startDestination="@id/splashScreenFragment">
 
-
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
         android:label="fragment_beranda"
         tools:layout="@layout/fragment_beranda" >
         <action
-            android:id="@+id/action_berandaFragment_to_notifikasiFragment2"
+            android:id="@+id/action_berandaFragment_to_kelasFragment"
+            app:destination="@id/kelasFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_kursusFragment"
+            app:destination="@id/kursusFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_akunFragment"
+            app:destination="@id/akunFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_notifikasiFragment"
             app:destination="@id/notifikasiFragment" />
     </fragment>
     <fragment
@@ -21,7 +29,7 @@
         android:label="fragment_notifikasi"
         tools:layout="@layout/fragment_notifikasi" >
         <action
-            android:id="@+id/action_notifikasiFragment_to_kelasFragment2"
+            android:id="@+id/action_notifikasiFragment_to_kelasFragment"
             app:destination="@id/kelasFragment" />
     </fragment>
     <fragment
@@ -30,7 +38,7 @@
         android:label="fragment_kelas"
         tools:layout="@layout/fragment_kelas" >
         <action
-            android:id="@+id/action_kelasFragment_to_detailKelasActivity2"
+            android:id="@+id/action_kelasFragment_to_detailKelasActivity"
             app:destination="@id/detailKelasActivity" />
     </fragment>
     <fragment
