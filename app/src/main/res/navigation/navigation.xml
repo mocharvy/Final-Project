@@ -70,7 +70,7 @@
         tools:layout="@layout/filter_bottom_sheet" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.programmer.finalproject.ui.fragment.ChangePasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.password.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <fragment

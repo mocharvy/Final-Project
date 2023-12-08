@@ -4,6 +4,8 @@ import com.programmer.finalproject.di.ApiService
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.user.password.ChangePasswordRequest
+import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import com.programmer.finalproject.model.user.update.ProfileRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import retrofit2.Response
@@ -27,5 +29,9 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun updateProfile(token: String, profileRequest: ProfileRequest): Response<ProfileResponse> {
         return apiService.updateProfile(token,profileRequest)
+    }
+
+    suspend fun changePassword(token: String, changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse> {
+        return apiService.changePassword(token,changePasswordRequest)
     }
 }

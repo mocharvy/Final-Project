@@ -9,6 +9,8 @@ import com.programmer.finalproject.model.login.LoginResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.user.password.ChangePasswordRequest
+import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import com.programmer.finalproject.model.user.update.ProfileRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import retrofit2.Call
@@ -59,5 +61,12 @@ interface ApiService {
         @Body profileRequest: ProfileRequest
 
     ):Response<ProfileResponse>
+
+    @PUT("user/password")
+    suspend fun changePassword(
+        @Header("Authorization") token: String,
+        @Body changePasswordRequest: ChangePasswordRequest
+
+    ):Response<ChangePasswordResponse>
 
 }

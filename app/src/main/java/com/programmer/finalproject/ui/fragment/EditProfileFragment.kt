@@ -98,9 +98,17 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun updateUI(userDetail: UserDetailResponse) {
-        binding.profileBackground.load(userDetail.data.photo)
-        binding.etNama.setText(userDetail.data.name)
-        binding.etEmail.setText(userDetail.data.email)
-        binding.etTelepon.setText(userDetail.data.phoneNumber)
+        binding.apply {
+            profileBackground.load(userDetail.data.photo)
+            etNama.setText(userDetail.data.name)
+            etEmail.setText(userDetail.data.email)
+            etTelepon.setText(userDetail.data.phoneNumber)
+            val country = userDetail.data.country.toString()
+            val city = userDetail.data.city.toString()
+            etNegara.setText(country)
+            etKota.setText(city)
+        }
     }
 }
+
+
