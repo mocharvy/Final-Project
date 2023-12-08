@@ -13,13 +13,17 @@ import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import com.programmer.finalproject.model.user.update.ProfileRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
@@ -55,12 +59,17 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Response<UserDetailResponse>
 
+    @Multipart
     @PUT("user")
-    suspend fun updateProfile(
-        @Header("Authorization") token: String,
-        @Body profileRequest: ProfileRequest
-
-    ):Response<ProfileResponse>
+    suspend fun editProfile(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("phone_number") phone_number: RequestBody,
+        @Part("country") country: RequestBody,
+        @Part("city") city: RequestBody,
+        @Part photo: MultipartBody.Part,
+        @Header("Authorization") authorization: String
+    ): ProfileResponse
 
     @PUT("user/password")
     suspend fun changePassword(

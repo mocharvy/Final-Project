@@ -27,9 +27,7 @@ class RemoteDataSource @Inject constructor(
         return apiService.getUserProfile(token)
     }
 
-    suspend fun updateProfile(token: String, profileRequest: ProfileRequest): Response<ProfileResponse> {
-        return apiService.updateProfile(token,profileRequest)
-    }
+
 
     suspend fun changePassword(token: String, changePasswordRequest: ChangePasswordRequest): Response<ChangePasswordResponse> {
         return apiService.changePassword(token,changePasswordRequest)

@@ -39,9 +39,7 @@ class PasswordViewModel @Inject constructor(
                 changePasswordResponse.value = handleChangePassword(response)
 
                 val updateProfile = changePasswordResponse.value!!.data
-//                if (updateProfile != null) {
-//                    offlineCacheUser(updateProfile)
-//                }
+
             } catch (e: Exception) {
                 changePasswordResponse.value = NetworkResult.Error("Error: $e")
             }

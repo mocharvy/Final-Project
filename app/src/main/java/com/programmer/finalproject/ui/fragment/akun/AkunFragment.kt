@@ -1,5 +1,7 @@
 package com.programmer.finalproject.ui.fragment.akun
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.bumptech.glide.Glide
 import com.programmer.finalproject.R
+import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
@@ -49,8 +53,25 @@ class AkunFragment : Fragment() {
                 findNavController().navigate(R.id.action_akunFragment_to_historyPaymentFragment)
             }
             tvLogout.setOnClickListener {
-
+                showDialogLogout()
             }
+        }
+    }
+
+    private fun showDialogLogout() {
+        val logout = DialogLogoutBinding.inflate(LayoutInflater.from(requireContext()))
+        val logoutDialogBuilder = AlertDialog.Builder(requireContext(), R.style.RoundedCornerDialog)
+            .setView(logout.root)
+        logoutDialogBuilder.setCancelable(true)
+        val logoutDialog = logoutDialogBuilder.show()
+        logout.btnLogout.setOnClickListener {
+//            saveLoginInfo(false)
+//            val intent = Intent(requireActivity(), MainActivity::class.java)
+//            requireActivity().finish()
+//            startActivity(intent)
+        }
+        logout.btnDismiss.setOnClickListener {
+            logoutDialog.dismiss()
         }
     }
 
@@ -105,7 +126,10 @@ class AkunFragment : Fragment() {
     }
 
     private fun updateUI(userDetail: UserDetailResponse) {
-        binding.ivProfile.load(userDetail.data.photo)
+        Glide.with(requireActivity())
+            .load(userDetail.data.photo)
+            .centerCrop()
+            .into(binding.ivProfile);
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
         binding.tvPhone.text = userDetail.data.phoneNumber

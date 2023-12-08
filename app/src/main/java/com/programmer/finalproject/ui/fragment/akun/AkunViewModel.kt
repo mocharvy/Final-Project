@@ -44,61 +44,6 @@ class AkunViewModel @Inject constructor(
         getUserDetailSafeCall(token)
     }
 
-    var updateProfileResponse: MutableLiveData<NetworkResult<ProfileResponse>> =
-        MutableLiveData()
-
-    fun updateProfile(token: String,profileRequest: ProfileRequest) = viewModelScope.launch {
-        updateProfileSafeCall(token,profileRequest)
-    }
-
-    private suspend fun updateProfileSafeCall(token: String,profileRequest: ProfileRequest) {
-        updateProfileResponse.value = NetworkResult.Loading()
-        if(hasInternetConnection()){
-            try {
-                val response = repository.remote.updateProfile(token,profileRequest)
-                updateProfileResponse.value = handleUpdateProfile(response)
-
-                val updateProfile = updateProfileResponse.value!!.data
-//                if (updateProfile != null) {
-//                    offlineCacheUser(updateProfile)
-//                }
-            } catch (e: Exception) {
-                updateProfileResponse.value = NetworkResult.Error("Error: $e")
-            }
-        } else {
-            updateProfileResponse.value = NetworkResult.Error("No Internet Connection")
-        }
-    }
-
-    private fun handleUpdateProfile(response: Response<ProfileResponse>): NetworkResult<ProfileResponse>? {
-        when {
-            response.message().toString().contains("timeout") -> {
-                return NetworkResult.Error("Timeout")
-            }
-
-            response.code() == 500 -> {
-                return NetworkResult.Error("Server Error")
-            }
-
-            response.code() == 400 -> {
-                return NetworkResult.Error("User has been registered")
-            }
-
-            response.code() == 401 -> {
-                return NetworkResult.Error("Unauthorized")
-            }
-
-            response.isSuccessful -> {
-                val userDetail = response.body()
-                return NetworkResult.Success(userDetail!!)
-            }
-
-            else -> {
-                return NetworkResult.Error(response.message())
-            }
-        }
-    }
-
     private suspend fun getUserDetailSafeCall(token: String) {
         userDetailResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {

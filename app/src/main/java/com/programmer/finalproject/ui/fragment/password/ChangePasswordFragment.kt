@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentChangePasswordBinding
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
@@ -38,13 +39,18 @@ class ChangePasswordFragment : Fragment() {
         binding.apply {
             binding.btnChangePassword.setOnClickListener {
                 authViewModel.token.observe(viewLifecycleOwner){
-                    if (it !=null){
-
-                            val changePassword = ChangePasswordRequest(etOldPassword.text.toString(),etNewPassword.text.toString(), etConfrimNewPassword.text.toString())
-                            passwordViewModel.changePassword("Bearer $it",changePassword)
-
+                    if (it != null) {
+                        val newPassword = etNewPassword.text.toString()
+                        val confirmPassword = etConfrimNewPassword.text.toString()
+                        if (newPassword == confirmPassword) {
+                            val changePassword = ChangePasswordRequest(newPassword, confirmPassword,etOldPassword.text.toString())
+                            passwordViewModel.changePassword("Bearer $it", changePassword)
+                            Toast.makeText(requireContext(), "Password Berhasil di Ubah", Toast.LENGTH_SHORT).show()
+                            findNavController().popBackStack()
+                        } else {
+                            Toast.makeText(requireContext(), "Password baru tidak cocok", Toast.LENGTH_SHORT).show()
+                        }
                     }
-
                 }
             }
         }
