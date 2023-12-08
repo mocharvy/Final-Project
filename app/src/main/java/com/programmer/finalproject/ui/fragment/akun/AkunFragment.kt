@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentAkunBinding
 import com.programmer.finalproject.model.user.UserDetailResponse
@@ -47,6 +48,9 @@ class AkunFragment : Fragment() {
             tvHistory.setOnClickListener {
                 findNavController().navigate(R.id.action_akunFragment_to_historyPaymentFragment)
             }
+            tvLogout.setOnClickListener {
+
+            }
         }
     }
 
@@ -55,8 +59,15 @@ class AkunFragment : Fragment() {
         authViewModel.token.observe(viewLifecycleOwner) {
             if (it != null) {
                 Log.d("TOKEN", it)
+                binding.clAkun.visibility = View.VISIBLE
+                binding.toLogin.visibility=View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
             } else {
+                binding.toLogin.visibility=  View.VISIBLE
+                binding.clAkun.visibility = View.GONE
+                binding.toLogin.setOnClickListener {
+                    findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
+                }
                 Toast.makeText(requireActivity(), "Access token is null", Toast.LENGTH_SHORT).show()
                 hideLoading()
             }
@@ -94,6 +105,7 @@ class AkunFragment : Fragment() {
     }
 
     private fun updateUI(userDetail: UserDetailResponse) {
+        binding.ivProfile.load(userDetail.data.photo)
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
         binding.tvPhone.text = userDetail.data.phoneNumber

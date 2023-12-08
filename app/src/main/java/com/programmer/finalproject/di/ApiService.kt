@@ -9,12 +9,15 @@ import com.programmer.finalproject.model.login.LoginResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.user.update.ProfileRequest
+import com.programmer.finalproject.model.user.update.ProfileResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -49,5 +52,12 @@ interface ApiService {
     suspend fun getUserProfile(
         @Header("Authorization") token: String,
     ): Response<UserDetailResponse>
+
+    @PUT("user")
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Body profileRequest: ProfileRequest
+
+    ):Response<ProfileResponse>
 
 }
