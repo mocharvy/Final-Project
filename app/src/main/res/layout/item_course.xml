@@ -177,7 +177,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_price"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"

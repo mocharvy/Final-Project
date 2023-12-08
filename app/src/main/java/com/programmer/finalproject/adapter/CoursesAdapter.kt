@@ -53,7 +53,5 @@ class CoursesAdapter : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Di
         }
     }
 
-    companion object {
-        var ID_LIST_AKREDITASI = ""
-    }
+
 }

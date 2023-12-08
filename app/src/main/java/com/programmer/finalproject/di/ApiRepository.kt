@@ -15,4 +15,7 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
 
     suspend fun editProfile(name: RequestBody, email: RequestBody, phone_number: RequestBody, country: RequestBody, city: RequestBody, photo: MultipartBody.Part, token:String) =
         apiHelper.editProfile(name,email,phone_number,country,city,photo,token)
+
+    fun getHistoryPayment(token: String) = apiHelper.getHistoryPayment(token)
+
 }

@@ -18,12 +18,7 @@ class EditProfileFragmentViewModel @Inject constructor(
     private val apiRepository: ApiRepository
 ) : ViewModel() {
 
-//    val statusLiveData get() = userRepository.statusLiveData
 
-    val loadingState = MutableLiveData<Boolean>()
-    val errorState = MutableLiveData<Pair<Boolean, Exception?>>()
-    val isError = MutableLiveData<Boolean>()
-    val verified = MutableLiveData<Boolean>()
 
     val _updateResponse = MutableLiveData<ProfileResponse>()
     val updateResponse: LiveData<ProfileResponse>
@@ -36,10 +31,5 @@ class EditProfileFragmentViewModel @Inject constructor(
             _updateResponse.postValue(apiRepository.editProfile(name,email,phone_number,country,city,photo,token))
         }
     }
-//    fun  updatePassword(id: Int,updatePasswordRequest: UpdatePasswordRequest){
-//        viewModelScope.launch {
-//            userRepository.updatePassword(ID,updatePasswordRequest)
-//        }
-//    }
 
 }

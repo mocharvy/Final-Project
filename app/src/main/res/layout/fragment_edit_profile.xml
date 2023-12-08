@@ -24,6 +24,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/iv_pick_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:background="@drawable/foto"
+        app:layout_constraintEnd_toEndOf="@+id/profile_background"
+        app:layout_constraintTop_toBottomOf="@+id/profile_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,14 +39,6 @@
         android:layout_marginTop="40dp"
         app:layout_constraintTop_toBottomOf="@+id/profile_background">
 
-        <ImageView
-            android:id="@+id/iv_pick_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-40dp"
-            android:background="@drawable/foto"
-            app:layout_constraintEnd_toEndOf="@+id/profile_background"
-            app:layout_constraintTop_toBottomOf="@+id/profile_background" />
 
 
         <TextView
@@ -50,8 +50,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="Nama"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_background" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/et_nama"
@@ -100,15 +99,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
+
+        <EditText
+            android:id="@+id/sufix"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input"
+            android:hint="+62"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="12sp"
+            android:paddingStart="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/et_telepon"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_telpon"
+            app:layout_constraintTop_toBottomOf="@+id/tv_telpon" />
+
         <EditText
             android:id="@+id/et_telepon"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="28dp"
             android:background="@drawable/input"
             android:paddingStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_telpon" />
 
         <TextView

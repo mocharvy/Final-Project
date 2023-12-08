@@ -65,10 +65,10 @@ class AkunFragment : Fragment() {
         logoutDialogBuilder.setCancelable(true)
         val logoutDialog = logoutDialogBuilder.show()
         logout.btnLogout.setOnClickListener {
-//            saveLoginInfo(false)
-//            val intent = Intent(requireActivity(), MainActivity::class.java)
-//            requireActivity().finish()
-//            startActivity(intent)
+          authViewModel.logout()
+
+            logoutDialog.dismiss()
+
         }
         logout.btnDismiss.setOnClickListener {
             logoutDialog.dismiss()
@@ -113,6 +113,8 @@ class AkunFragment : Fragment() {
                     Toast.makeText(requireContext(), "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.e("DetailKelasFragment", "Error: ${result.message}")
                 }
+
+                else -> {}
             }
         }
     }
@@ -132,6 +134,6 @@ class AkunFragment : Fragment() {
             .into(binding.ivProfile);
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
-        binding.tvPhone.text = userDetail.data.phoneNumber
+        binding.tvPhone.text = "+62${userDetail.data.phoneNumber}"
     }
 }

@@ -3,18 +3,25 @@ package com.programmer.finalproject
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.programmer.finalproject.ui.fragment.akun.AkunViewModel
+import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
 
-    private lateinit var txt_devacademy: TextView
-    private lateinit var txtPengalaman: TextView
-    private lateinit var iv_logo_devacademy: ImageView
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,27 +30,29 @@ class SplashScreenFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
 
-        // Mengambil referensi dari elemen-elemen tampilan pada layout
-        txt_devacademy = view.findViewById(R.id.txt_devacademy)
-        txtPengalaman = view.findViewById(R.id.txt_pengalaman)
-        iv_logo_devacademy = view.findViewById(R.id.iv_logo_devacademy)
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Handler untuk menunda navigasi ke MainActivity selama 3000 milidetik (3 detik)
-        Handler().postDelayed({
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish() // Opsional, untuk menutup activity saat ini setelah navigasi
-        }, 3000)
 
-        // Ubah teks dan gambar pada layout sesuai kebutuhan
-        txt_devacademy.text = "DEV-ACADEMY"
-        txtPengalaman.text = "Belajar dari Pengalaman Terbaik"
-        iv_logo_devacademy.setImageResource(R.drawable.logo_devacademy)
+        authViewModel.token.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Handler().postDelayed({
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_berandaFragment)
+
+                },3000)
+                Log.d("TOKEN", it)
+            } else {
+                Handler().postDelayed({
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_walkThroughFragment)
+                }, 3000)
+
+
+            }
+        }
+
+
     }
 }

@@ -6,6 +6,7 @@ import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+import com.programmer.finalproject.model.payment.OrdersResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
@@ -78,4 +79,11 @@ interface ApiService {
 
     ):Response<ChangePasswordResponse>
 
+//    @GET("categories")
+//    fun getCategories() : Call <CategoryResponse>
+    @GET("orders")
+      fun getHistoryPayment(
+        @Header("Authorization") token: String,
+
+        ): Call<OrdersResponse>
 }

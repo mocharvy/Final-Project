@@ -139,11 +139,11 @@ class EditProfileFragment : Fragment() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         findNavController().popBackStack()
                     }, 2000)
-                }else{
-                    Toast.makeText(requireContext(), "Anda harus memilih foto profile\nlagi", Toast.LENGTH_SHORT).show()
                 }
             }
 
+        }else{
+            Toast.makeText(requireContext(), "Anda harus memilih foto profile\nlagi", Toast.LENGTH_SHORT).show()
         }
     }
 
