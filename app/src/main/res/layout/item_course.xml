@@ -29,8 +29,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/ui_ux_design"
-            android:textColor="@color/dark_blue"
+             android:textColor="@color/dark_blue"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_course_image" />
@@ -64,8 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/membuat_ui_ux_design"
-            app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
@@ -74,8 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/john_doe"
-            android:textSize="12sp"
+             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
@@ -97,8 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/beginner"
-            android:textColor="@color/dark_blue"
+             android:textColor="@color/dark_blue"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_level"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -121,8 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/_10"
-            android:textColor="@color/black"
+             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_module"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -157,8 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/_10"
-            android:textColor="@color/black"
+             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/text_time"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
