@@ -1,8 +1,11 @@
 package com.programmer.finalproject.ui.fragment.auth
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.programmer.finalproject.data.Repository
+import com.programmer.finalproject.database.user.User
 import com.programmer.finalproject.di.ApiRepository
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
@@ -17,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val apiRepository: ApiRepository
+    private val apiRepository: ApiRepository,
+    private val repository: Repository
 ) : ViewModel() {
 
     val loadingState = MutableLiveData<Boolean>()
@@ -28,6 +32,23 @@ class AuthViewModel @Inject constructor(
     val _accountData = MutableLiveData<LoginResponse?>()
     val accountData: MutableLiveData<LoginResponse?>
         get() = _accountData
+
+    //=========AUTH==========//
+    private val _token = MutableLiveData<String?>()
+    val token: LiveData<String?>
+        get() = _token
+
+    private val _isLogin = MutableLiveData<Boolean>()
+    val isLogin: LiveData<Boolean>
+        get() = _isLogin
+    //=========AUTH==========//
+
+    init {
+        viewModelScope.launch {
+            _token.value = repository.local.readTokenFromDataStore()
+            _isLogin.value = repository.local.readLoginStateFromDataStore()
+        }
+    }
 
 
     fun login(loginRequest: LoginRequest) {
@@ -47,6 +68,12 @@ class AuthViewModel @Inject constructor(
                         viewModelScope.launch {
                             verified.postValue(true)
                             isError.postValue(false)
+
+                            addedUser?.data?.accessToken?.let {
+                                _token.value = it
+                                _isLogin.value = true
+                                saveTokenAndLoginState(it, true)
+                            }
                         }
                     } else if (response.code() == 401) {
                         isError.postValue(true)
@@ -89,6 +116,11 @@ class AuthViewModel @Inject constructor(
                 }
             }
         )
+    }
+
+    private suspend fun saveTokenAndLoginState(accessToken: String, isLogin: Boolean) {
+        repository.local.saveTokenToDataStore(accessToken)
+        repository.local.saveLoginStateToDataStore(isLogin)
     }
 
 }

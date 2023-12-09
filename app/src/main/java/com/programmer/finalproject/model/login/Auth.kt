@@ -1,5 +1,5 @@
 package com.programmer.finalproject.model.login
 
-data class Data(
+data class Auth(
     val accessToken: String
 )

@@ -1,18 +1,15 @@
-package com.programmer.finalproject.ui.fragment.kursus
+package com.programmer.finalproject.ui.fragment.akun
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.data.Repository
-import com.programmer.finalproject.database.course.Course
-import com.programmer.finalproject.model.courses.AllCoursesResponse2
+import com.programmer.finalproject.database.user.User
+import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,57 +18,55 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class KursusViewModel @Inject constructor(
+class AkunViewModel @Inject constructor(
     private val repository: Repository,
     application: Application
 ) : AndroidViewModel(application) {
 
     /** Room Database **/
 
-    val readCourse: LiveData<List<Course>> = repository.local.readCourse().asLiveData()
+    //val readUser: LiveData<List<User>> = repository.local.readUserDetail().asLiveData()
 
-    private fun insertCourse(course: Course) =
+    private fun insertUser(user: User) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertCourse(course)
+            repository.local.insertUser(user)
         }
 
 
     /** Retrofit **/
 
-    var listAllCoursesResponse: MutableLiveData<NetworkResult<AllCoursesResponse2>> =
+    var userDetailResponse: MutableLiveData<NetworkResult<UserDetailResponse>> =
         MutableLiveData()
 
-    fun getListCourse() = viewModelScope.launch {
-        getListCourseSafeCall()
+    fun getUserDetail(token: String) = viewModelScope.launch {
+        getUserDetailSafeCall(token)
     }
 
-    private suspend fun getListCourseSafeCall() {
-        listAllCoursesResponse.value = NetworkResult.Loading()
+    private suspend fun getUserDetailSafeCall(token: String) {
+        userDetailResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.getAllCourse()
-                listAllCoursesResponse.value = handleAllCourseResponse(response)
+                val response = repository.remote.getUserProfile(token)
+                userDetailResponse.value = handleUserDetailResponse(response)
 
-                val listCourse = listAllCoursesResponse.value!!.data
-                if (listCourse != null) {
-                    offlineCacheCourse(listCourse)
-                } else {
-                    Log.d("Insert database", "INSERT FAILED")
+                val userDetail = userDetailResponse.value!!.data
+                if (userDetail != null) {
+                    offlineCacheUser(userDetail)
                 }
             } catch (e: Exception) {
-                listAllCoursesResponse.value = NetworkResult.Error("Error: $e")
+                userDetailResponse.value = NetworkResult.Error("Error: $e")
             }
         } else {
-            listAllCoursesResponse.value = NetworkResult.Error("No Internet Connection")
+            userDetailResponse.value = NetworkResult.Error("No Internet Connection")
         }
     }
 
-    private fun offlineCacheCourse(listCourse: AllCoursesResponse2) {
-        val course = Course(listCourse)
-        insertCourse(course)
+    private fun offlineCacheUser(userDetail: UserDetailResponse) {
+        val user = User(userDetail)
+        insertUser(user)
     }
 
-    private fun handleAllCourseResponse(response: Response<AllCoursesResponse2>): NetworkResult<AllCoursesResponse2> {
+    private fun handleUserDetailResponse(response: Response<UserDetailResponse>): NetworkResult<UserDetailResponse> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -82,12 +77,16 @@ class KursusViewModel @Inject constructor(
             }
 
             response.code() == 400 -> {
-                return NetworkResult.Error("Client Error")
+                return NetworkResult.Error("User has been registered")
+            }
+
+            response.code() == 401 -> {
+                return NetworkResult.Error("Unauthorized")
             }
 
             response.isSuccessful -> {
-                val listCourse = response.body()
-                return NetworkResult.Success(listCourse!!)
+                val userDetail = response.body()
+                return NetworkResult.Success(userDetail!!)
             }
 
             else -> {
@@ -111,5 +110,4 @@ class KursusViewModel @Inject constructor(
         }
 
     }
-
 }

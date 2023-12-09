@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="25dp"
     android:background="@color/light_blue"
-    tools:context=".RegisterFragment">
+    tools:context=".ui.fragment.auth.RegisterFragment">
 
     <TextView
         android:id="@+id/txt_daftar"
