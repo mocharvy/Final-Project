@@ -18,4 +18,7 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
 
     fun getHistoryPayment(token: String) = apiHelper.getHistoryPayment(token)
 
+    fun getCoursesByame(name:String) = apiHelper.getCoursesByName(name)
+
+
 }

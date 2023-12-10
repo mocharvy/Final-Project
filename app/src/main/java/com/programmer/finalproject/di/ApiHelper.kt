@@ -17,5 +17,6 @@ class ApiHelper @Inject constructor(private val api: ApiService) {
         api.editProfile(name,email,phone_number,country,city,photo,token)
 
     fun getHistoryPayment(token: String) = api.getHistoryPayment(token)
+    fun getCoursesByName(name:String) = api.getCourseByName(name)
 
 }

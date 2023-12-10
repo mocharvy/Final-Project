@@ -26,6 +26,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -79,11 +80,13 @@ interface ApiService {
 
     ):Response<ChangePasswordResponse>
 
-//    @GET("categories")
-//    fun getCategories() : Call <CategoryResponse>
+
     @GET("orders")
       fun getHistoryPayment(
         @Header("Authorization") token: String,
-
         ): Call<OrdersResponse>
+    @GET("courses")
+    fun getCourseByName(
+        @Query("name") name:String
+    ): Call <CoursesResponse>
 }

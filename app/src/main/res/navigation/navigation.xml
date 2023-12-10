@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_berandaFragment_to_notifikasiFragment"
             app:destination="@id/notifikasiFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_notifikasiFragment_to_kelasFragment"
             app:destination="@id/kelasFragment" />
+        <action
+            android:id="@+id/action_notifikasiFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/kelasFragment"
@@ -97,7 +103,11 @@
         android:id="@+id/historyPaymentFragment"
         android:name="com.programmer.finalproject.ui.orders.HistoryPaymentFragment"
         android:label="fragment_history_payment"
-        tools:layout="@layout/fragment_history_payment" />
+        tools:layout="@layout/fragment_history_payment" >
+        <action
+            android:id="@+id/action_historyPaymentFragment_to_mustLoginBottomSheet"
+            app:destination="@id/mustLoginBottomSheet" />
+    </fragment>
     <activity
         android:id="@+id/detailKelasActivity"
         android:name="com.programmer.finalproject.ui.DetailKelasActivity"
@@ -158,5 +168,18 @@
             android:id="@+id/action_splashScreenFragment_to_walkThroughFragment"
             app:destination="@id/walkThroughFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/mustLoginBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
+        android:label="MustLoginBottomSheet" >
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.programmer.finalproject.ui.fragment.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

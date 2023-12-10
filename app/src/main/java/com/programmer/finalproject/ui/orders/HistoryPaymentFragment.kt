@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
@@ -55,9 +56,15 @@ class HistoryPaymentFragment : Fragment() {
                             false
                         )
                         historyPaymentAdapter.submitList(list?.data)
-
+                        if (list?.data.isNullOrEmpty()) {
+                            binding.clEmptyPayment.visibility = View.VISIBLE
+                        } else {
+                            binding.clEmptyPayment.visibility = View.GONE
+                        }
                     }
                 } else {
+                    findNavController().navigate(R.id.action_historyPaymentFragment_to_mustLoginBottomSheet)
+
 
 //                    binding.progressBar.visibility = View.GONE
 
