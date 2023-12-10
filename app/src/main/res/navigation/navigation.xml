@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/walkThroughFragment">
+    app:startDestination="@id/splashScreenFragment">
+
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
@@ -66,6 +67,9 @@
         <action
             android:id="@+id/action_akunFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <dialog
         android:id="@+id/filterBottomSheet"
@@ -74,17 +78,24 @@
         tools:layout="@layout/filter_bottom_sheet" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.programmer.finalproject.ui.fragment.ChangePasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.password.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.programmer.finalproject.ui.fragment.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_akunFragment"
+            app:destination="@id/akunFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_self"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyPaymentFragment"
-        android:name="com.programmer.finalproject.ui.fragment.HistoryPaymentFragment"
+        android:name="com.programmer.finalproject.ui.orders.HistoryPaymentFragment"
         android:label="fragment_history_payment"
         tools:layout="@layout/fragment_history_payment" />
     <activity
@@ -134,6 +145,18 @@
         <action
             android:id="@+id/action_walkThroughFragment_to_berandaFragment"
             app:destination="@id/berandaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.programmer.finalproject.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_walkThroughFragment"
+            app:destination="@id/walkThroughFragment" />
     </fragment>
 
 </navigation>

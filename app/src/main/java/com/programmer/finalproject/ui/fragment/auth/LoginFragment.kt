@@ -44,14 +44,12 @@ class LoginFragment : Fragment() {
             txtDaftardisini.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
-//            btn.setOnClickListener {
-//                    Toast.makeText(requireContext(), "Anda Berhasil Login", Toast.LENGTH_SHORT).show()
+            btnLogin.setOnClickListener {
 
                 login()
-                //verify()
+                verify()
 
-
-//            }
+            }
 
         }
 
@@ -77,7 +75,7 @@ class LoginFragment : Fragment() {
 
         val loginRequest = LoginRequest(
             emailOrPhone = binding.columEmail.text.toString(),
-            password = binding.columPassword.text.toString()
+            password = binding.columPassword1.text.toString()
         )
         viewModel.login(loginRequest)
 
