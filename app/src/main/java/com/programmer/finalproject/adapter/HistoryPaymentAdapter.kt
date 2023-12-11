@@ -29,8 +29,9 @@ class HistoryPaymentAdapter : ListAdapter<Data, HistoryPaymentAdapter.HistoryPay
 
         fun bindData(payment: Data) {
             binding.apply {
-                tvAuthor.text = payment.course.name
-                tvDesc.text = payment.course.category.category
+                tvAuthor.text = payment.course.category.category
+                tvDesc.text = payment.course.name
+                ivCourseImage.load(payment.course.category.image)
 
                 if(payment.status == "BELUM BAYAR"){
                     btPrice.setBackgroundColor(Color.parseColor("#EF4444"))

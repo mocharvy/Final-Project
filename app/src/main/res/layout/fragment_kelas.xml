@@ -38,37 +38,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_tv_bg"
-        android:fontFamily="@font/montserrat_bold"
-        android:layout_marginStart="70dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+         android:fontFamily="@font/montserrat_bold"
+        android:layout_marginStart="20dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="All"/>
+        android:text="All" />
+
     <TextView
         android:id="@+id/tv_inprogres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_tv_bg"
-        android:fontFamily="@font/montserrat_bold"
+         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/black"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toStartOf="@id/tv_selesai"
         app:layout_constraintStart_toEndOf="@id/tv_all"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="In Progress"/>
+        android:text="In Progress" />
+
     <TextView
         android:id="@+id/tv_selesai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/custom_tv_bg"
-        android:fontFamily="@font/montserrat_bold"
-        app:layout_constraintStart_toEndOf="@id/tv_inprogres"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+         android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="Selesai"/>
+        android:text="Selesai" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="15dp"
@@ -77,7 +88,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         tools:itemCount="1"
-        app:layout_constraintTop_toBottomOf="@id/tv_selesai"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_selesai" />
+
     <TextView
         android:id="@+id/tv_kategori"
         android:layout_width="wrap_content"
@@ -89,12 +101,16 @@
         android:text="Kategori"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycleviewClassProses"/>
+        app:layout_constraintTop_toBottomOf="@id/recycleviewClassProses" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
+        android:id="@+id/rv_category_class"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_kategori"
         tools:itemCount="2" />
