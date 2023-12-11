@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_kelasFragment_to_detailKelasActivity"
             app:destination="@id/detailKelasActivity" />
+        <action
+            android:id="@+id/action_kelasFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/kursusFragment"

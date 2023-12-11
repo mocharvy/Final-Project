@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/very_light_blue"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.search.SearchFragment">
@@ -62,21 +63,18 @@
 
         <EditText
             android:id="@+id/etSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:paddingStart="15dp"
-            android:hint="cari kelas"
+            android:paddingEnd="8dp"
+            android:hint="Cari kursus terbaik..."
+            android:textSize="12sp"
+            android:drawableEnd="@drawable/search"
             android:fontFamily="@font/montserrat_medium"
-            android:padding="15dp"
             android:background="@drawable/input"/>
 
-        <ImageView
-            android:id="@+id/imgVSearch"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            app:tint="@color/gray"/>
 
     </LinearLayout>
 
