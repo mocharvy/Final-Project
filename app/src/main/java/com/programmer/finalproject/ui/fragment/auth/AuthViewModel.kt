@@ -118,6 +118,12 @@ class AuthViewModel @Inject constructor(
         )
     }
 
+    fun logout() {
+        _token.value = null
+
+        _isLogin.value = false
+    }
+
     private suspend fun saveTokenAndLoginState(accessToken: String, isLogin: Boolean) {
         repository.local.saveTokenToDataStore(accessToken)
         repository.local.saveLoginStateToDataStore(isLogin)

@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/colum_email" />
 
     <EditText
-        android:id="@+id/colum_password"
+        android:id="@+id/colum_password1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -83,7 +83,7 @@
         android:textSize="15sp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_register"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_login"/>
 
     <TextView
         android:id="@+id/txt_daftardisini"
@@ -97,7 +97,7 @@
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintLeft_toRightOf="@id/txt_text"
-        app:layout_constraintTop_toBottomOf="@id/btn_register"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_login"/>
 
     <TextView
         android:id="@+id/txt_masuktanpalogin"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@id/txt_text"/>
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -126,6 +126,6 @@
         android:textSize="18sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/colum_password"/>
+        app:layout_constraintTop_toBottomOf="@id/colum_password1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

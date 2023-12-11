@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.data.Repository
 import com.programmer.finalproject.database.user.User
 import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.user.update.ProfileRequest
+import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

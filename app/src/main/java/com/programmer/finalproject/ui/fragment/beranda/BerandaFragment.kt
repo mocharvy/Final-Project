@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
@@ -40,14 +41,18 @@ class BerandaFragment : Fragment() {
         getCourse()
         getCategories()
 
-        binding.apply {
-
+        binding.searchBar.setOnClickListener {
+            findNavController().navigate(R.id.action_berandaFragment_to_searchFragment)
         }
 
         authViewModel.token.observe(viewLifecycleOwner) {
             it?.let { token ->
                 Log.d("Access Token through token", token)
                 Toast.makeText(requireActivity(), "Token = $token", Toast.LENGTH_SHORT).show()
+            }
+            authViewModel.isLogin.observe(viewLifecycleOwner){
+                Toast.makeText(requireActivity(), "Is Login = $it", Toast.LENGTH_SHORT).show()
+
             }
 
         }
