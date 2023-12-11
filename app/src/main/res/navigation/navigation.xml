@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_berandaFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_detailCategoryFragment2"
+            app:destination="@id/detailCategoryFragment2" />
     </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
@@ -181,5 +184,9 @@
         android:name="com.programmer.finalproject.ui.fragment.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/detailCategoryFragment2"
+        android:name="com.programmer.finalproject.DetailCategoryFragment"
+        android:label="DetailCategoryFragment" />
 
 </navigation>

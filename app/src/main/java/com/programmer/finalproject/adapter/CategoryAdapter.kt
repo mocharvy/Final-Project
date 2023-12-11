@@ -46,4 +46,5 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
             return oldItem == newItem
         }
     }
+
 }

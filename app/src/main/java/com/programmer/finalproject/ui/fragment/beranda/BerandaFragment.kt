@@ -41,6 +41,12 @@ class BerandaFragment : Fragment() {
         getCourse()
         getCategories()
 
+        binding.tvLihatsemua.setOnClickListener {
+            // Navigasi ke tampilan detail kategori
+            findNavController().navigate(R.id.action_berandaFragment_to_detailCategoryFragment2)
+        }
+
+
         binding.searchBar.setOnClickListener {
             findNavController().navigate(R.id.action_berandaFragment_to_searchFragment)
         }
