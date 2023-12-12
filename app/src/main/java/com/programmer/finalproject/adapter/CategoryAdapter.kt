@@ -12,8 +12,7 @@ import com.programmer.finalproject.model.courses.Category
 class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding =
-            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 
@@ -21,6 +20,10 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
         holder.bindData(getItem(position))
     }
 
+    override fun getItemCount(): Int {
+        // Limit the number of items to 4
+        return minOf(super.getItemCount(), 4)
+    }
 
     inner class CategoryViewHolder(
         private val binding: ItemCategoryBinding
@@ -42,9 +45,5 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem == newItem
         }
-    }
-
-    companion object {
-
     }
 }

@@ -6,42 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenFragment">
 
-    <TextView
-        android:id="@+id/txt_belajar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Belajar"
-        android:textColor="@color/dark_blue"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txt_pengalaman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="dari Pengalaman Terbaik"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/iv_planning"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:src="@drawable/project_planning"
+        android:id="@+id/iv_logo_devacademy"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Dev Academy"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_logo_devacademy"
+        app:layout_constraintStart_toStartOf="@+id/iv_logo_devacademy"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo_devacademy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

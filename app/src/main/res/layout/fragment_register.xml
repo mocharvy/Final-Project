@@ -6,31 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    android:background="@drawable/bgregister"
+    android:background="@color/light_blue"
     tools:context=".ui.fragment.auth.RegisterFragment">
 
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/txt_daftar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/nunitobold"
         android:text="Daftar"
-        android:textColor="@color/white"
-        android:textSize="45sp"
+        android:textColor="@color/bluesky"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -39,7 +35,7 @@
         android:id="@+id/txt_nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/nunitoregular"
         android:text="Nama Lengkap"
         android:textColor="@color/black"
@@ -52,6 +48,7 @@
         android:id="@+id/kolom_nama"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/colominput"
         android:hint="Nama Lengkap"
         android:paddingLeft="10dp"
@@ -76,6 +73,7 @@
         android:id="@+id/kolom_telp"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/colominput"
         android:hint="+62"
         android:inputType="textEmailAddress"
@@ -100,6 +98,7 @@
         android:id="@+id/kolom_email"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/colominput"
         android:hint="Contoh: Belajar@gmail.com"
         android:paddingLeft="10dp"
@@ -124,6 +123,7 @@
         android:id="@+id/kolom_katasandi"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/colominput"
         android:hint="Buat Password"
         android:paddingLeft="10dp"
@@ -140,8 +140,9 @@
         android:text="Sudah Punya Akun?"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kolom_katasandi"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_daftar"/>
 
 
     <TextView
@@ -153,21 +154,23 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/bluesky"
+        android:textStyle="bold"
         android:textSize="15sp"
         app:layout_constraintLeft_toRightOf="@id/txt_sudahpunyaakun"
-        app:layout_constraintTop_toBottomOf="@id/kolom_katasandi"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_daftar"/>
 
     <Button
         android:id="@+id/btn_daftar"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/bluesky"
         android:fontFamily="@font/nunitobold"
         android:text="Daftar"
-        android:textColor="@color/bluesky"
+        android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_masuk"/>
+        app:layout_constraintTop_toBottomOf="@id/kolom_katasandi"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

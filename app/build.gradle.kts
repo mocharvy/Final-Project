@@ -90,6 +90,8 @@ dependencies {
 
     //Image Loader
     implementation("io.coil-kt:coil:2.4.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
 
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")

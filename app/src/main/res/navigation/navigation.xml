@@ -3,23 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.programmer.finalproject.ui.fragment.beranda.BerandaFragment"
         android:label="fragment_beranda"
-        tools:layout="@layout/fragment_beranda" />
+        tools:layout="@layout/fragment_beranda" >
+        <action
+            android:id="@+id/action_berandaFragment_to_kelasFragment"
+            app:destination="@id/kelasFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_kursusFragment"
+            app:destination="@id/kursusFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_akunFragment"
+            app:destination="@id/akunFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_notifikasiFragment"
+            app:destination="@id/notifikasiFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
         android:name="com.programmer.finalproject.ui.fragment.NotifikasiFragment"
         android:label="fragment_notifikasi"
-        tools:layout="@layout/fragment_notifikasi" />
+        tools:layout="@layout/fragment_notifikasi" >
+        <action
+            android:id="@+id/action_notifikasiFragment_to_kelasFragment"
+            app:destination="@id/kelasFragment" />
+        <action
+            android:id="@+id/action_notifikasiFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/kelasFragment"
         android:name="com.programmer.finalproject.ui.fragment.KelasFragment"
         android:label="fragment_kelas"
-        tools:layout="@layout/fragment_kelas" />
+        tools:layout="@layout/fragment_kelas" >
+        <action
+            android:id="@+id/action_kelasFragment_to_detailKelasActivity"
+            app:destination="@id/detailKelasActivity" />
+    </fragment>
     <fragment
         android:id="@+id/kursusFragment"
         android:name="com.programmer.finalproject.ui.fragment.kursus.KursusFragment"
@@ -34,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
-        android:name="com.programmer.finalproject.ui.fragment.AkunFragment"
+        android:name="com.programmer.finalproject.ui.fragment.akun.AkunFragment"
         android:label="fragment_akun"
         tools:layout="@layout/fragment_akun" >
         <action
@@ -46,6 +73,9 @@
         <action
             android:id="@+id/action_akunFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <dialog
         android:id="@+id/filterBottomSheet"
@@ -54,19 +84,30 @@
         tools:layout="@layout/filter_bottom_sheet" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.programmer.finalproject.ui.fragment.ChangePasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.password.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.programmer.finalproject.ui.fragment.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_akunFragment"
+            app:destination="@id/akunFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_self"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyPaymentFragment"
-        android:name="com.programmer.finalproject.ui.fragment.HistoryPaymentFragment"
+        android:name="com.programmer.finalproject.ui.orders.HistoryPaymentFragment"
         android:label="fragment_history_payment"
-        tools:layout="@layout/fragment_history_payment" />
+        tools:layout="@layout/fragment_history_payment" >
+        <action
+            android:id="@+id/action_historyPaymentFragment_to_mustLoginBottomSheet"
+            app:destination="@id/mustLoginBottomSheet" />
+    </fragment>
     <activity
         android:id="@+id/detailKelasActivity"
         android:name="com.programmer.finalproject.ui.DetailKelasActivity"
@@ -110,5 +151,35 @@
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
         android:label="fragment_walk_through"
-        tools:layout="@layout/fragment_walk_through" />
+        tools:layout="@layout/fragment_walk_through" >
+        <action
+            android:id="@+id/action_walkThroughFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.programmer.finalproject.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_walkThroughFragment"
+            app:destination="@id/walkThroughFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/mustLoginBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
+        android:label="MustLoginBottomSheet" >
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.programmer.finalproject.ui.fragment.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
 </navigation>

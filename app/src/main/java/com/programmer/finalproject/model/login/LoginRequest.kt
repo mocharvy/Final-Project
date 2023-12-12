@@ -1,6 +1,6 @@
 package com.programmer.finalproject.model.login
 
 data class LoginRequest(
-    val email: String,
+    val emailOrPhone: String,
     val password: String
 )
