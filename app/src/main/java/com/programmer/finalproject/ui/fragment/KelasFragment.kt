@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
@@ -50,6 +51,9 @@ class KelasFragment : Fragment() {
                 tvInprogres.setBackgroundResource(R.drawable.default_bg_text)
                 tvAll.setBackgroundResource(R.drawable.default_bg_text)
 
+                etSearch.setOnClickListener {
+                    findNavController().navigate(R.id.action_kelasFragment_to_searchFragment)
+                }
 
             }
         }
