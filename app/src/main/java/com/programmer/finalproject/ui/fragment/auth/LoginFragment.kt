@@ -47,26 +47,28 @@ class LoginFragment : Fragment() {
             btnLogin.setOnClickListener {
 
                 login()
-                verify()
-
+//                verify()
+            }
+            tvForgotPassword.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
             }
 
         }
 
-//        binding.tvBypass.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
-//        }
-    }
-
-    private fun verify() {
-        if (isLoginInfoValid()) {
+        binding.txtMasuktanpalogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
         }
     }
 
-    private fun isLoginInfoValid(): Boolean {
-        return sharedPreferences.getBoolean(STATUS_LOGIN, false)
-    }
+//    private fun verify() {
+//        if (isLoginInfoValid()) {
+//            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
+//        }
+//    }
+
+//    private fun isLoginInfoValid(): Boolean {
+//        return sharedPreferences.getBoolean(STATUS_LOGIN, false)
+//    }
 
     var loginClicks = 0
     private fun login() {

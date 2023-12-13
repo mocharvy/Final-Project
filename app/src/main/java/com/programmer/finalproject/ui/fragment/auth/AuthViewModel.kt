@@ -11,6 +11,8 @@ import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
+import com.programmer.finalproject.model.user.password.ResetPasswordRequest
+import com.programmer.finalproject.model.user.password.ResetPasswordResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -118,9 +120,38 @@ class AuthViewModel @Inject constructor(
         )
     }
 
+    fun resetPassword(resetPasswordRequest: ResetPasswordRequest) {
+        loadingState.postValue(true)
+        errorState.postValue(Pair(false, null))
+        apiRepository.resetPassword(resetPasswordRequest).enqueue(
+            object : Callback<ResetPasswordResponse> {
+                override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
+                    viewModelScope.launch {
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+                override fun onResponse(call: Call<ResetPasswordResponse>, response: Response<ResetPasswordResponse>) {
+                     if (response.code() == 200) {
+                        viewModelScope.launch {
+                            verified.postValue(true)
+                            isError.postValue(false)
+                        }
+                    } else if (response.code() == 401||response.code()==400) {
+                        isError.postValue(true)
+                    }
+                    viewModelScope.launch {
+//                        _accountData.postValue(addedUser)
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+            }
+        )
+    }
+
     fun logout() {
         _token.value = null
-
         _isLogin.value = false
     }
 
