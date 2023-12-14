@@ -6,6 +6,8 @@ import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.otp.OTPResponse
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
@@ -103,4 +105,16 @@ interface ApiService {
         @Header ("Authorization") token:String,
         @Body orderRequest: OrderRequest
     ):Call<OrderResponse>
+
+    @GET("otp")
+    fun getOTP(
+        @Header ("Authorization") accessToken: String,
+        ):Call<OTPResponse>
+    @POST("otp")
+    fun postOTP(
+        @Header ("Authorization") accessToken: String,
+        @Body otpRequest: OTPRequest
+    ): Call<OTPResponse>
+
+
 }
