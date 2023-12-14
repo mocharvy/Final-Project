@@ -1,6 +1,7 @@
 package com.programmer.finalproject.di
 
 import com.programmer.finalproject.model.login.LoginRequest
+import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import okhttp3.MultipartBody
@@ -21,5 +22,7 @@ class ApiHelper @Inject constructor(private val api: ApiService) {
     fun getCoursesByName(name:String) = api.getCourseByName(name)
 
     fun resetPassword(resetPasswordRequest: ResetPasswordRequest)= api.resetPassword(resetPasswordRequest)
+
+    fun orderCourses(token: String,orderRequest: OrderRequest) = api.orderCourses(token,orderRequest)
 
 }
