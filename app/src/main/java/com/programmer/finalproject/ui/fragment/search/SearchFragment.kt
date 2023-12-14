@@ -46,7 +46,7 @@ class SearchFragment : Fragment() {
             searchJob?.cancel()
             searchJob = lifecycleScope.launch {
                 delay(500)
-                searchViewModel.searchMeals(searchQuery.toString())
+                searchViewModel.searchCourses(searchQuery.toString())
                 Log.d("lIST SEARCH",searchQuery.toString())
             }
 

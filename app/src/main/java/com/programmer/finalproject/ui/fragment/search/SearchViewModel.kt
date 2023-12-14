@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
     private var mSearchCoursesLiveData = MutableLiveData<List<Courses>>()
 
-    fun searchMeals(name: String) =
+    fun searchCourses(name: String) =
         apiRepository.getCoursesByame(name)
             .enqueue(object : Callback<CoursesResponse> {
                 override fun onResponse(call: Call<CoursesResponse>, response: Response<CoursesResponse>) {
@@ -32,7 +32,7 @@ class SearchViewModel @Inject constructor(
                 }
 
                 override fun onFailure(call: Call<CoursesResponse>, t: Throwable) {
-                    Log.d("Meals Search ", t.message.toString())
+                    Log.d("Courses Search ", t.message.toString())
                 }
             })
     fun observeSearchCoursesLiveData(): LiveData<List<Courses>> = mSearchCoursesLiveData
