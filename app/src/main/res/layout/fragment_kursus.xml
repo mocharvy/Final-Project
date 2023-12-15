@@ -11,17 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.search.SearchBar
+        <EditText
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/input"
+            android:drawableEnd="@drawable/search"
+            android:editable="false"
+            android:fontFamily="@font/montserrat_medium"
             android:hint="@string/cari_kursus_terbaik"
-            app:layout_constraintStart_toStartOf="parent"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textSize="12sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIconTint="@color/dark_blue" />
+            tools:ignore="Deprecated,VisualLintTextFieldSize"
+            tools:layout_editor_absoluteX="10dp" />
 
         <TextView
             android:id="@+id/tv_topik_kelas"
@@ -58,8 +66,8 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/custom_tv_bg"
             android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/black"
             android:text="@string/semua_kelas"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
 
@@ -70,8 +78,8 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/custom_tv_bg"
             android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/black"
             android:text="@string/kelas_premium"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@id/tv_free"
             app:layout_constraintStart_toEndOf="@id/tv_all"
             app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
@@ -84,8 +92,8 @@
             android:layout_marginEnd="25dp"
             android:background="@drawable/custom_tv_bg"
             android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/black"
             android:text="@string/kelas_gratis"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
 
