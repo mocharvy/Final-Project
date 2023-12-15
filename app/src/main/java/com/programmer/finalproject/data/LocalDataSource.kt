@@ -84,4 +84,11 @@ class LocalDataSource @Inject constructor(
         val IS_LOGIN = booleanPreferencesKey("is_login")
     }
 
+    suspend fun clearUserData() {
+        dataStore.edit { preferences ->
+            preferences.remove(PreferencesKeys.TOKEN)
+            preferences[PreferencesKeys.IS_LOGIN] = false
+        }
+    }
+
 }

@@ -156,8 +156,15 @@ class AuthViewModel @Inject constructor(
     }
 
     fun logout() {
-        _token.value = null
-        _isLogin.value = false
+        viewModelScope.launch {
+            clearUserData()
+            _token.value = null
+            _isLogin.value = false
+        }
+    }
+
+    private suspend fun clearUserData() {
+        repository.local.clearUserData()
     }
 
     private suspend fun saveTokenAndLoginState(accessToken: String, isLogin: Boolean) {
