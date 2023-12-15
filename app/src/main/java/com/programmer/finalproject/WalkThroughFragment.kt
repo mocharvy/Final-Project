@@ -30,7 +30,7 @@ class WalkThroughFragment : Fragment() {
 
         // Inisialisasi button dengan findViewById
         val button = view.findViewById<ImageButton>(R.id.button)
-
+        val masuk = view.findViewById<TextView>(R.id.txt_masuk)
 
         wkAdapter = WalkthroughAdapter(this)
         val viewPager = view.findViewById<ViewPager>(R.id.vp_walkthrough)
@@ -41,6 +41,12 @@ class WalkThroughFragment : Fragment() {
         button.setOnClickListener{
             findNavController().navigate(R.id.action_walkThroughFragment_to_berandaFragment)
         }
+
+        masuk.setOnClickListener {
+            findNavController().navigate(R.id.action_walkThroughFragment_to_loginFragment)
+        }
+
+
     }
 
     fun initAction(){

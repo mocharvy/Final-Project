@@ -17,6 +17,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
 import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +36,7 @@ class AkunFragment : Fragment() {
         binding = FragmentAkunBinding.inflate(layoutInflater, container, false)
 
         getUserDetail()
-        observeUserDetailResponse()
+        //observeUserDetailResponse()
 
         return binding.root
     }
@@ -83,6 +84,7 @@ class AkunFragment : Fragment() {
                 binding.clAkun.visibility = View.VISIBLE
                 binding.toLogin.visibility=View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
+                observeUserDetailResponse()
             } else {
                 binding.toLogin.visibility=  View.VISIBLE
                 binding.clAkun.visibility = View.GONE
@@ -127,13 +129,13 @@ class AkunFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun updateUI(userDetail: UserDetailResponse) {
+    private fun updateUI(userDetail: ProfileResponse) {
         Glide.with(requireActivity())
             .load(userDetail.data.photo)
             .centerCrop()
             .into(binding.ivProfile);
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
-        binding.tvPhone.text = "+62${userDetail.data.phoneNumber}"
+        binding.tvPhone.text = "+62${userDetail.data.phone_number}"
     }
 }

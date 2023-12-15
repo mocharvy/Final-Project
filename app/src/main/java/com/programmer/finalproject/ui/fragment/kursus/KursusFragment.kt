@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
-import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
 import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.utils.NetworkResult
@@ -41,13 +40,7 @@ class KursusFragment : Fragment() {
         }
 
         setupRecyclerView()
-        //readCourseFromDatabase()
         requestCourseFromApi()
-
-        binding.tvTopikKelas.setOnClickListener {
-            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-            startActivity(intent)
-        }
 
         binding.tvFilter.setOnClickListener {
             findNavController().navigate(R.id.action_kursusFragment_to_filterBottomSheet)
@@ -55,6 +48,10 @@ class KursusFragment : Fragment() {
 
         binding.tvPremium.setOnClickListener {
             findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment)
+        }
+
+        binding.searchBar.setOnClickListener {
+            findNavController().navigate(R.id.action_kursusFragment_to_searchFragment)
         }
 
 
@@ -83,7 +80,7 @@ class KursusFragment : Fragment() {
                     Log.d("Call success", "api called successfully")
                     response.data?.let {
                         Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("Data debug", "${response.data}")
+                        Log.d("DataDetailCourse2 debug", "${response.data}")
                         allCoursesAdapter.setData(it)
                         Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
@@ -102,6 +99,10 @@ class KursusFragment : Fragment() {
 
                 is NetworkResult.Loading -> {
                     showShimmerEffect()
+                }
+
+                else -> {
+                    Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show()
                 }
             }
         }

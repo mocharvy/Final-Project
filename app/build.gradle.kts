@@ -91,6 +91,7 @@ dependencies {
     //Image Loader
     implementation("io.coil-kt:coil:2.4.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    kapt ("com.github.bumptech.glide:compiler:4.16.0")
 
 
     //Navigation

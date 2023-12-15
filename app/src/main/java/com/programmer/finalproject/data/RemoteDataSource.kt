@@ -2,10 +2,12 @@ package com.programmer.finalproject.data
 
 import com.programmer.finalproject.di.ApiService
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
-import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
-import com.programmer.finalproject.model.user.UserDetailResponse
+ import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+ import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
+ import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
+import com.programmer.finalproject.model.user.update.ProfileResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -17,11 +19,11 @@ class RemoteDataSource @Inject constructor(
         return apiService.getAllCourses()
     }
 
-    suspend fun getCourseById(courseId : String): Response<DetailCourseResponse> {
+    suspend fun getCourseById(courseId : String): Response<DetailCourseResponse3> {
         return apiService.getCourseById(courseId)
     }
 
-    suspend fun getUserProfile(token: String): Response<UserDetailResponse> {
+    suspend fun getUserProfile(token: String): Response<ProfileResponse> {
         return apiService.getUserProfile(token)
     }
 

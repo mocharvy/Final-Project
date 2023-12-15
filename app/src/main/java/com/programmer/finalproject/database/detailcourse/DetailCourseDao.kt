@@ -12,6 +12,6 @@ interface DetailCourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetailCourse(detailCourse: DetailCourse)
 
-    @Query("SELECT * FROM detail_course_table WHERE id= :courseId ")
+    @Query("SELECT * FROM detail_course_table3 WHERE id= :courseId ")
     fun readDetailCourse(courseId: String): Flow<List<DetailCourse>>
 }
