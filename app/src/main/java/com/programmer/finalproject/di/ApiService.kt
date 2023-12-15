@@ -5,9 +5,16 @@ import com.programmer.finalproject.model.courses.AllCoursesResponse
 import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+ 
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.otp.OTPResponse
+import com.programmer.finalproject.model.payment.HistoryPaymentResponse
+import com.programmer.finalproject.model.payment.OrderRequest
+import com.programmer.finalproject.model.payment.OrderResponse
+ 
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
-<<<<<<< Updated upstream
+  
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
@@ -16,8 +23,7 @@ import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-=======
->>>>>>> Stashed changes
+ 
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -47,11 +53,10 @@ interface ApiService {
     suspend fun getAllCourses(): Response<AllCoursesResponse>
 
 
-<<<<<<< Updated upstream
-    @GET("orders")
+     @GET("orders")
       fun getHistoryPayment(
         @Header("Authorization") token: String,
-        ): Call<OrdersResponse>
+        ): Call<HistoryPaymentResponse>
     @GET("courses")
     fun getCourseByName(
         @Query("name") name:String
@@ -61,6 +66,24 @@ interface ApiService {
     fun resetPassword(
         @Body resetPasswordResponse: ResetPasswordRequest,
     ): Call<ResetPasswordResponse>
-=======
->>>>>>> Stashed changes
+ 
+
+    @POST("orders")
+    fun orderCourses(
+        @Header ("Authorization") token:String,
+        @Body orderRequest: OrderRequest
+    ):Call<OrderResponse>
+
+    @GET("otp")
+    fun getOTP(
+        @Header ("Authorization") accessToken: String,
+        ):Call<OTPResponse>
+    @POST("otp")
+    fun postOTP(
+        @Header ("Authorization") accessToken: String,
+        @Body otpRequest: OTPRequest
+    ): Call<OTPResponse>
+
+
+ 
 }

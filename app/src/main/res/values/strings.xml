@@ -68,8 +68,7 @@
     <string name="_10">10</string>
     <string name="modul">Modul</string>
     <string name="menit">Menit</string>
-<<<<<<< Updated upstream
-    <string name="ubah_password">Ubah Password</string>
+     <string name="ubah_password">Ubah Password</string>
     <string name="nama">Nama</string>
     <string name="no_telepon">No telepon</string>
     <string name="logit">Jika Anda yakin untuk keluar sekarang, silahkan klik tombol Keluar, tetapi Anda dapat kembali lagi nanti</string>
@@ -77,6 +76,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_email">Masukan Email anda untuk mengatur ulang\nkata sandi</string>
-=======
->>>>>>> Stashed changes
-</resources>
+ 
+    <string name="verif_email">Cek Email Anda untuk memverifikasi Akun</string>
+    <string name="pendaftaran_berhasil">Pendaftaran Akun anda Berhasil</string>
+ </resources>

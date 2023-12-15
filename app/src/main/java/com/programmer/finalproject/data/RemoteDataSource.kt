@@ -2,8 +2,9 @@ package com.programmer.finalproject.data
 
 import com.programmer.finalproject.di.ApiService
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
-import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
-import com.programmer.finalproject.model.user.UserDetailResponse
+ import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+ import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
+ import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import retrofit2.Response

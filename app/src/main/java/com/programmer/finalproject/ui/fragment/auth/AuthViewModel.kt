@@ -35,6 +35,10 @@ class AuthViewModel @Inject constructor(
     val accountData: MutableLiveData<LoginResponse?>
         get() = _accountData
 
+    val _registerResponse = MutableLiveData<RegisterResponse?>()
+    val registerResponse: MutableLiveData<RegisterResponse?>
+        get() = _registerResponse
+
     //=========AUTH==========//
     private val _token = MutableLiveData<String?>()
     val token: LiveData<String?>
@@ -101,17 +105,18 @@ class AuthViewModel @Inject constructor(
                     }
                 }
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-                    val addedUser = response.body()
+                    val register = response.body()
                     if (response.code() == 200) {
                         viewModelScope.launch {
                             verified.postValue(true)
                             isError.postValue(false)
+                            _registerResponse.postValue(register)
+
                         }
                     } else if (response.code() == 401) {
                         isError.postValue(true)
                     }
                     viewModelScope.launch {
-//                        _accountData.postValue(addedUser)
                         loadingState.postValue(false)
                         errorState.postValue(Pair(false, null))
                     }
