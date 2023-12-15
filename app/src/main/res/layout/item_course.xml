@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="255dp"
-    android:elevation="20dp"
     android:layout_margin="10dp"
+    android:elevation="20dp"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
-             android:textColor="@color/dark_blue"
+            android:textColor="@color/dark_blue"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_course_image" />
@@ -50,9 +50,9 @@
             android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/_5_0"
-            android:layout_marginStart="3dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_star"
             app:layout_constraintTop_toTopOf="@id/iv_star" />
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_bold"
-             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-             android:textSize="12sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
@@ -92,9 +92,10 @@
             android:id="@+id/tv_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/montserrat_medium"
-             android:textColor="@color/dark_blue"
+            android:text="@string/intermediate"
+            android:textColor="@color/dark_blue"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_level"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -115,9 +116,10 @@
             android:id="@+id/tv_module"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/montserrat_medium"
-             android:textColor="@color/black"
+            android:text="@string/_5_0"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_module"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -139,7 +141,7 @@
             android:id="@+id/iv_time"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_time"
             app:layout_constraintEnd_toStartOf="@id/tv_time"
@@ -152,7 +154,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/montserrat_medium"
-             android:textColor="@color/black"
+            android:text="@string/_5_0"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/text_time"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
