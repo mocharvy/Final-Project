@@ -1,6 +1,8 @@
 package com.programmer.finalproject.di
 
 import com.programmer.finalproject.model.login.LoginRequest
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import okhttp3.MultipartBody
@@ -22,5 +24,9 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
     fun getCoursesByame(name:String) = apiHelper.getCoursesByName(name)
     fun resetPassword(resetPasswordRequest: ResetPasswordRequest) = apiHelper.resetPassword(resetPasswordRequest)
 
+    fun orderCourses(token: String,orderRequest: OrderRequest) = apiHelper.orderCourses(token,orderRequest)
+
+    fun postOTP(accessToken:String,otpRequest: OTPRequest) = apiHelper.postOTP(accessToken,otpRequest)
+    fun getOTP(accessToken:String) = apiHelper.getOTP(accessToken)
 
 }

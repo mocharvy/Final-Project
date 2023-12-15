@@ -6,7 +6,11 @@ import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
-import com.programmer.finalproject.model.payment.OrdersResponse
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.otp.OTPResponse
+import com.programmer.finalproject.model.payment.HistoryPaymentResponse
+import com.programmer.finalproject.model.payment.OrderRequest
+import com.programmer.finalproject.model.payment.OrderResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
@@ -85,7 +89,7 @@ interface ApiService {
     @GET("orders")
       fun getHistoryPayment(
         @Header("Authorization") token: String,
-        ): Call<OrdersResponse>
+        ): Call<HistoryPaymentResponse>
     @GET("courses")
     fun getCourseByName(
         @Query("name") name:String
@@ -95,4 +99,22 @@ interface ApiService {
     fun resetPassword(
         @Body resetPasswordResponse: ResetPasswordRequest,
     ): Call<ResetPasswordResponse>
+
+    @POST("orders")
+    fun orderCourses(
+        @Header ("Authorization") token:String,
+        @Body orderRequest: OrderRequest
+    ):Call<OrderResponse>
+
+    @GET("otp")
+    fun getOTP(
+        @Header ("Authorization") accessToken: String,
+        ):Call<OTPResponse>
+    @POST("otp")
+    fun postOTP(
+        @Header ("Authorization") accessToken: String,
+        @Body otpRequest: OTPRequest
+    ): Call<OTPResponse>
+
+
 }

@@ -52,12 +52,14 @@ class LoginFragment : Fragment() {
             tvForgotPassword.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
             }
-
+            txtMasuktanpalogin.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
+            }
+            txtText.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_otpFragment)
+            }
         }
 
-        binding.txtMasuktanpalogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_berandaFragment)
-        }
     }
 
 //    private fun verify() {
