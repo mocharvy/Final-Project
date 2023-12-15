@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
@@ -25,6 +26,10 @@ class KursusFragment : Fragment() {
     private lateinit var allCoursesAdapter: AllCourseAdapter
 
     private val kursusViewModel: KursusViewModel by viewModels()
+    private val filterViewModel: FilterViewModel by viewModels({ requireActivity() })
+
+    private var typeChipText = "Free"
+    private var typeChipId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +51,32 @@ class KursusFragment : Fragment() {
             findNavController().navigate(R.id.action_kursusFragment_to_filterBottomSheet)
         }
 
-        binding.tvPremium.setOnClickListener {
-            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment)
-        }
-
         binding.searchBar.setOnClickListener {
             findNavController().navigate(R.id.action_kursusFragment_to_searchFragment)
         }
 
+        filterViewModel.filterLiveData.observe(viewLifecycleOwner) { filterData ->
+            Log.d("FILTER DATA", "${filterData.first}, ${filterData.second}, ${filterData.third}")
+            requestCourseFromApiByFilter(filterData.first, filterData.second, filterData.third, null)
+        }
+
+        binding.recChipGroup.setOnCheckedStateChangeListener { group, selectedChipId ->
+            if (selectedChipId.isNotEmpty()) {
+                val chip = group.findViewById<Chip>(selectedChipId.first())
+                val selectedRecType = chip.text.toString()
+                if (selectedRecType == "Kelas premium") {
+                    typeChipText = "Premium"
+                    typeChipId = selectedChipId.first()
+                    requestCourseFromApiByType(typeChipText)
+                } else if(selectedRecType == "Kelas gratis") {
+                    typeChipText = "Free"
+                    typeChipId = selectedChipId.first()
+                    requestCourseFromApiByType(typeChipText)
+                } else if (selectedRecType == "Semua kelas") {
+                    requestCourseFromApi()
+                }
+            }
+        }
 
         return binding.root
     }
@@ -72,7 +95,83 @@ class KursusFragment : Fragment() {
 
     private fun requestCourseFromApi() {
         Log.d("Call course API", "api course called")
-        kursusViewModel.getListCourse()
+        kursusViewModel.getListCourse(null,null,null, null)
+        kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideShimmerEffect()
+                    Log.d("Call success", "api called successfully")
+                    response.data?.let {
+                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
+                        Log.d("DataDetailCourse2 debug", "${response.data}")
+                        allCoursesAdapter.setData(it)
+                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
+
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    hideShimmerEffect()
+                    loadCourseFromCache()
+                    Toast.makeText(
+                        requireContext(),
+                        response.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
+                }
+
+                else -> {
+                    Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun requestCourseFromApiByFilter(filter: String?, category: String?, level: String?, type: String?) {
+        Log.d("Call course filter", "api course called")
+        kursusViewModel.getListCourse(filter,category,level, type)
+        kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideShimmerEffect()
+                    Log.d("Call success", "api called successfully")
+                    response.data?.let {
+                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
+                        Log.d("DataDetailCourse2 debug", "${response.data}")
+                        allCoursesAdapter.setData(it)
+                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
+
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    hideShimmerEffect()
+                    loadCourseFromCache()
+                    Toast.makeText(
+                        requireContext(),
+                        response.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
+                }
+
+                else -> {
+                    Toast.makeText(requireActivity(), "Error occurred", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun requestCourseFromApiByType(type: String?) {
+        Log.d("Call course filter", "api course called")
+        kursusViewModel.getListCourse(null,null,null, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
