@@ -21,6 +21,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentEditProfileBinding
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.update.ProfileRequest
+import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.ui.fragment.akun.AkunViewModel
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.profile.EditProfileFragmentViewModel
@@ -192,12 +193,12 @@ class EditProfileFragment : Fragment() {
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun updateUI(userDetail: UserDetailResponse) {
+    private fun updateUI(userDetail: ProfileResponse) {
         binding.apply {
             profileBackground.load(userDetail.data.photo)
             etNama.setText(userDetail.data.name)
             etEmail.setText(userDetail.data.email)
-            etTelepon.setText(userDetail.data.phoneNumber)
+            etTelepon.setText(userDetail.data.phone_number)
             val country = userDetail.data.country.toString()
             val city = userDetail.data.city.toString()
             etNegara.setText(country)

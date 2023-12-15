@@ -66,7 +66,7 @@ interface ApiService {
     @GET("user")
     suspend fun getUserProfile(
         @Header("Authorization") token: String,
-    ): Response<UserDetailResponse>
+    ): Response<ProfileResponse>
 
     @Multipart
     @PUT("user")
