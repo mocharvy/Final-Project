@@ -1,6 +1,9 @@
 package com.programmer.finalproject.ui.fragment.auth
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +12,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.programmer.finalproject.R
+import com.programmer.finalproject.databinding.DialogSuccessRegisterBinding
 import com.programmer.finalproject.databinding.FragmentRegisterBinding
 import com.programmer.finalproject.model.register.RegisterRequest
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +52,7 @@ class RegisterFragment : Fragment() {
             name = binding.kolomNama.text.toString(),
             email = binding.kolomEmail.text.toString(),
             password = binding.kolomKatasandi.text.toString(),
-            no_telp = binding.kolomTelp.text.toString(),
+            no_telp = "+62"+binding.kolomTelp.text.toString(),
         )
         viewModel.register(registerRequest)
         viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
@@ -56,23 +61,47 @@ class RegisterFragment : Fragment() {
 
         viewModel.verified.observe(viewLifecycleOwner) {
             if (it) {
-                Toast.makeText(requireContext(), "Berhasil Register", Toast.LENGTH_SHORT).show()
-                findNavController().popBackStack()
+                showSuccessDialog()
             }
         }
 
-        viewModel.isError.observe(viewLifecycleOwner) {
+        viewModel.isError.observe(viewLifecycleOwner) { it ->
             if (it) {
                 Toast.makeText(requireContext(), "Register Gagal", Toast.LENGTH_SHORT).show()
             } else {
 
+            }
+            viewModel.registerResponse.observe(viewLifecycleOwner){register->
+                if(register != null){
+                    ACCESS_TOKEN = register.data.accessToken
+                }
             }
 
         }
 
     }
 
-    fun isInputValid(): Boolean {
+    private fun showSuccessDialog() {
+        val registerSuccess =
+            DialogSuccessRegisterBinding.inflate(LayoutInflater.from(requireContext()))
+        val registerDialogBuilder =
+            AlertDialog.Builder(requireContext(), R.style.RoundedCornerDialog)
+                .setView(registerSuccess.root)
+        registerDialogBuilder.setCancelable(true)
+        Glide.with(requireContext())
+            .asGif()
+            .load(R.raw.succes)
+            .into(registerSuccess.ivSuccess)
+
+        val showSuccessDialog = registerDialogBuilder.show()
+
+        Handler(Looper.myLooper()!!).postDelayed({
+            showSuccessDialog.dismiss()
+            findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
+        }, 3000)
+    }
+
+    private fun isInputValid(): Boolean {
         val nama = binding.kolomNama.text.toString()
         val email = binding.kolomEmail.text.toString()
         val password = binding.kolomKatasandi.text.toString()
@@ -90,6 +119,10 @@ class RegisterFragment : Fragment() {
             return false
         }
         return true
+    }
+
+    companion object{
+        var ACCESS_TOKEN = ""
     }
 
 }

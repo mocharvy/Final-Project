@@ -1,13 +1,13 @@
-package com.programmer.finalproject.ui.orders
+package com.programmer.finalproject.ui.fragment.otp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.di.ApiRepository
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.otp.OTPResponse
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
-import com.programmer.finalproject.model.payment.OrderRequest
-import com.programmer.finalproject.model.payment.OrderResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -16,7 +16,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class OrdersViewModel @Inject constructor(
+class OtpViewModel @Inject constructor(
     private val apiRepository: ApiRepository
 ) : ViewModel() {
     val loadingState = MutableLiveData<Boolean>()
@@ -24,19 +24,18 @@ class OrdersViewModel @Inject constructor(
     var isError = MutableLiveData<Boolean>()
 
 
-    val _getListHistoryPayment= MutableLiveData<HistoryPaymentResponse?>()
+    val _getListHistoryPayment = MutableLiveData<HistoryPaymentResponse?>()
 
     val getListHistoryPayment: LiveData<HistoryPaymentResponse?>
         get() = _getListHistoryPayment
 
 
-
-    fun getHistoryPayment(token:String) {
+    fun postOtp(accessToken: String,otpRequest: OTPRequest) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
-        apiRepository.getHistoryPayment(token).enqueue(
-            object : Callback<HistoryPaymentResponse> {
-                override fun onFailure(call: Call<HistoryPaymentResponse>, t: Throwable) {
+        apiRepository.postOTP(accessToken, otpRequest).enqueue(
+            object : Callback<OTPResponse> {
+                override fun onFailure(call: Call<OTPResponse>, t: Throwable) {
                     viewModelScope.launch {
                         loadingState.postValue(false)
                         errorState.postValue(Pair(false, null))
@@ -44,8 +43,8 @@ class OrdersViewModel @Inject constructor(
                 }
 
                 override fun onResponse(
-                    call: Call<HistoryPaymentResponse>,
-                    response: Response<HistoryPaymentResponse>
+                    call: Call<OTPResponse>,
+                    response: Response<OTPResponse>
                 ) {
 
                     viewModelScope.launch {
@@ -53,8 +52,6 @@ class OrdersViewModel @Inject constructor(
                             isError.postValue(true)
                         } else {
                             isError.postValue(false)
-                            _getListHistoryPayment.postValue(response.body())
-
                         }
                         loadingState.postValue(false)
                         errorState.postValue(Pair(false, null))
@@ -64,12 +61,12 @@ class OrdersViewModel @Inject constructor(
         )
     }
 
-    fun  orderCourses(token: String,orderRequest: OrderRequest){
+    fun getOtp(accessToken: String) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
-        apiRepository.orderCourses(token,orderRequest).enqueue(
-            object : Callback<OrderResponse> {
-                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+        apiRepository.getOTP(accessToken).enqueue(
+            object : Callback<OTPResponse> {
+                override fun onFailure(call: Call<OTPResponse>, t: Throwable) {
                     viewModelScope.launch {
                         loadingState.postValue(false)
                         errorState.postValue(Pair(false, null))
@@ -77,8 +74,8 @@ class OrdersViewModel @Inject constructor(
                 }
 
                 override fun onResponse(
-                    call: Call<OrderResponse>,
-                    response: Response<OrderResponse>
+                    call: Call<OTPResponse>,
+                    response: Response<OTPResponse>
                 ) {
 
                     viewModelScope.launch {
