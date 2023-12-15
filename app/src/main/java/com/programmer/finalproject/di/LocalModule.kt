@@ -74,7 +74,7 @@ object LocalModule {
     ) = Room.databaseBuilder(
         context,
         UserDatabase::class.java,
-        "user_database"
+        "user_database_fix"
     ).build()
 
     @Singleton

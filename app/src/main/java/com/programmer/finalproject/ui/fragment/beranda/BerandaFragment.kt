@@ -50,17 +50,12 @@ class BerandaFragment : Fragment() {
                 Log.d("Access Token through token", token)
                 Toast.makeText(requireActivity(), "Token = $token", Toast.LENGTH_SHORT).show()
             }
-            authViewModel.isLogin.observe(viewLifecycleOwner){
+            /*authViewModel.isLogin.observe(viewLifecycleOwner){
                 Toast.makeText(requireActivity(), "Is Login = $it", Toast.LENGTH_SHORT).show()
 
-            }
+            }*/
 
         }
-
-        /*authViewModel.accountData.observe(viewLifecycleOwner) {
-            Log.d("Access Token accountData", it?.dataDetailCourse2?.accessToken.toString())
-            Toast.makeText(requireActivity(), "Acces Token = ${it?.dataDetailCourse2?.accessToken}", Toast.LENGTH_SHORT).show()
-        }*/
     }
 
     private fun getCourse() {

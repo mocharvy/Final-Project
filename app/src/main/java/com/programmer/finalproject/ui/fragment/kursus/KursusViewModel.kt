@@ -41,15 +41,30 @@ class KursusViewModel @Inject constructor(
     var listAllCoursesResponse: MutableLiveData<NetworkResult<AllCoursesResponse2>> =
         MutableLiveData()
 
-    fun getListCourse() = viewModelScope.launch {
-        getListCourseSafeCall()
+    fun getListCourse(
+        recFilter: String?,
+        categoryFilter: String?,
+        levelFilter: String?,
+        type: String?
+    ) = viewModelScope.launch {
+        getListCourseSafeCall(recFilter, categoryFilter, levelFilter, type)
     }
 
-    private suspend fun getListCourseSafeCall() {
+    private suspend fun getListCourseSafeCall(
+        recFilter: String?,
+        categoryFilter: String?,
+        levelFilter: String?,
+        type: String?
+    ) {
         listAllCoursesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {
-                val response = repository.remote.getAllCourse()
+                val response = repository.remote.getAllCourse(
+                    recFilter = recFilter,
+                    categoryFilter = categoryFilter,
+                    levelFilter = levelFilter,
+                    type = type
+                )
                 listAllCoursesResponse.value = handleAllCourseResponse(response)
 
                 val listCourse = listAllCoursesResponse.value!!.data

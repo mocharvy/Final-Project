@@ -37,7 +37,7 @@ class AkunViewModel @Inject constructor(
 
     /** Retrofit **/
 
-    var userDetailResponse: MutableLiveData<NetworkResult<UserDetailResponse>> =
+    var userDetailResponse: MutableLiveData<NetworkResult<ProfileResponse>> =
         MutableLiveData()
 
     fun getUserDetail(token: String) = viewModelScope.launch {
@@ -63,12 +63,12 @@ class AkunViewModel @Inject constructor(
         }
     }
 
-    private fun offlineCacheUser(userDetail: UserDetailResponse) {
+    private fun offlineCacheUser(userDetail: ProfileResponse) {
         val user = User(userDetail)
         insertUser(user)
     }
 
-    private fun handleUserDetailResponse(response: Response<UserDetailResponse>): NetworkResult<UserDetailResponse> {
+    private fun handleUserDetailResponse(response: Response<ProfileResponse>): NetworkResult<ProfileResponse> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")

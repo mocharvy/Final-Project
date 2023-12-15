@@ -58,44 +58,56 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
-        <TextView
-            android:id="@+id/tv_all"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/rec_scrollView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/custom_tv_bg"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/semua_kelas"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
-
-        <TextView
-            android:id="@+id/tv_premium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/custom_tv_bg"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/kelas_premium"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@id/tv_free"
-            app:layout_constraintStart_toEndOf="@id/tv_all"
-            app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
-
-        <TextView
-            android:id="@+id/tv_free"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/custom_tv_bg"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/kelas_gratis"
-            android:textColor="@color/black"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_topik_kelas" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_topik_kelas">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/rec_chipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:checkedChip="@+id/main_course_chip"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/semua_chip"
+                        style="@style/CustomChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/semua_kelas" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/premium_chip"
+                        style="@style/CustomChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelas_premium" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/gratis_chip"
+                        style="@style/CustomChipStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kelas_gratis" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerFrameLayout"
@@ -108,7 +120,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_premium">
+            app:layout_constraintTop_toBottomOf="@id/rec_scrollView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,7 +144,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_filter"
             app:layout_constraintStart_toStartOf="@id/tv_topik_kelas"
-            app:layout_constraintTop_toBottomOf="@id/tv_premium" />
+            app:layout_constraintTop_toBottomOf="@id/rec_scrollView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
