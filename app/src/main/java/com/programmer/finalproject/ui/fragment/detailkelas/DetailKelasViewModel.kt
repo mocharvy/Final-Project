@@ -11,7 +11,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.data.Repository
 import com.programmer.finalproject.database.detailcourse.DetailCourse
-import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
+import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +40,7 @@ class DetailKelasViewModel @Inject constructor(
 
     /** RETROFIT **/
 
-    val detailCourseResponse: MutableLiveData<NetworkResult<DetailCourseResponse>> =
+    val detailCourseResponse: MutableLiveData<NetworkResult<DetailCourseResponse3>> =
         MutableLiveData()
 
     fun getDetailCourse(courseId: String) = viewModelScope.launch {
@@ -66,7 +66,7 @@ class DetailKelasViewModel @Inject constructor(
         }
     }
 
-    private fun handleDetailCourseResponse(response: Response<DetailCourseResponse>): NetworkResult<DetailCourseResponse> {
+    private fun handleDetailCourseResponse(response: Response<DetailCourseResponse3>): NetworkResult<DetailCourseResponse3> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -91,7 +91,7 @@ class DetailKelasViewModel @Inject constructor(
         }
     }
 
-    private fun offlineCacheDetailCourse(listDetailCourse: DetailCourseResponse) {
+    private fun offlineCacheDetailCourse(listDetailCourse: DetailCourseResponse3) {
         val detailCourse = DetailCourse(listDetailCourse)
         insertDetailCourse(detailCourse)
     }

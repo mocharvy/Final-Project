@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class DataDetailCourse(
     @SerializedName("category")
-    val category: Category,
+    val category: CategoryLawas,
     @SerializedName("chapters")
     val chapters: List<Chapter>,
     @SerializedName("description")

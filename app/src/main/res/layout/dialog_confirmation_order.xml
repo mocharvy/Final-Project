@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="25dp"
+    android:paddingStart="35dp"
+    android:paddingEnd="35dp"
+    android:paddingBottom="25dp">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apakah anda yakin untuk membeli kelas ini ? "
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_bold"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_ingin_hapus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anda dapat menikmati Kelas ini se"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:weightSum="2"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ingin_hapus">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/btn_batal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:strokeColor="@color/bluesea"
+            app:cornerRadius="4dp"
+            android:text="Batal"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_beli_kelas"
+            style="@style/Widget.Material3.Button"
+            app:cornerRadius="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="Beli Kelas"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</LinearLayout>

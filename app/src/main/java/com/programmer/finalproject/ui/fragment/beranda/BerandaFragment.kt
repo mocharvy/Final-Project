@@ -58,8 +58,8 @@ class BerandaFragment : Fragment() {
         }
 
         /*authViewModel.accountData.observe(viewLifecycleOwner) {
-            Log.d("Access Token accountData", it?.data?.accessToken.toString())
-            Toast.makeText(requireActivity(), "Acces Token = ${it?.data?.accessToken}", Toast.LENGTH_SHORT).show()
+            Log.d("Access Token accountData", it?.dataDetailCourse2?.accessToken.toString())
+            Toast.makeText(requireActivity(), "Acces Token = ${it?.dataDetailCourse2?.accessToken}", Toast.LENGTH_SHORT).show()
         }*/
     }
 

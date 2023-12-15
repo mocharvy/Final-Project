@@ -3,12 +3,21 @@ package com.programmer.finalproject.di
 import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.CoursesResponse
-import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
+import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
-import com.programmer.finalproject.model.payment.OrdersResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
+import retrofit2.http.Header
+import retrofit2.http.Query
+
+
+import com.programmer.finalproject.model.otp.OTPRequest
+import com.programmer.finalproject.model.otp.OTPResponse
+import com.programmer.finalproject.model.payment.HistoryPaymentResponse
+import com.programmer.finalproject.model.payment.OrderRequest
+import com.programmer.finalproject.model.payment.OrderResponse
+
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
@@ -21,13 +30,11 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface ApiService {
 
@@ -43,19 +50,18 @@ interface ApiService {
 
 
     @GET("courses")
-    fun getCourses(): Call <CoursesResponse>
+    fun getCourses(): Call<CoursesResponse>
 
     @GET("categories")
-    fun getCategories() : Call <CategoryResponse>
+    fun getCategories(): Call<CategoryResponse>
 
     @GET("courses")
-    //suspend fun getAllCourses(): Response<AllCoursesResponse>
     suspend fun getAllCourses(): Response<AllCoursesResponse2>
 
     @GET("courses/{courseId}")
     suspend fun getCourseById(
         @Path("courseId") courseId: String
-    ): Response<DetailCourseResponse>
+    ): Response<DetailCourseResponse3>
 
     @GET("user")
     suspend fun getUserProfile(
@@ -79,20 +85,38 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body changePasswordRequest: ChangePasswordRequest
 
-    ):Response<ChangePasswordResponse>
-
+    ): Response<ChangePasswordResponse>
 
     @GET("orders")
-      fun getHistoryPayment(
+    fun getHistoryPayment(
         @Header("Authorization") token: String,
-        ): Call<OrdersResponse>
+    ): Call<HistoryPaymentResponse>
+
     @GET("courses")
     fun getCourseByName(
-        @Query("name") name:String
-    ): Call <CoursesResponse>
+        @Query("name") name: String
+    ): Call<CoursesResponse>
 
     @POST("reset/password")
     fun resetPassword(
         @Body resetPasswordResponse: ResetPasswordRequest,
     ): Call<ResetPasswordResponse>
+
+    @POST("orders")
+    fun orderCourses(
+        @Header("Authorization") token: String,
+        @Body orderRequest: OrderRequest
+    ): Call<OrderResponse>
+
+    @GET("otp")
+    fun getOTP(
+        @Header("Authorization") accessToken: String,
+    ): Call<OTPResponse>
+
+    @POST("otp")
+    fun postOTP(
+        @Header("Authorization") accessToken: String,
+        @Body otpRequest: OTPRequest
+    ): Call<OTPResponse>
+
 }

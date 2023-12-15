@@ -2,9 +2,11 @@ package com.programmer.finalproject.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.DataItem
@@ -20,22 +22,38 @@ class AllCourseAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataCourse: DataItem, onItemClick: (String) -> Unit) {
-                binding.apply {
-                    ivCourseImage.load(dataCourse.category?.image)
-                    tvTitle.text = dataCourse.name
-                    tvDesc.text = dataCourse.category?.category
-                    tvAuthor.text = dataCourse.facilitator
-                    tvTime.text = dataCourse.totalDuration.toString()
-                    tvModule.text = dataCourse.totalChapter.toString()
-                    tvLevel.text = dataCourse.level
-                    btPrice.text = dataCourse.price.toString()
+            binding.apply {
+                val type = dataCourse.type
 
-                    itemView.setOnClickListener {
-                        dataCourse.id?.let { courseId ->
-                            onItemClick(courseId)
-                        }
+                ivCourseImage.load(dataCourse.category?.image)
+                tvTitle.text = dataCourse.name
+                tvDesc.text = dataCourse.category?.category
+                tvAuthor.text = dataCourse.facilitator
+                tvTime.text = dataCourse.totalDuration.toString()
+                tvModule.text = dataCourse.totalChapter.toString()
+                tvLevel.text = dataCourse.level
+
+                if (type == "Free") {
+                    btPrice.text = itemView.context.getString(R.string.mulai_kelas)
+                } else {
+                    btPrice.text = buildString {
+                        append(itemView.context.getString(R.string.beli_rp))
+                        append(dataCourse.price.toString())
+                    }
+                    btPrice.setBackgroundColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.light_blue_alt
+                        )
+                    )
+                }
+
+                itemView.setOnClickListener {
+                    dataCourse.id?.let { courseId ->
+                        onItemClick(courseId)
                     }
                 }
+            }
         }
 
         companion object {

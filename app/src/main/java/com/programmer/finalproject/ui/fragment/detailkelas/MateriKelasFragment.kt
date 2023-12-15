@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.programmer.finalproject.R
+import com.programmer.finalproject.databinding.FragmentMateriKelasBinding
 import com.programmer.finalproject.databinding.FragmentTentangKelasBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MateriKelasFragment : Fragment() {
 
-    private lateinit var binding: FragmentTentangKelasBinding
+    private lateinit var binding: FragmentMateriKelasBinding
 
     private val detailKelasViewModel: DetailKelasViewModel by viewModels()
 
@@ -25,7 +26,7 @@ class MateriKelasFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTentangKelasBinding.inflate(inflater, container, false)
+        binding = FragmentMateriKelasBinding.inflate(inflater, container, false)
 
 
 
