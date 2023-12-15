@@ -12,7 +12,8 @@ import com.programmer.finalproject.model.register.RegisterResponse
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
-import com.programmer.finalproject.model.user.update.ProfileRequest
+import com.programmer.finalproject.model.user.password.ResetPasswordResponse
+import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -89,4 +90,9 @@ interface ApiService {
     fun getCourseByName(
         @Query("name") name:String
     ): Call <CoursesResponse>
+
+    @POST("reset/password")
+    fun resetPassword(
+        @Body resetPasswordResponse: ResetPasswordRequest,
+    ): Call<ResetPasswordResponse>
 }

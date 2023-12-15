@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_kelasFragment_to_detailKelasActivity"
             app:destination="@id/detailKelasActivity" />
+        <action
+            android:id="@+id/action_kelasFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/kursusFragment"
@@ -129,6 +132,9 @@
         <action
             android:id="@+id/action_loginFragment_to_berandaFragment"
             app:destination="@id/berandaFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -181,5 +187,10 @@
         android:name="com.programmer.finalproject.ui.fragment.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.programmer.finalproject.ui.fragment.auth.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 
 </navigation>
