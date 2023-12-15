@@ -40,7 +40,6 @@ class KursusFragment : Fragment() {
         }
 
         setupRecyclerView()
-        //readCourseFromDatabase()
         requestCourseFromApi()
 
         binding.tvTopikKelas.setOnClickListener {

@@ -3,11 +3,16 @@ package com.programmer.finalproject.di
 import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse
 import com.programmer.finalproject.model.courses.CoursesResponse
+import com.programmer.finalproject.model.detailcourse.DetailCourseResponse
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+import com.programmer.finalproject.model.payment.OrdersResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
-<<<<<<< Updated upstream
+import retrofit2.http.Header
+import retrofit2.http.Query
+
+
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
@@ -16,13 +21,12 @@ import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-=======
->>>>>>> Stashed changes
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -46,8 +50,11 @@ interface ApiService {
     @GET("courses")
     suspend fun getAllCourses(): Response<AllCoursesResponse>
 
+    @GET("courses/{courseId}")
+    suspend fun getCourseById(
+        @Path("courseId") courseId: String
+    ): Response<DetailCourseResponse3>
 
-<<<<<<< Updated upstream
     @GET("orders")
       fun getHistoryPayment(
         @Header("Authorization") token: String,
@@ -61,6 +68,5 @@ interface ApiService {
     fun resetPassword(
         @Body resetPasswordResponse: ResetPasswordRequest,
     ): Call<ResetPasswordResponse>
-=======
->>>>>>> Stashed changes
+
 }
