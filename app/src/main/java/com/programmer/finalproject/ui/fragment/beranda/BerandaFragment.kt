@@ -12,10 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.Tab
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentBerandaBinding
+import com.programmer.finalproject.model.courses.Category
+import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,11 +58,21 @@ class BerandaFragment : Fragment() {
             false
         )
 
-        getCourse()
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                val selectedCategory = tab?.text.toString()
+                getCourse(selectedCategory)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
         getCategories()
 
         binding.tvLihatsemua.setOnClickListener {
-            // Navigasi ke tampilan detail kategori
             findNavController().navigate(R.id.action_berandaFragment_to_detailCategoryFragment2)
         }
 
@@ -80,8 +94,8 @@ class BerandaFragment : Fragment() {
         }
     }
 
-    private fun getCourse() {
-        viewModel.getCourses()
+    private fun getCourse(categoryFilter: String) {
+        viewModel.getCourses(categoryFilter)
 
         viewModel.getListCourses.observe(viewLifecycleOwner) { list ->
             listCoursesAdapter.submitList(list?.data)
@@ -93,7 +107,6 @@ class BerandaFragment : Fragment() {
                 false
             )
             listCoursesAdapter.submitList(list?.data)
-
         }
     }
 
@@ -103,11 +116,26 @@ class BerandaFragment : Fragment() {
         viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
             categoryAdapter = CategoryAdapter()
 
+
+            showTabCategory(list?.data)
+
             binding.rvCategory.adapter = categoryAdapter
             binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
             categoryAdapter.submitList(list?.data)
 
         }
+    }
+
+    private fun showTabCategory(data: List<Category>?) {
+        val tabCategory = binding.tabLayout
+        data?.forEach { category ->
+            val tab= tabCategory.newTab()
+            tab.text = category.category
+            tabCategory.addTab(tab)
+        }
+
+
+
     }
 
 }
