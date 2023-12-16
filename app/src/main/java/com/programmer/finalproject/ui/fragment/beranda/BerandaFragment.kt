@@ -1,5 +1,6 @@
 package com.programmer.finalproject.ui.fragment.beranda
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentBerandaBinding
+import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +40,20 @@ class BerandaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        listCoursesAdapter = CoursesAdapter { course ->
+            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+            intent.putExtra("courseId", course.id)
+            startActivity(intent)
+        }
+
+        binding.rvCourses.adapter = listCoursesAdapter
+        binding.rvCourses.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
         getCourse()
         getCategories()
 
@@ -62,7 +78,7 @@ class BerandaFragment : Fragment() {
         viewModel.getCourses()
 
         viewModel.getListCourses.observe(viewLifecycleOwner) { list ->
-            listCoursesAdapter = CoursesAdapter()
+            listCoursesAdapter.submitList(list?.data)
 
             binding.rvCourses.adapter = listCoursesAdapter
             binding.rvCourses.layoutManager = LinearLayoutManager(
