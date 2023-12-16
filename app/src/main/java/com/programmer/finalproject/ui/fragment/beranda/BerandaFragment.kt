@@ -16,6 +16,8 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentBerandaBinding
+import com.programmer.finalproject.model.courses.Category
+import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,11 +105,25 @@ class BerandaFragment : Fragment() {
         viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
             categoryAdapter = CategoryAdapter()
 
+            showTabCategory(list?.data)
+
             binding.rvCategory.adapter = categoryAdapter
             binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
             categoryAdapter.submitList(list?.data)
 
         }
+    }
+
+    private fun showTabCategory(data: List<Category>?) {
+        val tabCategory = binding.tabLayout
+        data?.forEach { category ->
+            val tab= tabCategory.newTab()
+            tab.text = category.category
+            tabCategory.addTab(tab)
+        }
+
+
+
     }
 
 }
