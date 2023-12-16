@@ -7,7 +7,7 @@
     <string name="semua_kelas">Semua kelas</string>
     <string name="kelas_gratis">Kelas gratis</string>
     <string name="kelas_premium">Kelas premium</string>
-    <string name="ui_ux_design">UI/UX Design</string>
+    <string name="ui_ux_design">UI/UX</string>
     <string name="membuat_ui_ux_design">Membuat UI/UX Design</string>
     <string name="john_doe">John Doe</string>
     <string name="beginner">Beginner</string>
@@ -22,12 +22,12 @@
     <string name="text_desc">Ini adalah penjelasan tentang kelas. Apa saja boleh ditulis disini asalkan rapih.</string>
     <string name="kelas_ini_ditujukan">Kelas ini ditujukan untuk</string>
     <string name="rekomendasi">Rekomendasi</string>
-    <string name="terbaru">Terbaru</string>
+    <string name="terbaru">Paling Baru</string>
     <string name="terpopuler">Terpopuler</string>
     <string name="promo">Promo</string>
     <string name="kategori">Kategori</string>
     <string name="web_development">Web Development</string>
-    <string name="android_development">Android Development</string>
+    <string name="android_development">Android</string>
     <string name="data_science">Data Science</string>
     <string name="business_intelligent">Business Intelligent</string>
     <string name="level">Level</string>
@@ -79,4 +79,6 @@
     <string name="txt_email">Masukan Email anda untuk mengatur ulang\nkata sandi</string>
     <string name="verif_email">Cek Email Anda untuk memverifikasi Akun</string>
     <string name="pendaftaran_berhasil">Pendaftaran Akun anda Berhasil</string>
+    <string name="product_manager">Product Manager</string>
+    <string name="ios">IOS</string>
 </resources>

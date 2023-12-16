@@ -57,7 +57,12 @@ interface ApiService {
     fun getCategories(): Call<CategoryResponse>
 
     @GET("courses")
-    suspend fun getAllCourses(): Response<AllCoursesResponse2>
+    suspend fun getAllCourses(
+        @Query("filter") recFilter: String?,
+        @Query("category") categoryFilter: String?,
+        @Query("level") levelFilter: String?,
+        @Query("type") type: String?
+    ): Response<AllCoursesResponse2>
 
     @GET("courses/{courseId}")
     suspend fun getCourseById(
