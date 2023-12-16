@@ -88,12 +88,12 @@ class DetailPaymentFragment : Fragment() {
     }
 
     private fun orderCourses() {
-        authViewModel.token.observe(viewLifecycleOwner){
+        authViewModel.token.observe(viewLifecycleOwner){ it ->
             if (it != null) {
                     val orderRequest = OrderRequest(binding.courseId.text.toString())
                     orderViewModel.orderCourses("Bearer $it",orderRequest)
-                orderViewModel.isError.observe(viewLifecycleOwner){
-                    if(it){
+                orderViewModel.isError.observe(viewLifecycleOwner){isError->
+                    if(isError){
                         Toast.makeText(requireContext(), "gagal melakukan order kursus", Toast.LENGTH_SHORT).show()
                     }else{
                         showConfirmation()

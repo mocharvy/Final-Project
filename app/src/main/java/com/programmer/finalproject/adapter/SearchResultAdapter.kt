@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.Courses
 
-class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
+class SearchResultAdapter(private var onCourseClickListener: (Courses) -> Unit) : RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
 
 //    private var resultList = ArrayList<Meal>()
 
@@ -50,12 +50,17 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResult
         holder.binding.tvTime.text = courses.total_duration.toString()
         holder.binding.btPrice.text = "Beli Rp${courses.price}"
 
+        holder.itemView.setOnClickListener {
+            val course = mDiffer.currentList[position]
+            onCourseClickListener.invoke(course)
+        }
     }
-
+    fun setOnCourseClickListener(listener: (Courses) -> Unit) {
+        onCourseClickListener = listener
+    }
     override fun getItemCount(): Int {
 
         return mDiffer.currentList.size
     }
-
 
 }

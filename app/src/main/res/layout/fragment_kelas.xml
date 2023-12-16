@@ -38,6 +38,20 @@
         app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabIndicator="@null"
+        android:layout_marginStart="20dp"
+        style="@style/ChipTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycleviewClassProses"
+        app:tabMode="fixed"
+        app:tabBackground="@drawable/selector_tab"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/black" />
     <TextView
         android:id="@+id/tv_all"
         android:layout_width="wrap_content"
@@ -89,7 +103,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="15dp"
         android:id="@+id/recycleviewClassProses"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         tools:itemCount="1"
@@ -99,14 +113,13 @@
         android:id="@+id/tv_kategori"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Kategori"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycleviewClassProses" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category_class"
