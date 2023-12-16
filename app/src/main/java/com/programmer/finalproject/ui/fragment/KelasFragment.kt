@@ -39,7 +39,7 @@ class KelasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCategories()
-        showTab()
+//        showTab()
 
         binding.apply {
             tvAll.setBackgroundResource(R.drawable.background_hover)
@@ -86,19 +86,19 @@ class KelasFragment : Fragment() {
         }
 
     }
-    private fun showTab(){
-        val allTab = binding.tabLayout.newTab()
-        allTab.text = "All"
-        binding.tabLayout.addTab(allTab)
-
-        val premiumTab = binding.tabLayout.newTab()
-        premiumTab.text = "Premium"
-        binding.tabLayout.addTab(premiumTab)
-
-        val freeTab = binding.tabLayout.newTab()
-        freeTab.text = "Free"
-        binding.tabLayout.addTab(freeTab)
-    }
+//    private fun showTab(){
+//        val allTab = binding.tabLayout.newTab()
+//        allTab.text = "All"
+//        binding.tabLayout.addTab(allTab)
+//
+//        val premiumTab = binding.tabLayout.newTab()
+//        premiumTab.text = "Premium"
+//        binding.tabLayout.addTab(premiumTab)
+//
+//        val freeTab = binding.tabLayout.newTab()
+//        freeTab.text = "Free"
+//        binding.tabLayout.addTab(freeTab)
+//    }
 
     private fun getCategories() {
         viewModel.getCategories()

@@ -13,7 +13,7 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
     fun register(registerRequest: RegisterRequest) = apiHelper.register(registerRequest)
     fun login(loginRequest: LoginRequest) = apiHelper.login(loginRequest)
 
-    fun getCourses() = apiHelper.getCourses()
+    fun getCourses(categoryFilter:String) = apiHelper.getCourses(categoryFilter)
     fun getListCategory() = apiHelper.getCategories()
 
     suspend fun editProfile(name: RequestBody, email: RequestBody, phone_number: RequestBody, country: RequestBody, city: RequestBody, photo: MultipartBody.Part, token:String) =
