@@ -9,10 +9,12 @@ import coil.load
 import com.programmer.finalproject.databinding.ItemCategoryBinding
 import com.programmer.finalproject.model.courses.Category
 
-class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(Differ()) {
+class CategoryAdapter(private val showAllItems: Boolean = false) :
+    ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 
@@ -21,8 +23,11 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
     }
 
     override fun getItemCount(): Int {
-        // Limit the number of items to 4
-        return minOf(super.getItemCount(), 4)
+        return if (showAllItems) {
+            super.getItemCount()
+        } else {
+            minOf(super.getItemCount(), 4)
+        }
     }
 
     inner class CategoryViewHolder(
