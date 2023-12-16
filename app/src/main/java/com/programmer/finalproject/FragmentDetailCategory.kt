@@ -30,18 +30,19 @@ class DetailCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        observeCategories()
+        getCategories()
     }
 
-    private fun observeCategories() {
-        viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
-            if (::categoryAdapter.isInitialized) {
-                categoryAdapter = CategoryAdapter(showAllItems = true)
+    private fun getCategories() {
+        viewModel.getCategories()
 
-                binding.recyclerViewCategoryDetail.adapter = categoryAdapter
-                binding.recyclerViewCategoryDetail.layoutManager = GridLayoutManager(requireContext(), 2)
-                categoryAdapter.submitList(list?.data)
-            }
+        viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
+            categoryAdapter = CategoryAdapter(true)
+
+            binding.recyclerViewCategoryDetail.adapter = categoryAdapter
+            binding.recyclerViewCategoryDetail.layoutManager = GridLayoutManager(requireContext(), 2)
+            categoryAdapter.submitList(list?.data)
+
         }
     }
 }
