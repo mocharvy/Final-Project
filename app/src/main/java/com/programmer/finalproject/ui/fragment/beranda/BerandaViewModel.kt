@@ -33,10 +33,10 @@ class BerandaViewModel @Inject constructor(
         get() = _getListCategory
 
 
-    fun getCourses() {
+    fun getCourses(categoryFilter:String) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false,null))
-        apiRepository.getCourses().enqueue(
+        apiRepository.getCourses(categoryFilter).enqueue(
             object : Callback<CoursesResponse> {
                 override fun onFailure(call: Call<CoursesResponse>, t: Throwable) {
                     viewModelScope.launch {

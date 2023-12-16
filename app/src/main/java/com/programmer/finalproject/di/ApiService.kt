@@ -51,7 +51,9 @@ interface ApiService {
 
 
     @GET("courses")
-    fun getCourses(): Call<CoursesResponse>
+    fun getCourses(
+        @Query("category") categoryFilter: String?
+    ): Call<CoursesResponse>
 
     @GET("categories")
     fun getCategories(): Call<CategoryResponse>

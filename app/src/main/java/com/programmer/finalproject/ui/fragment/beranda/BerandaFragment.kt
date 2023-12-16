@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.Tab
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
@@ -56,11 +58,21 @@ class BerandaFragment : Fragment() {
             false
         )
 
-        getCourse()
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                val selectedCategory = tab?.text.toString()
+                getCourse(selectedCategory)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
         getCategories()
 
         binding.tvLihatsemua.setOnClickListener {
-            // Navigasi ke tampilan detail kategori
             findNavController().navigate(R.id.action_berandaFragment_to_detailCategoryFragment2)
         }
 
@@ -82,8 +94,8 @@ class BerandaFragment : Fragment() {
         }
     }
 
-    private fun getCourse() {
-        viewModel.getCourses()
+    private fun getCourse(categoryFilter: String) {
+        viewModel.getCourses(categoryFilter)
 
         viewModel.getListCourses.observe(viewLifecycleOwner) { list ->
             listCoursesAdapter.submitList(list?.data)
@@ -95,7 +107,6 @@ class BerandaFragment : Fragment() {
                 false
             )
             listCoursesAdapter.submitList(list?.data)
-
         }
     }
 
@@ -104,6 +115,7 @@ class BerandaFragment : Fragment() {
 
         viewModel.getListCategory.observe(viewLifecycleOwner) { list ->
             categoryAdapter = CategoryAdapter()
+
 
             showTabCategory(list?.data)
 

@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ApiHelper @Inject constructor(private val api: ApiService) {
     fun register(registerRequest: RegisterRequest) = api.registerUser(registerRequest)
     fun login(loginRequest: LoginRequest) = api.loginUser(loginRequest)
-    fun getCourses() = api.getCourses()
+    fun getCourses(categoryFilter:String) = api.getCourses(categoryFilter)
     fun getCategories() = api.getCategories()
 
     suspend fun editProfile(name:RequestBody,email:RequestBody,phone_number:RequestBody,country:RequestBody,city:RequestBody,photo:MultipartBody.Part,token:String) =
