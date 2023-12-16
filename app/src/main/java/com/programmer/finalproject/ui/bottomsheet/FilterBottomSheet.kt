@@ -1,17 +1,22 @@
 package com.programmer.finalproject.ui.bottomsheet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.programmer.finalproject.databinding.FilterBottomSheetBinding
-import java.util.Locale
+import com.programmer.finalproject.ui.fragment.kursus.FilterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilterBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding : FilterBottomSheetBinding
+    private val filterViewModel: FilterViewModel by viewModels({ requireActivity() })
 
     private var recChipText = "Paling Baru"
     private var recChipId = 0
@@ -19,10 +24,6 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
     private var categoryChipId = 0
     private var levelChipText = "Beginner"
     private var levelChipId = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +58,27 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
+        binding.btApply.setOnClickListener {
+            applyFilters()
+        }
+
 
         return binding.root
+    }
+
+    private fun applyFilters() {
+        val recFilter = recChipText
+        val categoryFilter = categoryChipText
+        val levelFilter = levelChipText
+        Log.d("FILTER","$recFilter, $categoryFilter, $levelFilter")
+
+        filterViewModel.setFilterData(recFilter, categoryFilter, levelFilter)
+
+        filterViewModel.filterLiveData.observe(viewLifecycleOwner) {
+            Log.d("FILTER DATA BS", "${it.first}, ${it.second}, ${it.third}")
+        }
+
+        dismiss()
     }
 
 

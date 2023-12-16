@@ -3,6 +3,7 @@ package com.programmer.finalproject.di
 import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.CoursesResponse
+import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
@@ -56,7 +57,12 @@ interface ApiService {
     fun getCategories(): Call<CategoryResponse>
 
     @GET("courses")
-    suspend fun getAllCourses(): Response<AllCoursesResponse2>
+    suspend fun getAllCourses(
+        @Query("filter") recFilter: String?,
+        @Query("category") categoryFilter: String?,
+        @Query("level") levelFilter: String?,
+        @Query("type") type: String?
+    ): Response<AllCoursesResponse2>
 
     @GET("courses/{courseId}")
     suspend fun getCourseById(
@@ -119,4 +125,9 @@ interface ApiService {
         @Body otpRequest: OTPRequest
     ): Call<OTPResponse>
 
+    @GET("trackers")
+    fun getTrackerClass(
+        @Header("Authorization") token: String,
+        @Query("progress") progress: String
+    ): Call<TrackerResponse>
 }

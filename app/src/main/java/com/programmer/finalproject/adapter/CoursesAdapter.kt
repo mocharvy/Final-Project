@@ -10,7 +10,7 @@ import coil.load
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.Courses
 
-class CoursesAdapter : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Differ()) {
+class CoursesAdapter(private val onCourseClickListener: (Courses) -> Unit) : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
         val binding =
@@ -20,6 +20,10 @@ class CoursesAdapter : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Di
 
     override fun onBindViewHolder(holder: CoursesViewHolder, position: Int) {
         holder.bindData(getItem(position))
+        holder.itemView.setOnClickListener {
+            val course = getItem(position)
+            onCourseClickListener.invoke(course)
+        }
     }
 
 
@@ -52,6 +56,5 @@ class CoursesAdapter : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Di
             return oldItem == newItem
         }
     }
-
 
 }
