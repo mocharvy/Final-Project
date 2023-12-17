@@ -7,6 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.programmer.finalproject.databinding.ActivityMainBinding
+import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
+import com.programmer.finalproject.utils.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNav()
+
     }
+
     private fun setupBottomNav() {
         binding.apply {
             navController = findNavController(R.id.nav_host)
