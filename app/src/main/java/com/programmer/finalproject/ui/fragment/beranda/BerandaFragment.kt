@@ -50,6 +50,8 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkLoginStatus()
+
         listCoursesAdapter = CoursesAdapter { course ->
             val intent = Intent(requireContext(), DetailKelasActivity::class.java)
             intent.putExtra("courseId", course.id)
@@ -97,8 +99,6 @@ class BerandaFragment : Fragment() {
             }*/
 
         }
-
-        checkLoginStatus()
     }
 
     private fun checkLoginStatus() {
@@ -153,9 +153,5 @@ class BerandaFragment : Fragment() {
             tab.text = category.category
             tabCategory.addTab(tab)
         }
-
-
-
     }
-
 }
