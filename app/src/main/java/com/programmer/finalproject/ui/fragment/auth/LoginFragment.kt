@@ -45,9 +45,16 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
             btnLogin.setOnClickListener {
+                val inputEmail = columEmail.text.toString()
+                val inputPassword = columPassword1.text.toString()
 
-                login()
-//                verify()
+                if (!isValidEmail(inputEmail)) {
+                    columEmail.error = "Email tidak valid! Pastikan email Anda memiliki format yang benar (contoh: DevAcademy@gmail.com)"
+                } else if (inputPassword.length < 8) {
+                    columPassword1.error = "Password harus terdiri dari minimal 8 karakter"
+                } else {
+                    login()
+                }
             }
             tvForgotPassword.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
@@ -60,6 +67,11 @@ class LoginFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
     }
 
 //    private fun verify() {
