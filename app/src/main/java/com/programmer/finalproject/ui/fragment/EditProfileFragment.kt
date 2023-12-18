@@ -1,7 +1,6 @@
 package com.programmer.finalproject.ui.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,14 +12,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentEditProfileBinding
-import com.programmer.finalproject.model.user.UserDetailResponse
-import com.programmer.finalproject.model.user.update.ProfileRequest
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.ui.fragment.akun.AkunViewModel
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
@@ -74,7 +71,7 @@ class EditProfileFragment : Fragment() {
 
 
                 } else {
-                    Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+                    handleValidationErrors(etNama, etEmail, etTelepon, etKota, etNegara)
                 }
 
             }
@@ -89,6 +86,40 @@ class EditProfileFragment : Fragment() {
                 binding.etKota.text.isNotEmpty() &&
                 binding.etNegara.text.isNotEmpty()
     }
+
+    private fun handleValidationErrors(
+        name: EditText,
+        email: EditText,
+        phoneNumber: EditText,
+        city: EditText,
+        country: EditText
+    ) {
+        // Handling validation errors and displaying appropriate messages
+        with(binding) {
+            if (!isNameValid(name)) etNama.error = "Nama harus melebihi 3 huruf dan tidak menggunakan angka atau simbol"
+            if (!isEmailValid(email)) etEmail.error = "Email tidak valid! Pastikan email Anda memiliki format yang benar (contoh: DevAcademy@gmail.com)"
+            if (isPhoneNumberValid(phoneNumber)) etTelepon.error = "Nomor telepon harus dimulai dengan +62 dan memiliki setidaknya 8 digit"
+            if (etNegara.text.isEmpty()) etNegara.error = "Tolong isi, tidak boleh kosong!"
+            if (etKota.text.isEmpty()) etKota.error = "Tolong isi, tidak boleh kosong!"
+        }
+    }
+
+    // Validation functions
+    private fun isNameValid(name: EditText): Boolean {
+        val namePattern = Regex("^[a-zA-Z ]{3,}\$")
+        return name.text.toString().matches(namePattern)
+    }
+
+    private fun isEmailValid(email: EditText): Boolean {
+        val emailPattern = Regex("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}\$")
+        return email.text.toString().matches(emailPattern)
+    }
+
+    private fun isPhoneNumberValid(phoneNumber: EditText): Boolean {
+        val phonePattern = Regex("^\\+62\\d{8,}\$")
+        return phoneNumber.text.toString().matches(phonePattern)
+    }
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
