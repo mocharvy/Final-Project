@@ -18,6 +18,7 @@ data class DetailCourseResponse3(
 	val status: String? = null
 ): Parcelable
 
+@Parcelize
 data class Category(
 
 	@field:SerializedName("image")
@@ -25,8 +26,9 @@ data class Category(
 
 	@field:SerializedName("category")
 	val category: String? = null
-)
+): Parcelable
 
+@Parcelize
 data class ChaptersItem(
 
 	@field:SerializedName("is_locked")
@@ -40,8 +42,9 @@ data class ChaptersItem(
 
 	@field:SerializedName("id")
 	val id: String? = null
-)
+): Parcelable
 
+@Parcelize
 data class Data(
 
 	@field:SerializedName("on_boarding")
@@ -85,4 +88,4 @@ data class Data(
 
 	@field:SerializedName("category")
 	val category: Category? = null
-)
+): Parcelable

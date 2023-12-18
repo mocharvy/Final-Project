@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.detailkelas.MateriKelasFragment">
 
+    <TextView
+        android:text="Materi Kelas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 
 </FrameLayout>

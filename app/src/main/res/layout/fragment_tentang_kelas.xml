@@ -57,7 +57,7 @@
                 android:text="@string/text_desc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <TextView
                 android:id="@+id/tv_for"
@@ -65,12 +65,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/kelas_ini_ditujukan"
                 android:fontFamily="@font/montserrat_bold"
+                android:text="@string/kelas_ini_ditujukan"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_desc"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
             <TextView
                 android:id="@+id/tv_desc_for"
@@ -82,20 +82,10 @@
                 android:text="@string/text_desc"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_for"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_for" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:indeterminateTint="@color/dark_blue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
