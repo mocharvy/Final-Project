@@ -73,8 +73,14 @@ class BerandaFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val selectedCategory = tab?.text.toString()
-                getCourse(selectedCategory)
+                if(tab?.text.toString()== "All"){
+                    getCourse("")
+
+                }else{
+                    val selectedCategory = tab?.text.toString()
+                    getCourse(selectedCategory)
+                }
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -83,6 +89,13 @@ class BerandaFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+        val allTab = binding.tabLayout.newTab()
+        allTab.text = "All"
+        binding.tabLayout.addTab(allTab)
+
+        // Set the default category to "All" when the fragment is created
+        getCourse("")
+
         getCategories()
 
         binding.tvLihatsemua.setOnClickListener {
