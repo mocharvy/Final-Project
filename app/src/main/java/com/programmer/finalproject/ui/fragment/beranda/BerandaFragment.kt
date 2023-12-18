@@ -21,7 +21,9 @@ import com.programmer.finalproject.databinding.FragmentBerandaBinding
 import com.programmer.finalproject.model.courses.Category
 import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import com.programmer.finalproject.utils.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +32,7 @@ class BerandaFragment : Fragment() {
     private val viewModel: BerandaViewModel by viewModels()
     private lateinit var listCoursesAdapter: CoursesAdapter
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var prefManager: PreferenceManager
 
     private val authViewModel: AuthViewModel by viewModels()
 
@@ -39,11 +42,15 @@ class BerandaFragment : Fragment() {
     ): View? {
 
         binding = FragmentBerandaBinding.inflate(layoutInflater,container,false)
+        prefManager = PreferenceManager(requireContext())
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        checkLoginStatus()
 
         listCoursesAdapter = CoursesAdapter { course ->
             val intent = Intent(requireContext(), DetailKelasActivity::class.java)
@@ -94,6 +101,19 @@ class BerandaFragment : Fragment() {
         }
     }
 
+    private fun checkLoginStatus() {
+        if (!prefManager.isLoggedIn()) {
+            showMustLoginBottomSheet()
+        }
+    }
+
+    private fun showMustLoginBottomSheet() {
+        val bottomSheet = MustLoginBottomSheet()
+        bottomSheet.isCancelable = false
+        bottomSheet.show(childFragmentManager, bottomSheet.tag)
+    }
+
+
     private fun getCourse(categoryFilter: String) {
         viewModel.getCourses(categoryFilter)
 
@@ -133,9 +153,5 @@ class BerandaFragment : Fragment() {
             tab.text = category.category
             tabCategory.addTab(tab)
         }
-
-
-
     }
-
 }

@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNav()
+
     }
+
     private fun setupBottomNav() {
         binding.apply {
             navController = findNavController(R.id.nav_host)

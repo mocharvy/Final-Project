@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_berandaFragment_to_detailCategoryFragment2"
             app:destination="@id/detailCategoryFragment2" />
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
