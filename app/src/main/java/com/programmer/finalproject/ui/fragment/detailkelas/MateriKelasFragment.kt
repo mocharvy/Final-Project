@@ -1,14 +1,13 @@
 package com.programmer.finalproject.ui.fragment.detailkelas
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentMateriKelasBinding
-import com.programmer.finalproject.databinding.FragmentTentangKelasBinding
+import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,10 +16,6 @@ class MateriKelasFragment : Fragment() {
     private lateinit var binding: FragmentMateriKelasBinding
 
     private val detailKelasViewModel: DetailKelasViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +30,17 @@ class MateriKelasFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    companion object {
+        private const val ARG_DETAIL_COURSE = "arg_detail_course"
+        fun newInstance(detailCourse: DetailCourseResponse3): TentangKelasFragment {
+            val fragment = TentangKelasFragment()
+            val args = Bundle()
+            args.putParcelable(ARG_DETAIL_COURSE, detailCourse)
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }
