@@ -73,7 +73,6 @@
         android:id="@+id/tl_nomorhp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:prefixText="+62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_telp"
         android:layout_marginTop="5dp">
@@ -82,6 +81,7 @@
             android:id="@+id/kolom_telp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="+62"
             android:background="@drawable/colominput"
             android:inputType="phone"
             android:paddingLeft="10dp"

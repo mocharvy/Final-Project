@@ -24,12 +24,11 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private val viewModel: AuthViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,92 +36,101 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             btnDaftar.setOnClickListener {
-                if (isInputValid()) {
-                    registerUser()
-                }else{
-                    Toast.makeText(requireContext(), "Periksa Inputan Anda ! ", Toast.LENGTH_SHORT).show()
+                val nama = kolomNama.text.toString()
+                val email = kolomEmail.text.toString()
+                val password = kolomKatasandi.text.toString()
+                val noTelp = kolomTelp.text.toString()
+
+                if (!isNameValid(nama)) {
+                    kolomNama.error = "Nama harus melebihi 3 huruf dan tidak menggunakan angka atau simbol"
+                    return@setOnClickListener
+                }
+
+                if (!isPhoneNumberValid(noTelp)) {
+                    kolomTelp.error = "Nomor telepon harus diawali dengan +62"
+                    return@setOnClickListener
+                }
+
+                if (!isEmailValid(email)) {
+                    kolomEmail.error = "Email tidak valid! Pastikan email Anda memiliki format yang benar (contoh: DevAcademy@gmail.com)"
+                    return@setOnClickListener
+                }
+
+                if (!isPasswordValid(password)) {
+                    kolomKatasandi.error = "Password harus terdiri dari minimal 8 karakter"
+                    return@setOnClickListener
+                }
+
+                val registerRequest = RegisterRequest(
+                    name = nama,
+                    email = email,
+                    password = password,
+                    no_telp = "+62$noTelp",
+                )
+
+                viewModel.register(registerRequest)
+                viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
+                    pb.isVisible = isLoading
+                }
+
+                viewModel.verified.observe(viewLifecycleOwner) {
+                    if (it) {
+                        showSuccessDialog()
+                    }
+                }
+
+                viewModel.isError.observe(viewLifecycleOwner) { it ->
+                    if (it) {
+                        Toast.makeText(requireContext(), "Register Gagal", Toast.LENGTH_SHORT).show()
+                    }
+                    viewModel.registerResponse.observe(viewLifecycleOwner) { register ->
+                        if (register != null) {
+                            ACCESS_TOKEN = register.data.accessToken
+                        }
+                    }
                 }
             }
         }
-
-    }
-
-    private fun registerUser() {
-        val registerRequest = RegisterRequest(
-            name = binding.kolomNama.text.toString(),
-            email = binding.kolomEmail.text.toString(),
-            password = binding.kolomKatasandi.text.toString(),
-            no_telp = "+62"+binding.kolomTelp.text.toString(),
-        )
-        viewModel.register(registerRequest)
-        viewModel.loadingState.observe(viewLifecycleOwner) { isLoading ->
-            binding.pb.isVisible = isLoading
-        }
-
-        viewModel.verified.observe(viewLifecycleOwner) {
-            if (it) {
-                showSuccessDialog()
-            }
-        }
-
-        viewModel.isError.observe(viewLifecycleOwner) { it ->
-            if (it) {
-                Toast.makeText(requireContext(), "Register Gagal", Toast.LENGTH_SHORT).show()
-            } else {
-
-            }
-            viewModel.registerResponse.observe(viewLifecycleOwner){register->
-                if(register != null){
-                    ACCESS_TOKEN = register.data.accessToken
-                }
-            }
-
-        }
-
     }
 
     private fun showSuccessDialog() {
         val registerSuccess =
-            DialogSuccessRegisterBinding.inflate(LayoutInflater.from(requireContext()))
+            DialogSuccessRegisterBinding.inflate(layoutInflater)
         val registerDialogBuilder =
             AlertDialog.Builder(requireContext(), R.style.RoundedCornerDialog)
                 .setView(registerSuccess.root)
         registerDialogBuilder.setCancelable(true)
         Glide.with(requireContext())
             .asGif()
-            .load(R.raw.succes)
+//            .load(R.raw.success)
             .into(registerSuccess.ivSuccess)
 
         val showSuccessDialog = registerDialogBuilder.show()
 
-        Handler(Looper.myLooper()!!).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             showSuccessDialog.dismiss()
             findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
         }, 3000)
     }
 
-    private fun isInputValid(): Boolean {
-        val nama = binding.kolomNama.text.toString()
-        val email = binding.kolomEmail.text.toString()
-        val password = binding.kolomKatasandi.text.toString()
-
-        if (nama.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            return false
-        }
-
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        if (!email.matches(emailPattern.toRegex())) {
-            return false
-        }
-
-        if (password.length < 8) {
-            return false
-        }
-        return true
+    private fun isNameValid(name: String): Boolean {
+        return name.length > 3 && name.matches("[a-zA-Z ]+".toRegex())
     }
 
-    companion object{
+    private fun isPhoneNumberValid(phoneNumber: String): Boolean {
+        return phoneNumber.startsWith("+62")
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        return password.length >= 8
+    }
+
+    companion object {
         var ACCESS_TOKEN = ""
     }
-
 }
