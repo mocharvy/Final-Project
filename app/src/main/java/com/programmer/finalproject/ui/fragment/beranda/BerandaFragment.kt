@@ -50,7 +50,7 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkLoginStatus()
+//        checkLoginStatus()
 
         listCoursesAdapter = CoursesAdapter { course ->
             val intent = Intent(requireContext(), DetailKelasActivity::class.java)
@@ -101,17 +101,17 @@ class BerandaFragment : Fragment() {
         }
     }
 
-    private fun checkLoginStatus() {
-        if (!prefManager.isLoggedIn()) {
-            showMustLoginBottomSheet()
-        }
-    }
-
-    private fun showMustLoginBottomSheet() {
-        val bottomSheet = MustLoginBottomSheet()
-        bottomSheet.isCancelable = false
-        bottomSheet.show(childFragmentManager, bottomSheet.tag)
-    }
+//    private fun checkLoginStatus() {
+//        if (!prefManager.isLoggedIn()) {
+//            showMustLoginBottomSheet()
+//        }
+//    }
+//
+//    private fun showMustLoginBottomSheet() {
+//        val bottomSheet = MustLoginBottomSheet()
+//        bottomSheet.isCancelable = false
+//        bottomSheet.show(childFragmentManager, bottomSheet.tag)
+//    }
 
 
     private fun getCourse(categoryFilter: String) {
