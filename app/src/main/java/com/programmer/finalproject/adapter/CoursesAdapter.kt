@@ -2,11 +2,13 @@ package com.programmer.finalproject.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.Courses
 
@@ -39,7 +41,22 @@ class CoursesAdapter(private val onCourseClickListener: (Courses) -> Unit) : Lis
                 tvLevel.text= courses.level
                 tvModule.text = courses.total_chapter.toString()
                 tvTime.text = courses.total_duration.toString()
-                btPrice.text = "Beli Rp${courses.price}"
+
+                if (courses.type == "Free") {
+                    btPrice.text = itemView.context.getString(R.string.mulai_kelas)
+                } else {
+                    btPrice.text = buildString {
+                        append(itemView.context.getString(R.string.beli_rp))
+                        append(courses.price.toString())
+                    }
+                    btPrice.setBackgroundColor(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.light_blue_alt
+                        )
+                    )
+                }
+
             }
 
             binding.root.setOnClickListener {

@@ -65,9 +65,6 @@ class HistoryPaymentFragment : Fragment() {
                 } else {
                     findNavController().navigate(R.id.action_historyPaymentFragment_to_mustLoginBottomSheet)
 
-
-//                    binding.progressBar.visibility = View.GONE
-
                 }
             }
         }

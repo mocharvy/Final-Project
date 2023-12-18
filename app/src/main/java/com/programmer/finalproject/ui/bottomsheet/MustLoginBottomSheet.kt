@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.programmer.finalproject.R
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.programmer.finalproject.databinding.MustLoginBottomSheetBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MustLoginBottomSheet : DialogFragment() {
+@AndroidEntryPoint
+class MustLoginBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: MustLoginBottomSheetBinding
 
