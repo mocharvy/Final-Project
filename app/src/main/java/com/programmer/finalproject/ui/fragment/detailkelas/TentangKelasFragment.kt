@@ -1,21 +1,15 @@
 package com.programmer.finalproject.ui.fragment.detailkelas
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.programmer.finalproject.databinding.FragmentTentangKelasBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
-import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TentangKelasFragment : Fragment() {
@@ -33,20 +27,30 @@ class TentangKelasFragment : Fragment() {
         binding = FragmentTentangKelasBinding.inflate(inflater, container, false)
 
         @Suppress("DEPRECATION")
-        detailCourse = arguments?.getParcelable("detailCourse")
+        detailCourse = arguments?.getParcelable(ARG_DETAIL_COURSE)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            updateUI()
-        }, 2000)
+        updateUI()
+
 
         return binding.root
     }
 
     private fun updateUI() {
+        detailCourse?.let {
+            binding.tvDesc.text = it.data?.onBoarding
+            binding.tvDescFor.text = it.data?.description
+        }
+    }
 
-        Log.e("DATA DETAIL", "$detailCourse")
-        binding.tvDesc.text = detailCourse?.data?.onBoarding
-        binding.tvDescFor.text = detailCourse?.data?.description
+    companion object {
+        private const val ARG_DETAIL_COURSE = "arg_detail_course"
+        fun newInstance(detailCourse: DetailCourseResponse3): TentangKelasFragment {
+            val fragment = TentangKelasFragment()
+            val args = Bundle()
+            args.putParcelable(ARG_DETAIL_COURSE, detailCourse)
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }
