@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_mustLoginBottomSheet"
+            app:destination="@id/mustLoginBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
@@ -196,6 +199,9 @@
         <action
             android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
     </dialog>
     <fragment
         android:id="@+id/searchFragment"

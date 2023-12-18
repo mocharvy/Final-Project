@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                         R.id.notifikasiFragment, R.id.akunFragment, R.id.kelasFragment -> {
                             val bottomSheetFragmentMustLogin = MustLoginBottomSheet()
                             bottomSheetFragmentMustLogin.show(supportFragmentManager, bottomSheetFragmentMustLogin.tag)
-                            navController.navigate(R.id.berandaFragment)
 
                         }
                     }
