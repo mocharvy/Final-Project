@@ -177,7 +177,7 @@
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/dark_blue"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/mulai_kelas"
+            android:text="@string/harga_kelas"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_level"
