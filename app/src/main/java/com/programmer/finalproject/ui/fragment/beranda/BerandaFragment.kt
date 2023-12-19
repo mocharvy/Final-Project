@@ -3,46 +3,40 @@ package com.programmer.finalproject.ui.fragment.beranda
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.Tab
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.databinding.FragmentBerandaBinding
 import com.programmer.finalproject.model.courses.Category
-import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.ui.DetailKelasActivity
-import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
-import com.programmer.finalproject.utils.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BerandaFragment : Fragment() {
-    private lateinit var binding : FragmentBerandaBinding
+    private lateinit var binding: FragmentBerandaBinding
     private val viewModel: BerandaViewModel by viewModels()
     private lateinit var listCoursesAdapter: CoursesAdapter
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var prefManager: PreferenceManager
 
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        binding = FragmentBerandaBinding.inflate(layoutInflater,container,false)
-        prefManager = PreferenceManager(requireContext())
+        binding = FragmentBerandaBinding.inflate(layoutInflater, container, false)
 
         return binding.root
     }
@@ -50,8 +44,7 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        checkLoginStatus()
-
+ 
         listCoursesAdapter = CoursesAdapter { course ->
             if(authViewModel.token.value==null && course.type == "Premium"){
                 findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
@@ -119,8 +112,7 @@ class BerandaFragment : Fragment() {
 
         }
     }
-
-
+ 
 
     private fun getCourse(categoryFilter: String) {
         viewModel.getCourses(categoryFilter)
@@ -157,7 +149,7 @@ class BerandaFragment : Fragment() {
     private fun showTabCategory(data: List<Category>?) {
         val tabCategory = binding.tabLayout
         data?.forEach { category ->
-            val tab= tabCategory.newTab()
+            val tab = tabCategory.newTab()
             tab.text = category.category
             tabCategory.addTab(tab)
         }
