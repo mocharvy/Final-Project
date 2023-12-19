@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FilterBottomSheetBinding
 
 class FilterBottomSheet : BottomSheetDialogFragment() {

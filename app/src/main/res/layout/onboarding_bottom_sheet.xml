@@ -72,5 +72,5 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         android:backgroundTint="@color/dark_blue"
-        android:text="Ikuti Kelas"/>
+        android:text="@string/ikuti_kelas"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

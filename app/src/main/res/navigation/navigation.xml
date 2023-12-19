@@ -146,7 +146,11 @@
         android:id="@+id/otpFragment"
         android:name="com.programmer.finalproject.OtpFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" />
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_registerSuccessBottomSheet"
+            app:destination="@id/registerSuccessBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
@@ -181,5 +185,14 @@
         android:name="com.programmer.finalproject.ui.fragment.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <dialog
+        android:id="@+id/registerSuccessBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.RegisterSuccessBottomSheet"
+        android:label="fragment_register_success_bottom_sheet"
+        tools:layout="@layout/fragment_register_success_bottom_sheet" >
+        <action
+            android:id="@+id/action_registerSuccessBottomSheet_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
+    </dialog>
 
 </navigation>

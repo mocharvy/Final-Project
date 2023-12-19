@@ -49,8 +49,6 @@ class KelasFragment : Fragment() {
                 tvSelesai.setBackgroundResource(R.drawable.background_hover)
                 tvInprogres.setBackgroundResource(R.drawable.default_bg_text)
                 tvAll.setBackgroundResource(R.drawable.default_bg_text)
-
-
             }
         }
 
