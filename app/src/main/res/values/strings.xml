@@ -76,4 +76,9 @@
     <string name="success_registration">Registrasi\nBerhasil!</string>
     <string name="beranda">Beranda</string>
     <string name="ikuti_kelas">Ikuti Kelas</string>
+    <string name="kelas_berjalan">Kelas Berjalan</string>
+    <string name="all">All</string>
+    <string name="in_progress">In Progress</string>
+    <string name="selesai">Selesai</string>
+    <string name="kategori">Kategori</string>
 </resources>

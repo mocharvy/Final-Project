@@ -27,7 +27,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Kelas Berjalan"
+        android:text="@string/kelas_berjalan"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
@@ -47,7 +47,7 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="All" />
+        android:text="@string/all" />
 
     <TextView
         android:id="@+id/tv_inprogres"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toStartOf="@id/tv_selesai"
         app:layout_constraintStart_toEndOf="@id/tv_all"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="In Progress" />
+        android:text="@string/in_progress" />
 
     <TextView
         android:id="@+id/tv_selesai"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/tv_kelas_berjalan"
-        android:text="Selesai" />
+        android:text="@string/selesai" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="15dp"
@@ -98,7 +98,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Kategori"
+        android:text="@string/kategori"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycleviewClassProses" />
