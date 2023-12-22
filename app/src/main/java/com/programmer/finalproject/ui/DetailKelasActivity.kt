@@ -62,8 +62,6 @@ class DetailKelasActivity : AppCompatActivity() {
     private fun requestDetailClassFromApi() {
         val courseId = detailKelasViewModel.courseId.value
 
-//        binding.beliKelas.text = courseId.toString()
-
         if (courseId != null) {
             detailKelasViewModel.getDetailCourse(courseId)
             observeDetailCourse()
