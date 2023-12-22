@@ -13,6 +13,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.programmer.finalproject.adapter.PagerAdapter
 import com.programmer.finalproject.databinding.ActivityDetailKelasBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
 import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasViewModel
 import com.programmer.finalproject.ui.fragment.detailkelas.MateriKelasFragment
 import com.programmer.finalproject.ui.fragment.detailkelas.TentangKelasFragment
@@ -46,10 +47,22 @@ class DetailKelasActivity : AppCompatActivity() {
 
         requestDetailClassFromApi()
 
+        binding.beliKelas.setOnClickListener {
+            COURSE_ID = detailKelasViewModel.courseId.value!!
+            toOrderCourse()
+
+        }
+    }
+
+    private fun toOrderCourse() {
+        val bottomSheetFragment = PremiumBottomSheet()
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 
     private fun requestDetailClassFromApi() {
         val courseId = detailKelasViewModel.courseId.value
+
+//        binding.beliKelas.text = courseId.toString()
 
         if (courseId != null) {
             detailKelasViewModel.getDetailCourse(courseId)
@@ -127,5 +140,9 @@ class DetailKelasActivity : AppCompatActivity() {
         binding.tvAuthor.text = detailCourse.data?.facilitator
         binding.tvLevel.text = detailCourse.data?.level
         binding.tvModule.text = detailCourse.data?.totalChapter.toString()
+    }
+
+    companion object{
+        var COURSE_ID = ""
     }
 }
