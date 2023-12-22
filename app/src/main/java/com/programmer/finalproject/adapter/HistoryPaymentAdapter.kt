@@ -10,7 +10,7 @@ import coil.load
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.payment.Data
 
-class HistoryPaymentAdapter : ListAdapter<Data, HistoryPaymentAdapter.HistoryPaymentViewHolder>(Differ()) {
+class HistoryPaymentAdapter (private val onPaymentClick: (Data) -> Unit): ListAdapter<Data, HistoryPaymentAdapter.HistoryPaymentViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryPaymentViewHolder {
         val binding =
@@ -20,6 +20,10 @@ class HistoryPaymentAdapter : ListAdapter<Data, HistoryPaymentAdapter.HistoryPay
 
     override fun onBindViewHolder(holder: HistoryPaymentViewHolder, position: Int) {
         holder.bindData(getItem(position))
+        holder.itemView.setOnClickListener {
+            val payment = getItem(position)
+            onPaymentClick.invoke(payment)
+        }
     }
 
 
@@ -35,8 +39,11 @@ class HistoryPaymentAdapter : ListAdapter<Data, HistoryPaymentAdapter.HistoryPay
 
                 if(payment.status == "BELUM BAYAR"){
                     btPrice.setBackgroundColor(Color.parseColor("#EF4444"))
-                    btPrice.text = "Waiting For Payment"
+                    btPrice.text = "BELUM BAYAR"
 
+                }else{
+                    btPrice.setBackgroundColor(Color.parseColor("#73CA5C"))
+                    btPrice.text = "SUDAH BAYAR"
                 }
             }
 

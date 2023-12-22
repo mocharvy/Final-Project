@@ -3,6 +3,7 @@ package com.programmer.finalproject.di
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.otp.OTPRequest
 import com.programmer.finalproject.model.payment.OrderRequest
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.user.password.ResetPasswordRequest
 import okhttp3.MultipartBody
@@ -34,5 +35,8 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
     fun getNotification(token : String) = apiHelper.getNotification(token)
 
     fun readNotification(token : String,notif_id : String) = apiHelper.readNotification(token,notif_id)
+
+    fun putOrder(token : String,order_id:String,putOrder : PutOrderRequest) = apiHelper.putOrder(token,order_id,putOrder)
+
 
 }

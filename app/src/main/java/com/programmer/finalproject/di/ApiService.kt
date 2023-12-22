@@ -20,6 +20,7 @@ import com.programmer.finalproject.model.otp.OTPResponse
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
 
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
@@ -146,6 +147,11 @@ interface ApiService {
         @Path("notif_id") notif_id: String
     ):Call<UpdateNotifResponse>
 
-
+    @PUT("orders/{order_id}")
+    fun putOrder(
+        @Header("Authorization") token: String,
+        @Path("order_id") order_id: String,
+        @Body putOrderRequest: PutOrderRequest
+    ):Call<OrderResponse>
 
 }
