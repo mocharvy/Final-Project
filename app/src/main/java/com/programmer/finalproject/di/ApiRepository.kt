@@ -31,4 +31,7 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
 
     fun getTrackerClass(token : String,progress:String) = apiHelper.getTrackerClass(token,progress)
 
+    fun getNotification(token : String) = apiHelper.getNotification(token)
+
+
 }

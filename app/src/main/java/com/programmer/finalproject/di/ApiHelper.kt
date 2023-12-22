@@ -28,5 +28,6 @@ class ApiHelper @Inject constructor(private val api: ApiService) {
     fun getOTP(accessToken : String) = api.getOTP(accessToken)
 
     fun getTrackerClass(token : String,progress:String) = api.getTrackerClass(token,progress)
+    fun getNotification(token : String) = api.getNotification(token)
 
 }

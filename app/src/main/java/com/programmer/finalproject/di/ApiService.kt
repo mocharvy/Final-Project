@@ -7,6 +7,7 @@ import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+import com.programmer.finalproject.model.notification.NotificationResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import retrofit2.http.Header
@@ -48,7 +49,6 @@ interface ApiService {
     fun loginUser(
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
-
 
     @GET("courses")
     fun getCourses(
@@ -132,4 +132,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("progress") progress: String
     ): Call<TrackerResponse>
+
+    @GET("notifications")
+    fun getNotification(
+        @Header("Authorization") token: String,
+    ):Call<NotificationResponse>
+
+
 }
