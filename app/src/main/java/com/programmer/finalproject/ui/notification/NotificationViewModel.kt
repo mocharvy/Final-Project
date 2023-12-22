@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.programmer.finalproject.di.ApiRepository
 import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.notification.NotificationResponse
+import com.programmer.finalproject.model.notification.UpdateNotifResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -61,4 +62,37 @@ class NotificationViewModel  @Inject constructor(
             }
         )
     }
+
+    fun readNotification(token:String,notif_id: String) {
+        loadingState.postValue(true)
+        errorState.postValue(Pair(false, null))
+        apiRepository.readNotification(token,notif_id).enqueue(
+            object : Callback<UpdateNotifResponse> {
+                override fun onFailure(call: Call<UpdateNotifResponse>, t: Throwable) {
+                    viewModelScope.launch {
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+
+                override fun onResponse(
+                    call: Call<UpdateNotifResponse>,
+                    response: Response<UpdateNotifResponse>
+                ) {
+
+                    viewModelScope.launch {
+                        if (response.code() == 400 || response.code() == 401 || response.code() == 500) {
+                            isError.postValue(true)
+                        } else {
+
+                            isError.postValue(false)
+                        }
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+            }
+        )
+    }
+
 }

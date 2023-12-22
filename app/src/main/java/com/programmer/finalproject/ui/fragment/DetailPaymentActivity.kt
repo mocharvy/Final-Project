@@ -11,7 +11,9 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ActivityDetailKelasBinding
 import com.programmer.finalproject.databinding.ActivityDetailPaymentBinding
 import com.programmer.finalproject.databinding.FragmentDetailPaymentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailPaymentActivity : AppCompatActivity() {
     private var expandedLayoutBank = false
     private var expandedLayoutCredit = false

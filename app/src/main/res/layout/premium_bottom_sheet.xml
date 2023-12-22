@@ -111,114 +111,99 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
-            <ImageView
-                android:id="@+id/iv_level"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_level"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_author"
-                tools:ignore="ImageContrastCheck" />
-
-            <TextView
-                android:id="@+id/tv_level"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/intermediate"
-                android:textColor="@color/dark_blue"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/iv_level"
-                app:layout_constraintTop_toTopOf="@id/iv_level" />
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tv_author">
 
-            <ImageView
-                android:id="@+id/iv_module"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_module"
-                app:layout_constraintStart_toEndOf="@id/tv_level"
-                app:layout_constraintTop_toTopOf="@id/iv_level"
-                app:layout_goneMarginStart="20dp"
-                tools:ignore="ImageContrastCheck" />
+                <ImageView
+                    android:id="@+id/iv_level"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_level"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_author"
+                    tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/tv_module"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/_5_0"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/iv_module"
-                app:layout_constraintTop_toTopOf="@id/iv_level" />
+                <TextView
+                    android:id="@+id/tv_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/intermediate"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/iv_level"
+                    app:layout_constraintTop_toTopOf="@id/iv_level" />
 
-            <TextView
-                android:id="@+id/text_module"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/modul"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/tv_module"
-                app:layout_constraintTop_toTopOf="@id/iv_level" />
+                <ImageView
+                    android:id="@+id/iv_module"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_module"
+                    app:layout_constraintStart_toEndOf="@id/tv_level"
+                    app:layout_constraintTop_toTopOf="@id/iv_level"
+                    app:layout_goneMarginStart="20dp"
+                    tools:ignore="ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/tv_module"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/_5_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/iv_module"
+                    app:layout_constraintTop_toTopOf="@id/iv_level" />
 
 
-            <ImageView
-                android:id="@+id/iv_time"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="5dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_time"
-                app:layout_constraintEnd_toStartOf="@id/tv_time"
-                app:layout_constraintTop_toTopOf="@id/iv_level"
-                tools:ignore="ImageContrastCheck" />
+                <ImageView
+                    android:id="@+id/iv_time"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_time"
+                    app:layout_constraintEnd_toStartOf="@id/tv_time"
+                    app:layout_constraintTop_toTopOf="@id/iv_level"
+                    tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/_5_0"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/text_time"
-                app:layout_constraintTop_toTopOf="@id/iv_level" />
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/_5_0"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/text_time"
+                    app:layout_constraintTop_toTopOf="@id/iv_level" />
 
-            <TextView
-                android:id="@+id/text_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/menit"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_level" />
+
+            </LinearLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_price"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_margin="16dp"
                 android:backgroundTint="@color/dark_blue"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="@string/mulai_kelas"
-                android:textStyle="bold"
+                 android:textStyle="bold"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_level"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

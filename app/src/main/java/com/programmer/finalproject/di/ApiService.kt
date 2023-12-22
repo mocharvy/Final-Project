@@ -8,6 +8,7 @@ import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
 import com.programmer.finalproject.model.notification.NotificationResponse
+import com.programmer.finalproject.model.notification.UpdateNotifResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import retrofit2.http.Header
@@ -137,6 +138,14 @@ interface ApiService {
     fun getNotification(
         @Header("Authorization") token: String,
     ):Call<NotificationResponse>
+
+
+    @PUT("notifications/{notif_id}")
+    fun readNotification(
+        @Header("Authorization") token: String,
+        @Path("notif_id") notif_id: String
+    ):Call<UpdateNotifResponse>
+
 
 
 }

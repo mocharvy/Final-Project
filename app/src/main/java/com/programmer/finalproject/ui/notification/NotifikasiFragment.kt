@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.NotificationAdapter
@@ -43,12 +45,18 @@ class NotifikasiFragment : Fragment() {
                 notificationViewModel.getNotification("Bearer $it")
 
                 notificationViewModel.getNotification.observe(viewLifecycleOwner) { list ->
-                    notificationAdapter = NotificationAdapter()
+                    notificationAdapter = NotificationAdapter{notif->
+                        val notifId = notif.id
+                        notificationViewModel.readNotification("Bearer " + it,notifId)
+                        Toast.makeText(requireContext(), "Pesan telah dibaca", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_notifikasiFragment_self)
+
+                    }
 
                     binding.rvNotifcation.adapter = notificationAdapter
                     binding.rvNotifcation.layoutManager = LinearLayoutManager(
                         requireContext(),
-                        LinearLayoutManager.HORIZONTAL,
+                        LinearLayoutManager.VERTICAL,
                         false
                     )
                     notificationAdapter.submitList(list?.data)

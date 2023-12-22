@@ -33,5 +33,6 @@ class ApiRepository @Inject constructor(private val apiHelper: ApiHelper) {
 
     fun getNotification(token : String) = apiHelper.getNotification(token)
 
+    fun readNotification(token : String,notif_id : String) = apiHelper.readNotification(token,notif_id)
 
 }
