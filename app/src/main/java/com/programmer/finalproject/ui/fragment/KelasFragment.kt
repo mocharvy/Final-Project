@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
@@ -39,66 +40,64 @@ class KelasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCategories()
-//        showTab()
+        showTabLayout()
+        getTrackerClass("")
 
         binding.apply {
-            tvAll.setBackgroundResource(R.drawable.background_hover)
-            tvAll.setOnClickListener {
-                tvAll.setBackgroundResource(R.drawable.background_hover)
-                tvInprogres.setBackgroundResource(R.drawable.default_bg_text)
-                tvSelesai.setBackgroundResource(R.drawable.default_bg_text)
-            }
-            tvInprogres.setOnClickListener {
-                tvInprogres.setBackgroundResource(R.drawable.background_hover)
-                tvSelesai.setBackgroundResource(R.drawable.default_bg_text)
-                tvAll.setBackgroundResource(R.drawable.default_bg_text)
-
-            }
-            tvSelesai.setOnClickListener {
-                tvSelesai.setBackgroundResource(R.drawable.background_hover)
-                tvInprogres.setBackgroundResource(R.drawable.default_bg_text)
-                tvAll.setBackgroundResource(R.drawable.default_bg_text)
-
                 etSearch.setOnClickListener {
                     findNavController().navigate(R.id.action_kelasFragment_to_searchFragment)
                 }
-            }
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    if (tab?.text.toString() == "All") {
+                        getTrackerClass("")
 
-            authViewModel.token.observe(viewLifecycleOwner){
-                if(it != null){
-
-                    trackerViewModel.getTrackerClass("Bearer $it","")
-
-                    trackerViewModel.getListTrackerClass.observe(viewLifecycleOwner) { list ->
-                        trackerAdapter = TrackerClassAdapter()
-
-                        binding.recycleviewClassProses.adapter = trackerAdapter
-                        binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
-                            requireContext(),
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                        )
-                        trackerAdapter.submitList(list?.data)
-
+                    } else {
+                        val selectedProgress = tab?.text.toString()
+                        getTrackerClass(selectedProgress)
                     }
                 }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+            })
             }
         }
 
+    private fun getTrackerClass(selectedProgress: String) {
+        authViewModel.token.observe(viewLifecycleOwner){
+            if(it != null){
+
+                trackerViewModel.getTrackerClass("Bearer $it",selectedProgress)
+
+                trackerViewModel.getListTrackerClass.observe(viewLifecycleOwner) { list ->
+                    trackerAdapter = TrackerClassAdapter()
+
+                    binding.recycleviewClassProses.adapter = trackerAdapter
+                    binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
+                        requireContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    trackerAdapter.submitList(list?.data)
+
+                }
+            }
+        }
     }
-//    private fun showTab(){
-//        val allTab = binding.tabLayout.newTab()
-//        allTab.text = "All"
-//        binding.tabLayout.addTab(allTab)
-//
-//        val premiumTab = binding.tabLayout.newTab()
-//        premiumTab.text = "Premium"
-//        binding.tabLayout.addTab(premiumTab)
-//
-//        val freeTab = binding.tabLayout.newTab()
-//        freeTab.text = "Free"
-//        binding.tabLayout.addTab(freeTab)
-//    }
+
+    private fun showTabLayout() {
+        val tabLayout = binding.tabLayout
+
+        tabLayout.addTab(tabLayout.newTab().setText("All"))
+        tabLayout.addTab(tabLayout.newTab().setText("In Progress"))
+        tabLayout.addTab(tabLayout.newTab().setText("Selesai"))
+
+    }
+
 
     private fun getCategories() {
         viewModel.getCategories()

@@ -44,12 +44,12 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
- 
+
         listCoursesAdapter = CoursesAdapter { course ->
-            if(authViewModel.token.value==null && course.type == "Premium"){
+            if (authViewModel.token.value == null && course.type == "Premium") {
                 findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
 
-            }else{
+            } else {
                 val intent = Intent(requireContext(), DetailKelasActivity::class.java)
                 intent.putExtra("courseId", course.id)
                 startActivity(intent)
@@ -66,10 +66,10 @@ class BerandaFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab?.text.toString()== "All"){
+                if (tab?.text.toString() == "All") {
                     getCourse("")
 
-                }else{
+                } else {
                     val selectedCategory = tab?.text.toString()
                     getCourse(selectedCategory)
                 }
@@ -85,8 +85,6 @@ class BerandaFragment : Fragment() {
         val allTab = binding.tabLayout.newTab()
         allTab.text = "All"
         binding.tabLayout.addTab(allTab)
-
-        // Set the default category to "All" when the fragment is created
         getCourse("")
 
         getCategories()
@@ -112,7 +110,7 @@ class BerandaFragment : Fragment() {
 
         }
     }
- 
+
 
     private fun getCourse(categoryFilter: String) {
         viewModel.getCourses(categoryFilter)

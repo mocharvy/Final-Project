@@ -35,7 +35,7 @@ class TrackerClassAdapter : ListAdapter<Data, TrackerClassAdapter.TrackerViewHol
                 tvLevel.text= tracker.course.level
                 tvModule.text = tracker.course.total_chapter.toString()
                 tvTime.text = tracker.course.total_duration.toString()
-                btPrice.text = tracker.progress.toString() + "%"
+                btPrice.text = tracker.progress_course.toString() + "%"
             }
 
             binding.root.setOnClickListener {
