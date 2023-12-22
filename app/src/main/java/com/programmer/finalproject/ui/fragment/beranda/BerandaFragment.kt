@@ -44,10 +44,17 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+ 
         listCoursesAdapter = CoursesAdapter { course ->
-            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-            intent.putExtra("courseId", course.id)
-            startActivity(intent)
+            if(authViewModel.token.value==null && course.type == "Premium"){
+                findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
+
+            }else{
+                val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+                intent.putExtra("courseId", course.id)
+                startActivity(intent)
+            }
+
         }
 
         binding.rvCourses.adapter = listCoursesAdapter
@@ -59,8 +66,14 @@ class BerandaFragment : Fragment() {
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val selectedCategory = tab?.text.toString()
-                getCourse(selectedCategory)
+                if(tab?.text.toString()== "All"){
+                    getCourse("")
+
+                }else{
+                    val selectedCategory = tab?.text.toString()
+                    getCourse(selectedCategory)
+                }
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -69,6 +82,13 @@ class BerandaFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+        val allTab = binding.tabLayout.newTab()
+        allTab.text = "All"
+        binding.tabLayout.addTab(allTab)
+
+        // Set the default category to "All" when the fragment is created
+        getCourse("")
+
         getCategories()
 
         binding.tvLihatsemua.setOnClickListener {
@@ -92,7 +112,7 @@ class BerandaFragment : Fragment() {
 
         }
     }
-
+ 
 
     private fun getCourse(categoryFilter: String) {
         viewModel.getCourses(categoryFilter)
