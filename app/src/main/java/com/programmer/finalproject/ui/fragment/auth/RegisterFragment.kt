@@ -46,10 +46,7 @@ class RegisterFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (!isPhoneNumberValid(noTelp)) {
-                    kolomTelp.error = "Nomor telepon harus diawali dengan +62"
-                    return@setOnClickListener
-                }
+
 
                 if (!isEmailValid(email)) {
                     kolomEmail.error = "Email tidak valid! Pastikan email Anda memiliki format yang benar (contoh: DevAcademy@gmail.com)"
@@ -102,7 +99,7 @@ class RegisterFragment : Fragment() {
         registerDialogBuilder.setCancelable(true)
         Glide.with(requireContext())
             .asGif()
-//            .load(R.raw.success)
+            .load(R.raw.succes)
             .into(registerSuccess.ivSuccess)
 
         val showSuccessDialog = registerDialogBuilder.show()

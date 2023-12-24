@@ -8,6 +8,7 @@ import com.programmer.finalproject.di.ApiRepository
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -94,5 +95,38 @@ class OrdersViewModel @Inject constructor(
             }
         )
     }
+
+    fun  putOrder(token: String,order_id:String,putOrderRequest: PutOrderRequest){
+        loadingState.postValue(true)
+        errorState.postValue(Pair(false, null))
+        apiRepository.putOrder(token,order_id,putOrderRequest).enqueue(
+            object : Callback<OrderResponse> {
+                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                    viewModelScope.launch {
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+
+                override fun onResponse(
+                    call: Call<OrderResponse>,
+                    response: Response<OrderResponse>
+                ) {
+
+                    viewModelScope.launch {
+                        if (response.code() == 400 || response.code() == 401 || response.code() == 500) {
+                            isError.postValue(true)
+                        } else {
+                            isError.postValue(false)
+                        }
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+            }
+        )
+    }
+
+
 
 }

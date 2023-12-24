@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/notifikasiFragment"
-        android:name="com.programmer.finalproject.ui.fragment.NotifikasiFragment"
+        android:name="com.programmer.finalproject.ui.notification.NotifikasiFragment"
         android:label="fragment_notifikasi"
         tools:layout="@layout/fragment_notifikasi" >
         <action
@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_notifikasiFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_notifikasiFragment_self"
+            app:destination="@id/notifikasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/kelasFragment"

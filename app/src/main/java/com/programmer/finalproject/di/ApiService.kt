@@ -7,6 +7,8 @@ import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
+import com.programmer.finalproject.model.notification.NotificationResponse
+import com.programmer.finalproject.model.notification.UpdateNotifResponse
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
 import retrofit2.http.Header
@@ -18,6 +20,7 @@ import com.programmer.finalproject.model.otp.OTPResponse
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
 
 import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
@@ -48,7 +51,6 @@ interface ApiService {
     fun loginUser(
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
-
 
     @GET("courses")
     fun getCourses(
@@ -132,4 +134,24 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("progress") progress: String
     ): Call<TrackerResponse>
+
+    @GET("notifications")
+    fun getNotification(
+        @Header("Authorization") token: String,
+    ):Call<NotificationResponse>
+
+
+    @PUT("notifications/{notif_id}")
+    fun readNotification(
+        @Header("Authorization") token: String,
+        @Path("notif_id") notif_id: String
+    ):Call<UpdateNotifResponse>
+
+    @PUT("orders/{order_id}")
+    fun putOrder(
+        @Header("Authorization") token: String,
+        @Path("order_id") order_id: String,
+        @Body putOrderRequest: PutOrderRequest
+    ):Call<OrderResponse>
+
 }
