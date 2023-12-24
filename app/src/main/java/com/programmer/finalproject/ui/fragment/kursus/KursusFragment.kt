@@ -1,5 +1,6 @@
 package com.programmer.finalproject.ui.fragment.kursus
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
+import com.programmer.finalproject.model.courses.DataItem
 import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.fragment.DetailPaymentFragment
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,10 +42,17 @@ class KursusFragment : Fragment() {
         binding = FragmentKursusBinding.inflate(inflater, container, false)
 
 
-        allCoursesAdapter = AllCourseAdapter { courseId ->
-            val intent = Intent(context, DetailKelasActivity::class.java)
-            intent.putExtra("courseId", courseId)
-            context?.startActivity(intent)
+        allCoursesAdapter = AllCourseAdapter(requireContext()) { courseId ->
+            val clickedCourse = allCoursesAdapter.course.firstOrNull { it.id == courseId }
+            clickedCourse?.let { course ->
+                if (course.type == "Free") {
+                    val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+                    intent.putExtra("courseId", courseId)
+                    startActivity(intent)
+                } else {
+                    showPaymentConfirmationDialog()
+                }
+            }
         }
 
         setupRecyclerView()
@@ -79,6 +90,25 @@ class KursusFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun showPaymentConfirmationDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_confirmation_order)
+
+        val btnCancel = dialog.findViewById<MaterialButton>(R.id.btn_batal)
+        val btnBuy = dialog.findViewById<MaterialButton>(R.id.btn_beli_kelas)
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnBuy.setOnClickListener {
+            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment)
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun readCourseFromDatabase() {

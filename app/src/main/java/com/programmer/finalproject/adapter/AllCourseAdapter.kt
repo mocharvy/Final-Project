@@ -1,25 +1,34 @@
 package com.programmer.finalproject.adapter
 
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.google.android.material.button.MaterialButton
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.DataItem
+import com.programmer.finalproject.ui.fragment.DetailPaymentFragment
 import com.programmer.finalproject.utils.CourseDiffUtil
 
 class AllCourseAdapter(
+    private val context: Context,
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<AllCourseAdapter.MyViewHolder>() {
 
-    private var course = emptyList<DataItem>()
+    var course = emptyList<DataItem>()
 
-    class MyViewHolder(private val binding: ItemCourseBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(
+        private val binding: ItemCourseBinding,
+        private val context: Context
+        ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataCourse: DataItem, onItemClick: (String) -> Unit) {
             binding.apply {
@@ -35,6 +44,11 @@ class AllCourseAdapter(
 
                 if (type == "Free") {
                     btPrice.text = itemView.context.getString(R.string.mulai_kelas)
+                    btPrice.setOnClickListener {
+                        dataCourse.id?.let { courseId ->
+                            onItemClick(courseId)
+                        }
+                    }
                 } else {
                     btPrice.text = buildString {
                         append(itemView.context.getString(R.string.beli_rp))
@@ -46,6 +60,9 @@ class AllCourseAdapter(
                             R.color.light_blue_alt
                         )
                     )
+                    btPrice.setOnClickListener {
+                        showPaymentConfirmationDialog()
+                    }
                 }
 
                 itemView.setOnClickListener {
@@ -56,11 +73,30 @@ class AllCourseAdapter(
             }
         }
 
+        private fun showPaymentConfirmationDialog() {
+            val dialog = Dialog(context)
+            dialog.setContentView(R.layout.dialog_confirmation_order)
+
+            val btnCancel = dialog.findViewById<MaterialButton>(R.id.btn_batal)
+            val btnBuy = dialog.findViewById<MaterialButton>(R.id.btn_beli_kelas)
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnBuy.setOnClickListener {
+                // intent / do nav ke detail payment
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCourseBinding.inflate(layoutInflater, parent, false)
-                return MyViewHolder(binding)
+                return MyViewHolder(binding, parent.context)
             }
         }
 
