@@ -1,11 +1,13 @@
 package com.programmer.finalproject.ui.orders
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.CoursesAdapter
 import com.programmer.finalproject.adapter.HistoryPaymentAdapter
 import com.programmer.finalproject.databinding.FragmentHistoryPaymentBinding
+import com.programmer.finalproject.ui.fragment.DetailPaymentActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +50,17 @@ class HistoryPaymentFragment : Fragment() {
 
                     historyPaymentViewModel.getHistoryPayment("Bearer $it")
                     historyPaymentViewModel.getListHistoryPayment.observe(viewLifecycleOwner) { list ->
-                        historyPaymentAdapter = HistoryPaymentAdapter()
+                        historyPaymentAdapter = HistoryPaymentAdapter{history->
+                            val course_id = history.course.id
+                            COURSEID = course_id
+                            ORDER_ID = history.id
+                            Toast.makeText(requireContext(), course_id, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(requireContext(), DetailPaymentActivity::class.java)
+                            startActivity(intent)
+
+                        }
+
+
 
                         binding.rvHistoryPayment.adapter = historyPaymentAdapter
                         binding.rvHistoryPayment.layoutManager = LinearLayoutManager(
@@ -69,5 +82,8 @@ class HistoryPaymentFragment : Fragment() {
             }
         }
     }
-
+companion object{
+    var COURSEID = ""
+    var ORDER_ID = ""
+}
 }
