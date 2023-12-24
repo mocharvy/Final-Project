@@ -9,7 +9,8 @@ import com.programmer.finalproject.model.chapter.ModulesItem
 
 class LessonAdapter(
     private val context: Context,
-    private var lessons: List<ModulesItem>?
+    private var lessons: List<ModulesItem>?,
+    private val onLessonClick: ((String) -> Unit?)? = null
 ) : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
@@ -21,13 +22,21 @@ class LessonAdapter(
         val lesson = lessons?.get(position)
         holder.binding.tvName.text = lesson?.name
         holder.binding.tvIndex.text = lesson?.index.toString()
+
+        holder.itemView.setOnClickListener {
+            val videoUrl = lesson?.video
+            if (videoUrl != null) {
+                onLessonClick?.let { it1 -> it1(videoUrl) }
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
         return lessons?.size ?: 0
     }
 
-    class LessonViewHolder(val binding: ItemLessonBinding ) : RecyclerView.ViewHolder(binding.root)
+    class LessonViewHolder(val binding: ItemLessonBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun updateModules(modules: List<ModulesItem?>?) {
         lessons = modules as List<ModulesItem>?

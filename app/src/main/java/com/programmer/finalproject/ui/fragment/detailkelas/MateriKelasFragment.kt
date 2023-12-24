@@ -20,7 +20,6 @@ class MateriKelasFragment : Fragment() {
 
     private lateinit var binding: FragmentMateriKelasBinding
 
-    private val detailKelasViewModel: DetailKelasViewModel by viewModels()
     private val materiKelasViewModel: MateriKelasViewModel by viewModels()
 
     private var detailCourse: DetailCourseResponse3? = null
@@ -35,9 +34,10 @@ class MateriKelasFragment : Fragment() {
         detailCourse = arguments?.getParcelable(ARG_DETAIL_COURSE)
         Log.d("MateriKelasFragment", "Detail Course: $detailCourse")
 
-        val chapterAdapter = ChapterAdapter(requireContext(), detailCourse?.data?.chapters) { chapterId ->
-            materiKelasViewModel.getDetailChapter(chapterId)
-        }
+        val chapterAdapter =
+            ChapterAdapter(requireContext(), detailCourse?.data?.chapters) { chapterId ->
+                materiKelasViewModel.getDetailChapter(chapterId)
+            }
         binding.rvChapter.adapter = chapterAdapter
         binding.rvChapter.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -45,15 +45,20 @@ class MateriKelasFragment : Fragment() {
         materiKelasViewModel.detailChapterResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
+
+                    val chapterId = response.data?.data?.id
                     val newModules = response.data?.data?.modules
-                    chapterAdapter.updateModules(newModules)
+                    if (chapterId != null) {
+                        chapterAdapter.updateModules(chapterId, newModules)
+                    }
                 }
+
                 else -> {
-                    Toast.makeText(requireContext(),"Data already loaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Data already loaded", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
-
 
 
         return binding.root
