@@ -230,5 +230,19 @@
             android:id="@+id/action_premiumBottomSheet_to_detailPaymentFragment"
             app:destination="@id/detailPaymentFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/materiKelasFragment"
+        android:name="com.programmer.finalproject.ui.fragment.detailkelas.MateriKelasFragment"
+        android:label="fragment_materi_kelas"
+        tools:layout="@layout/fragment_materi_kelas" >
+        <action
+            android:id="@+id/action_materiKelasFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.programmer.finalproject.ui.fragment.videomateri.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video" />
 
 </navigation>
