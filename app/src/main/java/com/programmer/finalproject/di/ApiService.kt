@@ -1,5 +1,6 @@
 package com.programmer.finalproject.di
 
+import com.programmer.finalproject.model.chapter.ChapterResponse
 import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.CoursesResponse
@@ -153,5 +154,10 @@ interface ApiService {
         @Path("order_id") order_id: String,
         @Body putOrderRequest: PutOrderRequest
     ):Call<OrderResponse>
+
+    @GET("chapters/{chapterId}")
+    suspend fun getChaptersById(
+        @Path("chapterId") chapterId: String
+    ): Response<ChapterResponse>
 
 }
