@@ -17,6 +17,7 @@
         android:text="Apakah anda yakin untuk membeli kelas ini ? "
         android:textSize="18sp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:fontFamily="@font/montserrat_bold"
         android:textStyle="bold"
@@ -24,18 +25,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_ingin_hapus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Anda dapat menikmati Kelas ini se"
-        android:gravity="center"
-        android:fontFamily="@font/montserrat_regular"
-        android:textSize="16sp"
-        />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
@@ -55,7 +47,7 @@
             app:strokeColor="@color/bluesea"
             app:cornerRadius="4dp"
             android:text="Batal"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.button.MaterialButton
@@ -68,7 +60,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:text="Beli Kelas"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
     </LinearLayout>
 
 </LinearLayout>
