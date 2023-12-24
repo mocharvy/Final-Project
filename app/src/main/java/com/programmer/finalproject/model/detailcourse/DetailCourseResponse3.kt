@@ -16,7 +16,11 @@ data class DetailCourseResponse3(
 
 	@field:SerializedName("status")
 	val status: String? = null
-): Parcelable
+): Parcelable  {
+	fun getChapterIds(): List<String?> {
+		return data?.chapters?.map { it?.id } ?: emptyList()
+	}
+}
 
 @Parcelize
 data class Category(
@@ -41,7 +45,10 @@ data class ChaptersItem(
 	val index: Int? = null,
 
 	@field:SerializedName("id")
-	val id: String? = null
+	val id: String? = null,
+
+	@field:SerializedName("total_module_duration")
+	val moduleDuration: Int? = null
 ): Parcelable
 
 @Parcelize
