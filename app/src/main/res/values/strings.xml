@@ -82,4 +82,10 @@
     <string name="product_manager">Product Manager</string>
     <string name="ios">IOS</string>
     <string name="selangkah_lagi_menuju">Selangkah Lagi Menuju</string>
+    <string name="materi_belajar">Materi Belajar</string>
+    <string name="chapter">Chapter</string>
+    <string name="pendahuluan">Pendahuluan</string>
+    <string name="strip">-</string>
+    <string name="_1">1</string>
+    <string name="pelajaran_dasar">Pelajaran dasar</string>
 </resources>
