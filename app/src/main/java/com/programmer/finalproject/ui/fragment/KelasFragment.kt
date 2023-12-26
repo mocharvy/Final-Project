@@ -1,5 +1,6 @@
 package com.programmer.finalproject.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,9 +12,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.programmer.finalproject.R
+import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentKelasBinding
+import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.beranda.BerandaViewModel
 import com.programmer.finalproject.ui.kelas.KelasViewModel
@@ -42,6 +46,8 @@ class KelasFragment : Fragment() {
         getCategories()
         showTabLayout()
         getTrackerClass("")
+        initializeTrackerAdapter()
+
 
         binding.apply {
                 etSearch.setOnClickListener {
@@ -67,24 +73,42 @@ class KelasFragment : Fragment() {
             }
         }
 
-    private fun getTrackerClass(selectedProgress: String) {
-        authViewModel.token.observe(viewLifecycleOwner){
-            if(it != null){
+    private fun initializeTrackerAdapter() {
+        trackerAdapter = TrackerClassAdapter(requireContext()) { courseId ->
+            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+            intent.putExtra("courseId", courseId)
+            startActivity(intent)
+        }
+        binding.recycleviewClassProses.adapter = trackerAdapter
+        binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+    }
 
-                trackerViewModel.getTrackerClass("Bearer $it",selectedProgress)
+    private fun showMustLoginBottomSheet() {
+        val bottomSheet = MustLoginBottomSheet()
+        bottomSheet.show(parentFragmentManager, "MustLoginBottomSheet")
+    }
+
+    private fun getTrackerClass(selectedProgress: String) {
+        authViewModel.token.observe(viewLifecycleOwner) { it ->
+            it?.let { token ->
+                trackerViewModel.getTrackerClass("Bearer $token", selectedProgress)
 
                 trackerViewModel.getListTrackerClass.observe(viewLifecycleOwner) { list ->
-                    trackerAdapter = TrackerClassAdapter()
-
-                    binding.recycleviewClassProses.adapter = trackerAdapter
-                    binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
-                        requireContext(),
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                    )
                     trackerAdapter.submitList(list?.data)
-
                 }
+
+                binding.recycleviewClassProses.adapter = trackerAdapter
+                binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            } ?: run {
+                showMustLoginBottomSheet()
             }
         }
     }
@@ -111,5 +135,4 @@ class KelasFragment : Fragment() {
 
         }
     }
-
 }

@@ -12,7 +12,8 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.Courses
 
-class CoursesAdapter(private val onCourseClickListener: (Courses) -> Unit) : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Differ()) {
+class CoursesAdapter(
+    private val onCourseClickListener: (Courses) -> Unit) : ListAdapter<Courses, CoursesAdapter.CoursesViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
         val binding =

@@ -48,7 +48,6 @@ class BerandaFragment : Fragment() {
         listCoursesAdapter = CoursesAdapter { course ->
             if (authViewModel.token.value == null && course.type == "Premium") {
                 findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
-
             } else {
                 val intent = Intent(requireContext(), DetailKelasActivity::class.java)
                 intent.putExtra("courseId", course.id)
