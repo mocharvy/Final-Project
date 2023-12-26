@@ -46,7 +46,24 @@ class KelasFragment : Fragment() {
         getCategories()
         showTabLayout()
         getTrackerClass("")
-        initializeTrackerAdapter()
+
+
+        trackerAdapter = TrackerClassAdapter(requireContext()) { courseId ->
+            if (authViewModel.token.value == null) {
+                findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
+            } else {
+                val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+                intent.putExtra("courseId", courseId)
+                startActivity(intent)
+            }
+        }
+
+        binding.recycleviewClassProses.adapter = trackerAdapter
+        binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
 
 
         binding.apply {
@@ -72,20 +89,6 @@ class KelasFragment : Fragment() {
             })
             }
         }
-
-    private fun initializeTrackerAdapter() {
-        trackerAdapter = TrackerClassAdapter(requireContext()) { courseId ->
-            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-            intent.putExtra("courseId", courseId)
-            startActivity(intent)
-        }
-        binding.recycleviewClassProses.adapter = trackerAdapter
-        binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-    }
 
     private fun showMustLoginBottomSheet() {
         val bottomSheet = MustLoginBottomSheet()
