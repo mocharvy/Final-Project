@@ -29,9 +29,6 @@
             android:id="@+id/action_berandaFragment_to_detailCategoryFragment2"
             app:destination="@id/detailCategoryFragment2" />
         <action
-            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_berandaFragment_to_mustLoginBottomSheet"
             app:destination="@id/mustLoginBottomSheet" />
     </fragment>
@@ -200,11 +197,11 @@
         android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
         android:label="MustLoginBottomSheet" >
         <action
-            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_mustLoginBottomSheet_to_berandaFragment"
             app:destination="@id/berandaFragment" />
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </dialog>
     <fragment
         android:id="@+id/searchFragment"

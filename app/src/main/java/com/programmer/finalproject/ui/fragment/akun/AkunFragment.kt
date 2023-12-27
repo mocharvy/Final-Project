@@ -1,7 +1,6 @@
 package com.programmer.finalproject.ui.fragment.akun
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.bumptech.glide.Glide
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
-import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.utils.NetworkResult
@@ -36,7 +33,6 @@ class AkunFragment : Fragment() {
         binding = FragmentAkunBinding.inflate(layoutInflater, container, false)
 
         getUserDetail()
-        //observeUserDetailResponse()
 
         return binding.root
     }
@@ -66,9 +62,11 @@ class AkunFragment : Fragment() {
         logoutDialogBuilder.setCancelable(true)
         val logoutDialog = logoutDialogBuilder.show()
         logout.btnLogout.setOnClickListener {
-          authViewModel.logout()
+            authViewModel.logout()
 
             logoutDialog.dismiss()
+            findNavController().popBackStack(R.id.loginFragment, false)
+            findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
 
         }
         logout.btnDismiss.setOnClickListener {
@@ -82,11 +80,11 @@ class AkunFragment : Fragment() {
             if (it != null) {
                 Log.d("TOKEN", it)
                 binding.clAkun.visibility = View.VISIBLE
-                binding.toLogin.visibility=View.GONE
+                binding.toLogin.visibility = View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
                 observeUserDetailResponse()
             } else {
-                binding.toLogin.visibility=  View.VISIBLE
+                binding.toLogin.visibility = View.VISIBLE
                 binding.clAkun.visibility = View.GONE
                 binding.toLogin.setOnClickListener {
                     findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
@@ -133,9 +131,9 @@ class AkunFragment : Fragment() {
         Glide.with(requireActivity())
             .load(userDetail.data.photo)
             .centerCrop()
-            .into(binding.ivProfile);
+            .into(binding.ivProfile)
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
-        binding.tvPhone.text = "+62${userDetail.data.phone_number}"
+        binding.tvPhone.text = userDetail.data.phone_number
     }
 }

@@ -54,7 +54,7 @@ class MateriKelasFragment : Fragment() {
                 }
 
                 else -> {
-                    Toast.makeText(requireContext(), "Data already loaded", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Data loaded", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
