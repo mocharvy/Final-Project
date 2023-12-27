@@ -29,28 +29,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNav()
-        checkLogin()
 
     }
 
-    private fun checkLogin() {
-        authViewModel.token.observe(this) { token ->
-            if (token == null) {
-                navController = findNavController(R.id.nav_host)
 
-                navController.addOnDestinationChangedListener { _, destination, _ ->
-                    when (destination.id) {
-                        R.id.notifikasiFragment, R.id.akunFragment, R.id.kelasFragment -> {
-                            val bottomSheetFragmentMustLogin = MustLoginBottomSheet()
-                            bottomSheetFragmentMustLogin.show(supportFragmentManager, bottomSheetFragmentMustLogin.tag)
-
-                        }
-                    }
-
-                }
-            }
-        }
-    }
 
 
     private fun setupBottomNav() {

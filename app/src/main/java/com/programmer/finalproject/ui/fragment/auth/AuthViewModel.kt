@@ -80,7 +80,9 @@ class AuthViewModel @Inject constructor(
                                 saveTokenAndLoginState(it, true)
                             }
                         }
-                    } else if (response.code() == 401) {
+                    } else if (response.code() == 401||response.code() == 400||response.code()==500) {
+                        _token.value= null
+                        _isLogin.value = false
                         isError.postValue(true)
                     }
                     viewModelScope.launch {

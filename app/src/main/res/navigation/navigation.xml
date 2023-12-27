@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_notifikasiFragment_self"
             app:destination="@id/notifikasiFragment" />
+        <action
+            android:id="@+id/action_notifikasiFragment_to_mustLoginBottomSheet"
+            app:destination="@id/mustLoginBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/kelasFragment"

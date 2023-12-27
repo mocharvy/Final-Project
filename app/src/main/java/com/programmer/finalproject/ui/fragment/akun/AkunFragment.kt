@@ -91,6 +91,7 @@ class AkunFragment : Fragment() {
                 binding.toLogin.setOnClickListener {
                     findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
                 }
+                authViewModel.logout()
                 Toast.makeText(requireActivity(), "Access token is null", Toast.LENGTH_SHORT).show()
                 hideLoading()
             }
@@ -112,6 +113,7 @@ class AkunFragment : Fragment() {
 
                 is NetworkResult.Error -> {
                     hideLoading()
+                    binding.clAkun.visibility = View.GONE
                     Toast.makeText(requireContext(), "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.e("DetailKelasFragment", "Error: ${result.message}")
                 }

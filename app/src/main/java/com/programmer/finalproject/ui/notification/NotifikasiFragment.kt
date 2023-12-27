@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.NotificationAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentNotifikasiBinding
+import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,6 +69,15 @@ class NotifikasiFragment : Fragment() {
                     }
 
                 }
+            }else{
+                checkLogin()
+            }
+        }
+    }
+    private fun checkLogin() {
+        authViewModel.token.observe(requireActivity()) { token ->
+            if (token == null) {
+               findNavController().navigate(R.id.action_notifikasiFragment_to_mustLoginBottomSheet)
             }
         }
     }

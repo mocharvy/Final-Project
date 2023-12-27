@@ -32,8 +32,9 @@ class MustLoginBottomSheet : BottomSheetDialogFragment() {
 
         binding.apply {
             btLogin.setOnClickListener {
-                dismiss()
-                findNavController().navigate(R.id.action_mustLoginBottomSheet_to_loginFragment)
+
+                 findNavController().navigate(R.id.action_mustLoginBottomSheet_to_loginFragment)
+
             }
             close.setOnClickListener{
                 dismiss()
