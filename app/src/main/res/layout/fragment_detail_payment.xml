@@ -144,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/ppn_11"
                 android:textColor="@color/black"
@@ -560,7 +561,7 @@
         android:id="@+id/course_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9e49fb8b-82b6-4a70-880e-d66fd6c7244b"
+        android:text="@string/course_id"
         app:layout_constraintBottom_toTopOf="@+id/bt_pay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

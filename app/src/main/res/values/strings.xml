@@ -50,7 +50,7 @@
     <string name="harga">Harga</string>
     <string name="rp">Rp.</string>
     <string name="_123456">123456</string>
-    <string name="ppn_11">PPN 11%</string>
+    <string name="ppn_11">PPN 10%</string>
     <string name="total">Total</string>
     <string name="bank_transfer">Bank Transfer</string>
     <string name="account_number">Account number</string>
@@ -88,4 +88,5 @@
     <string name="strip">-</string>
     <string name="_1">1</string>
     <string name="pelajaran_dasar">Pelajaran dasar</string>
+    <string name="course_id">Course ID</string>
 </resources>

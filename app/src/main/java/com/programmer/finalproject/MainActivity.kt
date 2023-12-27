@@ -1,17 +1,14 @@
 package com.programmer.finalproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.programmer.finalproject.databinding.ActivityMainBinding
 import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
@@ -20,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
     private val authViewModel: AuthViewModel by viewModels()
 
 
@@ -34,15 +31,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLogin() {
-        authViewModel.token.observe(this) { token ->
-            if (token == null) {
+        authViewModel.token.observe(this) {
+        Log.d("TOKEN", "$it")
+            if (it == null) {
                 navController = findNavController(R.id.nav_host)
 
                 navController.addOnDestinationChangedListener { _, destination, _ ->
                     when (destination.id) {
                         R.id.notifikasiFragment, R.id.akunFragment, R.id.kelasFragment -> {
                             val bottomSheetFragmentMustLogin = MustLoginBottomSheet()
-                            bottomSheetFragmentMustLogin.show(supportFragmentManager, bottomSheetFragmentMustLogin.tag)
+                            bottomSheetFragmentMustLogin.show(
+                                supportFragmentManager,
+                                bottomSheetFragmentMustLogin.tag
+                            )
 
                         }
                     }
@@ -54,7 +55,26 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupBottomNav() {
-        binding.apply {
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+
+        val navController = navHostFragment.navController
+        binding.navBottom.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.berandaFragment, R.id.notifikasiFragment, R.id.kelasFragment, R.id.kursusFragment, R.id.akunFragment -> {
+                    binding.navBottom.visibility = View.VISIBLE
+                }
+
+                else -> {
+                    binding.navBottom.visibility = View.GONE
+                }
+            }
+        }
+
+        /*binding.apply {
             navController = findNavController(R.id.nav_host)
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -66,6 +86,6 @@ class MainActivity : AppCompatActivity() {
                     binding.navBottom.visibility = View.GONE
                 }
             }
-        }
+        }*/
     }
 }
