@@ -128,18 +128,14 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApi() {
-        Log.d("Call course API", "api course called")
         kursusViewModel.getListCourse(null,null,null, null)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
+
                     response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
                         allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
                     }
                 }
@@ -166,19 +162,14 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApiByFilter(filter: String?, category: String?, level: String?, type: String?) {
-        Log.d("Call course filter", "api course called")
         kursusViewModel.getListCourse(filter,category,level, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
-                    response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
-                        allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
+                    response.data?.let {
+                        allCoursesAdapter.setData(it)
                     }
                 }
 
@@ -204,19 +195,14 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApiByType(type: String?) {
-        Log.d("Call course filter", "api course called")
         kursusViewModel.getListCourse(null,null,null, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
-                    response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
-                        allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
+                    response.data?.let {
+                        allCoursesAdapter.setData(it)
                     }
                 }
 
