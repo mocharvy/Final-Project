@@ -140,7 +140,13 @@ class DetailKelasActivity : AppCompatActivity() {
         binding.tvModule.text = detailCourse.data?.totalChapter.toString()
     }
 
-    companion object{
+    override fun onDestroy() {
+        super.onDestroy()
+
+        youtubePlayerView.release()
+    }
+
+    companion object {
         var COURSE_ID = ""
     }
 }
