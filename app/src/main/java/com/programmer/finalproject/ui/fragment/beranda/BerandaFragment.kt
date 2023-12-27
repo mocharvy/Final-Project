@@ -103,11 +103,6 @@ class BerandaFragment : Fragment() {
                 Log.d("Access Token through token", token)
                 Toast.makeText(requireActivity(), "Token = $token", Toast.LENGTH_SHORT).show()
             }
-            /*authViewModel.isLogin.observe(viewLifecycleOwner){
-                Toast.makeText(requireActivity(), "Is Login = $it", Toast.LENGTH_SHORT).show()
-
-            }*/
-
         }
     }
 
