@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
@@ -33,12 +34,12 @@ class AkunFragment : Fragment() {
         binding = FragmentAkunBinding.inflate(layoutInflater, container, false)
 
         getUserDetail()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             tvProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_akunFragment_to_editProfileFragment)
@@ -83,7 +84,13 @@ class AkunFragment : Fragment() {
                 binding.toLogin.visibility = View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
                 observeUserDetailResponse()
+
+                val mustLoginBottomSheet = requireActivity().supportFragmentManager.findFragmentByTag("mustLoginBottomSheet")
+                if (mustLoginBottomSheet != null && mustLoginBottomSheet is BottomSheetDialogFragment) {
+                    mustLoginBottomSheet.dismiss()
+                }
             } else {
+                findNavController().navigate(R.id.action_akunFragment_to_mustLoginBottomSheet)
                 binding.toLogin.visibility = View.VISIBLE
                 binding.clAkun.visibility = View.GONE
                 binding.toLogin.setOnClickListener {
@@ -94,6 +101,7 @@ class AkunFragment : Fragment() {
             }
         }
     }
+
 
     private fun observeUserDetailResponse() {
         akunViewModel.userDetailResponse.observe(viewLifecycleOwner) { result ->

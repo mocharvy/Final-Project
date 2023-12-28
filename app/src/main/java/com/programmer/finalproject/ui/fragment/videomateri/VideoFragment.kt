@@ -2,23 +2,34 @@ package com.programmer.finalproject.ui.fragment.videomateri
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import com.programmer.finalproject.databinding.ActivityVideoBinding
+import com.programmer.finalproject.databinding.FragmentVideoBinding
 import java.util.regex.Pattern
 
-class VideoActivity : AppCompatActivity() {
+class VideoFragment : Fragment() {
 
-    private lateinit var binding : ActivityVideoBinding
+    private lateinit var binding: FragmentVideoBinding
     private lateinit var youtubePlayerView: YouTubePlayerView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityVideoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        val videoUrl = intent.getStringExtra("videoUrl")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentVideoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val videoUrl = arguments?.getString("videoUrl")
         Log.d("VIDEO URL", "$videoUrl")
 
         val videoIds = videoUrl?.let { extractVideoIdFromUrl(it) }
@@ -33,7 +44,6 @@ class VideoActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
     private fun extractVideoIdFromUrl(url: String): String {
