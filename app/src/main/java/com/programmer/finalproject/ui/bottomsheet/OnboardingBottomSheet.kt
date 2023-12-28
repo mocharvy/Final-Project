@@ -33,6 +33,7 @@ class OnboardingBottomSheet : BottomSheetDialogFragment() {
 
         binding.apply {
             btnPurchased.setOnClickListener {
+                findNavController().navigate(R.id.action_onboardingBottomSheet_to_materiKelasFragment)
             }
         }
     }
