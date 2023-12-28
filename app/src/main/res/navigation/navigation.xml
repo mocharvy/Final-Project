@@ -73,9 +73,9 @@
         <action
             android:id="@+id/action_kursusFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_kursusFragment_to_materiKelasFragment"
-            app:destination="@id/materiKelasFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_kursusFragment_to_materiKelasFragment"-->
+<!--            app:destination="@id/materiKelasFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
@@ -94,12 +94,24 @@
         <action
             android:id="@+id/action_akunFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_akunFragment_to_mustLoginBottomSheet"
+            app:destination="@id/mustLoginBottomSheet" />
     </fragment>
     <dialog
         android:id="@+id/filterBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.FilterBottomSheet"
         android:label="filter_bottom_sheet"
         tools:layout="@layout/filter_bottom_sheet" />
+    <dialog
+        android:id="@+id/onboardingBottomSheet"
+        android:name="com.programmer.finalproject.ui.bottomsheet.OnboardingBottomSheet"
+        android:label="onboarding_bottom_sheet"
+        tools:layout="@layout/onboarding_bottom_sheet" >
+        <action
+            android:id="@+id/action_onboardingBottomSheet_to_materiKelasFragment"
+            app:destination="@id/materiKelasFragment" />
+    </dialog>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.programmer.finalproject.ui.fragment.password.ChangePasswordFragment"
@@ -198,7 +210,8 @@
     <dialog
         android:id="@+id/mustLoginBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
-        android:label="MustLoginBottomSheet" >
+        android:label="MustLoginBottomSheet"
+        tools:layout="@layout/onboarding_bottom_sheet">
         <action
             android:id="@+id/action_mustLoginBottomSheet_to_berandaFragment"
             app:destination="@id/berandaFragment" />
@@ -218,14 +231,15 @@
         tools:layout="@layout/fragment_forgot_password" />
 
     <fragment
-
         android:id="@+id/detailCategoryFragment2"
         android:name="com.programmer.finalproject.DetailCategoryFragment"
-        android:label="DetailCategoryFragment" />
+        android:label="DetailCategoryFragment"
+        tools:layout="@layout/fragment_detail_category"/>
     <dialog
         android:id="@+id/premiumBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet"
-        android:label="PremiumBottomSheet" >
+        android:label="PremiumBottomSheet"
+        tools:layout="@layout/premium_bottom_sheet">
         <action
             android:id="@+id/action_premiumBottomSheet_to_detailPaymentFragment"
             app:destination="@id/detailPaymentFragment" />
@@ -243,6 +257,6 @@
         android:id="@+id/videoFragment"
         android:name="com.programmer.finalproject.ui.fragment.videomateri.VideoFragment"
         android:label="fragment_video"
-        tools:layout="@layout/fragment_video" />
-
+        tools:layout="@layout/fragment_video" >
+    </fragment>
 </navigation>
