@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/berandaFragment">
 
     <fragment
         android:id="@+id/berandaFragment"
@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_berandaFragment_to_detailCategoryFragment2"
             app:destination="@id/detailCategoryFragment2" />
-        <action
-            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
-            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_berandaFragment_to_mustLoginBottomSheet"
             app:destination="@id/mustLoginBottomSheet" />
@@ -76,6 +73,9 @@
         <action
             android:id="@+id/action_kursusFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_kursusFragment_to_materiKelasFragment"
+            app:destination="@id/materiKelasFragment" />
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
@@ -200,11 +200,11 @@
         android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
         android:label="MustLoginBottomSheet" >
         <action
-            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_mustLoginBottomSheet_to_berandaFragment"
             app:destination="@id/berandaFragment" />
+        <action
+            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </dialog>
     <fragment
         android:id="@+id/searchFragment"

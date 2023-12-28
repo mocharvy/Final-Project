@@ -1,5 +1,6 @@
 package com.programmer.finalproject.ui.fragment.detailkelas
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.programmer.finalproject.adapter.ChapterAdapter
 import com.programmer.finalproject.databinding.FragmentMateriKelasBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+import com.programmer.finalproject.ui.fragment.videomateri.VideoActivity
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,9 +37,17 @@ class MateriKelasFragment : Fragment() {
         Log.d("MateriKelasFragment", "Detail Course: $detailCourse")
 
         val chapterAdapter =
-            ChapterAdapter(requireContext(), detailCourse?.data?.chapters) { chapterId ->
+            ChapterAdapter(requireContext(), detailCourse?.data?.chapters, { chapterId ->
                 materiKelasViewModel.getDetailChapter(chapterId)
-            }
+            }, { videoUrl ->
+
+                val intent = Intent(context, VideoActivity::class.java).apply {
+                    putExtra("videoUrl", videoUrl)
+                }
+                startActivity(intent)
+            })
+
+
         binding.rvChapter.adapter = chapterAdapter
         binding.rvChapter.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -54,7 +64,7 @@ class MateriKelasFragment : Fragment() {
                 }
 
                 else -> {
-                    Toast.makeText(requireContext(), "Data already loaded", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Data loaded", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
@@ -63,6 +73,7 @@ class MateriKelasFragment : Fragment() {
 
         return binding.root
     }
+
 
     companion object {
         private const val ARG_DETAIL_COURSE = "arg_detail_course"

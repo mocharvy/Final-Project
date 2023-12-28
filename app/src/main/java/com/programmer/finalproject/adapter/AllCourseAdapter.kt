@@ -2,11 +2,10 @@ package com.programmer.finalproject.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -15,11 +14,9 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
 import com.programmer.finalproject.model.courses.DataItem
-import com.programmer.finalproject.ui.fragment.DetailPaymentFragment
 import com.programmer.finalproject.utils.CourseDiffUtil
 
 class AllCourseAdapter(
-    private val context: Context,
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<AllCourseAdapter.MyViewHolder>() {
 
@@ -61,7 +58,9 @@ class AllCourseAdapter(
                         )
                     )
                     btPrice.setOnClickListener {
-                        showPaymentConfirmationDialog()
+                        dataCourse.id?.let { courseId ->
+                            onItemClick(courseId)
+                        }
                     }
                 }
 
@@ -81,11 +80,6 @@ class AllCourseAdapter(
             val btnBuy = dialog.findViewById<MaterialButton>(R.id.btn_beli_kelas)
 
             btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            btnBuy.setOnClickListener {
-                // intent / do nav ke detail payment
                 dialog.dismiss()
             }
 

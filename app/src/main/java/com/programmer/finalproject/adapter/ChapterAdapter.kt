@@ -1,10 +1,12 @@
 package com.programmer.finalproject.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.programmer.finalproject.R
@@ -15,7 +17,8 @@ import com.programmer.finalproject.model.detailcourse.ChaptersItem
 class ChapterAdapter(
     private val context: Context,
     private val chapters: List<ChaptersItem?>?,
-    private val onChapterClick: (String) -> Unit
+    private val onChapterClick: (String) -> Unit,
+    private val onLessonClick: ((String) -> Unit)? = null
 ) : RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder>() {
 
     private val lessonAdapters = mutableMapOf<String, LessonAdapter>()
@@ -44,7 +47,7 @@ class ChapterAdapter(
         val chapterId = chapter?.id
         if (chapterId != null) {
             val lessonAdapter = lessonAdapters.getOrPut(chapterId) {
-                LessonAdapter(context, listOf())
+                LessonAdapter(context, listOf(), onLessonClick)  // Pass the click listener here
             }
             holder.binding.rvLesson.adapter = lessonAdapter
             holder.binding.rvLesson.layoutManager =

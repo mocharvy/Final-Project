@@ -75,8 +75,6 @@ class AuthViewModel @Inject constructor(
                             isError.postValue(false)
 
                             addedUser?.data?.accessToken?.let {
-                                _token.value = it
-                                _isLogin.value = true
                                 saveTokenAndLoginState(it, true)
                             }
                         }
@@ -167,6 +165,8 @@ class AuthViewModel @Inject constructor(
     }
 
     private suspend fun saveTokenAndLoginState(accessToken: String, isLogin: Boolean) {
+        _token.value = accessToken
+        _isLogin.value = isLogin
         repository.local.saveTokenToDataStore(accessToken)
         repository.local.saveLoginStateToDataStore(isLogin)
     }
