@@ -18,6 +18,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
 import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.fragment.DetailPaymentActivity
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -108,13 +109,15 @@ class KursusFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("courseId", courseId)
             }
-            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment, bundle)
+            COURSES_ID = courseId
+            val intent = Intent(activity, DetailPaymentActivity::class.java)
+            startActivity(intent)
+//            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment, bundle)
             dialog.dismiss()
         }
 
         dialog.show()
     }
-
     private fun readCourseFromDatabase() {
         Log.d("Read course database", "read course database called")
         kursusViewModel.readCourse.observe(viewLifecycleOwner) { database ->
@@ -253,5 +256,9 @@ class KursusFragment : Fragment() {
         binding.shimmerFrameLayout.stopShimmer()
         binding.shimmerFrameLayout.visibility = View.GONE
         binding.rvCourse.visibility = View.VISIBLE
+    }
+
+    companion object{
+        var COURSES_ID = ""
     }
 }

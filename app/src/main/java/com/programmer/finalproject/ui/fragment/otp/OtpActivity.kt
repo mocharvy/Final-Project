@@ -1,43 +1,33 @@
 package com.programmer.finalproject.ui.fragment.otp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.otpview.OTPListener
-import com.programmer.finalproject.R
-import com.programmer.finalproject.databinding.FragmentOtpBinding
+import com.programmer.finalproject.databinding.ActivityOtpBinding
 import com.programmer.finalproject.model.otp.OTPRequest
-import com.programmer.finalproject.model.register.RegisterRequest
-import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
-import com.programmer.finalproject.ui.fragment.auth.RegisterFragment.Companion.ACCESS_TOKEN
-import com.programmer.finalproject.ui.orders.OrdersViewModel
+import com.programmer.finalproject.ui.LoginActivity
+import com.programmer.finalproject.ui.fragment.auth.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class OtpFragment : Fragment() {
-    private lateinit var binding : FragmentOtpBinding
+class OtpActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityOtpBinding
+
     private val otpViewModel: OtpViewModel by viewModels()
-    private val registerViewModel: AuthViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityOtpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentOtpBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         with(binding) {
             startCountdownTimer()
 
@@ -57,12 +47,15 @@ class OtpFragment : Fragment() {
                         code5 = otpList[4],
                         code6 = otpList[5]
                     )
-                    registerViewModel.registerResponse.observe(viewLifecycleOwner){
-                        otpViewModel.postOtp("Bearer ${it!!.data.accessToken}",otpRequest)
+                    registerViewModel.registerResponse.observe(this@OtpActivity) {
+                        otpViewModel.postOtp("Bearer ${it!!.data.accessToken}", otpRequest)
                     }
 
 
-                    Toast.makeText(requireContext(), "Verification Success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@OtpActivity, "Verification Success", Toast.LENGTH_SHORT)
+                        .show()
+                    val intent = Intent(this@OtpActivity, LoginActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -70,7 +63,7 @@ class OtpFragment : Fragment() {
     }
 
     private fun startCountdownTimer() {
-        val timer = object : CountDownTimer(59000, 1000) {
+        object : CountDownTimer(59000, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 val seconds = millisUntilFinished / 1000
@@ -81,17 +74,23 @@ class OtpFragment : Fragment() {
                 binding.tvResend.visibility = View.VISIBLE
                 binding.tvResend.setOnClickListener {
                     otpViewModel
-                    registerViewModel.registerResponse.observe(viewLifecycleOwner){
-//                        otpViewModel.getOtp("Bearer $ACCESS_TOKEN")
-
+                    registerViewModel.registerResponse.observe(this@OtpActivity) {
                         otpViewModel.getOtp("Bearer ${it!!.data.accessToken}")
                     }
 
-                    otpViewModel.isError.observe(viewLifecycleOwner){
-                        if(it){
-                            Toast.makeText(requireContext(), "Gagal Mengirim OTP", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(requireContext(), "OTP berhasil dikirim ke Email Anda", Toast.LENGTH_SHORT).show()
+                    otpViewModel.isError.observe(this@OtpActivity) {
+                        if (it) {
+                            Toast.makeText(
+                                this@OtpActivity,
+                                "Failed sending OTP",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                this@OtpActivity,
+                                "OTP sent to your email",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                         }
                     }
@@ -99,8 +98,8 @@ class OtpFragment : Fragment() {
                 binding.countdownText.visibility = View.GONE
             }
         }.start()
+
         binding.tvResend.visibility = View.GONE
         binding.countdownText.visibility = View.VISIBLE
     }
-
 }

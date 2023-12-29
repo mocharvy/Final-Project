@@ -1,6 +1,7 @@
 package com.programmer.finalproject.ui.fragment.akun
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +17,8 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
 import com.programmer.finalproject.model.user.update.ProfileResponse
-import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import com.programmer.finalproject.ui.LoginActivity
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +27,7 @@ class AkunFragment : Fragment() {
     private lateinit var binding: FragmentAkunBinding
 
     private val akunViewModel: AkunViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,11 +65,12 @@ class AkunFragment : Fragment() {
         logoutDialogBuilder.setCancelable(true)
         val logoutDialog = logoutDialogBuilder.show()
         logout.btnLogout.setOnClickListener {
-            authViewModel.logout()
+            loginViewModel.logout()
 
             logoutDialog.dismiss()
-            findNavController().popBackStack(R.id.loginFragment, false)
-            findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
 
         }
         logout.btnDismiss.setOnClickListener {
@@ -77,7 +80,7 @@ class AkunFragment : Fragment() {
 
     private fun getUserDetail() {
         Log.d("Get User Detail", "getUserDetail fun called")
-        authViewModel.token.observe(viewLifecycleOwner) {
+        loginViewModel.token.observe(viewLifecycleOwner) {
             if (it != null) {
                 Log.d("TOKEN", it)
                 binding.clAkun.visibility = View.VISIBLE
@@ -85,7 +88,8 @@ class AkunFragment : Fragment() {
                 akunViewModel.getUserDetail("Bearer $it")
                 observeUserDetailResponse()
 
-                val mustLoginBottomSheet = requireActivity().supportFragmentManager.findFragmentByTag("mustLoginBottomSheet")
+                val mustLoginBottomSheet =
+                    requireActivity().supportFragmentManager.findFragmentByTag("mustLoginBottomSheet")
                 if (mustLoginBottomSheet != null && mustLoginBottomSheet is BottomSheetDialogFragment) {
                     mustLoginBottomSheet.dismiss()
                 }
@@ -94,9 +98,11 @@ class AkunFragment : Fragment() {
                 binding.toLogin.visibility = View.VISIBLE
                 binding.clAkun.visibility = View.GONE
                 binding.toLogin.setOnClickListener {
-                    findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
-                Toast.makeText(requireActivity(), "Access token is null", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "You are Unauthorized", Toast.LENGTH_SHORT).show()
                 hideLoading()
             }
         }

@@ -1,4 +1,4 @@
-package com.programmer.finalproject.ui.kelas
+package com.programmer.finalproject.ui.fragment.kelas
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

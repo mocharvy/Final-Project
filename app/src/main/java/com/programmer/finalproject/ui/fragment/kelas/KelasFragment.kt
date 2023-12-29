@@ -1,6 +1,5 @@
-package com.programmer.finalproject.ui.fragment
+package com.programmer.finalproject.ui.fragment.kelas
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,15 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.programmer.finalproject.R
-import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentKelasBinding
-import com.programmer.finalproject.ui.DetailKelasActivity
-import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.beranda.BerandaViewModel
-import com.programmer.finalproject.ui.kelas.KelasViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,29 +42,10 @@ class KelasFragment : Fragment() {
         showTabLayout()
         getTrackerClass("")
 
-
-        trackerAdapter = TrackerClassAdapter(requireContext()) { courseId ->
-            if (authViewModel.token.value == null) {
-                findNavController().navigate(R.id.action_berandaFragment_to_mustLoginBottomSheet)
-            } else {
-                val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-                intent.putExtra("courseId", courseId)
-                startActivity(intent)
-            }
-        }
-
-        binding.recycleviewClassProses.adapter = trackerAdapter
-        binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-
-
         binding.apply {
-                etSearch.setOnClickListener {
-                    findNavController().navigate(R.id.action_kelasFragment_to_searchFragment)
-                }
+            etSearch.setOnClickListener {
+                findNavController().navigate(R.id.action_kelasFragment_to_searchFragment)
+            }
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab?.text.toString() == "All") {
@@ -87,35 +63,46 @@ class KelasFragment : Fragment() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                 }
             })
-            }
         }
-
-    private fun showMustLoginBottomSheet() {
-        val bottomSheet = MustLoginBottomSheet()
-        bottomSheet.show(parentFragmentManager, "MustLoginBottomSheet")
     }
 
     private fun getTrackerClass(selectedProgress: String) {
-        authViewModel.token.observe(viewLifecycleOwner) { it ->
-            it?.let { token ->
-                trackerViewModel.getTrackerClass("Bearer $token", selectedProgress)
+        authViewModel.token.observe(viewLifecycleOwner){
+            if(it != null){
+
+                trackerViewModel.getTrackerClass("Bearer $it",selectedProgress)
 
                 trackerViewModel.getListTrackerClass.observe(viewLifecycleOwner) { list ->
-                    trackerAdapter.submitList(list?.data)
-                }
+                    trackerAdapter = TrackerClassAdapter()
 
-                binding.recycleviewClassProses.adapter = trackerAdapter
-                binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-            } ?: run {
-                showMustLoginBottomSheet()
+                    binding.recycleviewClassProses.adapter = trackerAdapter
+                    binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
+                        requireContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    trackerAdapter.submitList(list?.data)
+
+                    if (list?.data.isNullOrEmpty()) {
+                        binding.imageView3.visibility = View.VISIBLE
+                    } else {
+                        binding.imageView3.visibility = View.GONE
+                    }
+
+                }
+            }else{
+                checkLogin()
             }
         }
     }
 
+    private fun checkLogin() {
+        authViewModel.token.observe(requireActivity()) { token ->
+            if (token == null) {
+//                findNavController().navigate(R.id.action_kelasFragment_to_mustLoginBottomSheet)
+            }
+        }
+    }
     private fun showTabLayout() {
         val tabLayout = binding.tabLayout
 
@@ -138,4 +125,5 @@ class KelasFragment : Fragment() {
 
         }
     }
+
 }

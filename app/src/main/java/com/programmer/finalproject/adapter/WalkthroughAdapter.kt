@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import com.programmer.finalproject.R
-import com.programmer.finalproject.WalkThroughFragment
+import com.programmer.finalproject.ui.WalkThroughActivity
 
-class WalkthroughAdapter(private val context: WalkThroughFragment): PagerAdapter() {
+class WalkthroughAdapter(private val context: WalkThroughActivity): PagerAdapter() {
 
-    private val imgArray: IntArray = intArrayOf(R.drawable.analytics, R.drawable.project_planning, R.drawable.share_location)
-    private val titleArray: Array<String> = arrayOf("Analytics", "Project Planning", "Share Location")
+    private val imgArray: IntArray = intArrayOf(R.drawable.analytics, R.drawable.project_planning, R.drawable.track_progress)
+    private val titleArray: Array<String> = arrayOf("Level up your skill", "Get insight from the expert", "Track your progress")
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -25,13 +24,13 @@ class WalkthroughAdapter(private val context: WalkThroughFragment): PagerAdapter
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view: View = LayoutInflater.from(context.requireContext()).inflate(R.layout.slide_walkthrough, container,false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.slide_walkthrough, container,false)
 
         val txtTitle: TextView = view.findViewById(R.id.tv_title)
         val img: ImageView = view.findViewById(R.id.iv_img)
 
         txtTitle.text = titleArray[position]
-        img.setImageDrawable(ContextCompat.getDrawable(context.requireContext(), imgArray[position]))
+        img.setImageDrawable(ContextCompat.getDrawable(context, imgArray[position]))
         container.addView(view)
 
         return view

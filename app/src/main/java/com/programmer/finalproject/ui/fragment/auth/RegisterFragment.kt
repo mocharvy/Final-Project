@@ -106,7 +106,7 @@ class RegisterFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             showSuccessDialog.dismiss()
-            findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
+            //findNavController().navigate(R.id.action_registerFragment_to_otpFragment)
         }, 3000)
     }
 

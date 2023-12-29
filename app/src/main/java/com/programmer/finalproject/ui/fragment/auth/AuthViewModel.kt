@@ -143,7 +143,6 @@ class AuthViewModel @Inject constructor(
                         isError.postValue(true)
                     }
                     viewModelScope.launch {
-//                        _accountData.postValue(addedUser)
                         loadingState.postValue(false)
                         errorState.postValue(Pair(false, null))
                     }
