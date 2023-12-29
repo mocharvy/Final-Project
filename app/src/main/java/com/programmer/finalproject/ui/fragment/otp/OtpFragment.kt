@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.otpview.OTPListener
+import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.FragmentOtpBinding
 import com.programmer.finalproject.model.otp.OTPRequest
 import com.programmer.finalproject.model.register.RegisterRequest
@@ -60,7 +62,8 @@ class OtpFragment : Fragment() {
                     }
 
 
-//                    Toast.makeText(requireContext(), "The OTP is "+ACCESS_TOKEN, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Verification Success", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_otpFragment_to_loginFragment)
                 }
             }
 
