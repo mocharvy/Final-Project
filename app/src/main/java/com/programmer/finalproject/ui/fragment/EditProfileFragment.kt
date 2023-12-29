@@ -138,7 +138,7 @@ class EditProfileFragment : Fragment() {
                     )
                     binding.progressBar.visibility=View.VISIBLE
                     Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
+                        findNavController().navigate(R.id.action_editProfileFragment_self)
                     }, 2000)
                 }
             }

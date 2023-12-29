@@ -247,6 +247,9 @@
         <action
             android:id="@+id/action_premiumBottomSheet_to_detailPaymentFragment"
             app:destination="@id/detailPaymentFragment" />
+        <action
+            android:id="@+id/action_premiumBottomSheet_to_historyPaymentFragment"
+            app:destination="@id/historyPaymentFragment" />
     </dialog>
     <fragment
         android:id="@+id/materiKelasFragment"

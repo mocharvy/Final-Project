@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
- import coil.load
+import androidx.navigation.fragment.findNavController
+import coil.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.PremiumBottomSheetBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.payment.OrderRequest
@@ -60,8 +62,9 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
                         if(isError){
                             Toast.makeText(requireContext(), "gagal melakukan order kursus", Toast.LENGTH_SHORT).show()
                         }else{
-                            val intent = Intent(requireContext(), DetailPaymentActivity::class.java)
-                            startActivity(intent)
+//                            val intent = Intent(requireContext(), DetailPaymentActivity::class.java)
+//                            startActivity(intent)
+                            findNavController().navigate(R.id.action_premiumBottomSheet_to_historyPaymentFragment)
                             dismiss()
                         }
 

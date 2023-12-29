@@ -86,6 +86,8 @@
                     android:layout_height="150dp"
                     android:background="@drawable/kos"
                     android:visibility="gone"
+                    android:gravity="center"
+android:layout_gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_kelas_berjalan" />
