@@ -1,15 +1,13 @@
 package com.programmer.finalproject.ui.bottomsheet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
-import com.programmer.finalproject.R
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.programmer.finalproject.databinding.MustLoginBottomSheetBinding
+import com.programmer.finalproject.ui.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,13 +30,12 @@ class MustLoginBottomSheet : BottomSheetDialogFragment() {
 
         binding.apply {
             btLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_mustLoginBottomSheet_to_loginFragment)
-                dismiss()
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
             }
             close.setOnClickListener{
                 dismiss()
-
-//                findNavController().navigate(R.id.action_mustLoginBottomSheet_to_berandaFragment)
             }
         }
     }

@@ -6,17 +6,14 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.google.android.material.textfield.TextInputEditText
 import com.programmer.finalproject.R
+import com.google.android.material.textfield.TextInputEditText
 
-class EmailEditText : TextInputEditText, View.OnTouchListener {
-
+class GeneralEditText : TextInputEditText, View.OnTouchListener {
     private lateinit var clearButton: Drawable
-    private var emailValid = false
 
     constructor(context: Context) : super(context) {
         init()
@@ -42,8 +39,7 @@ class EmailEditText : TextInputEditText, View.OnTouchListener {
     }
 
     private fun init() {
-        clearButton =
-            ContextCompat.getDrawable(context, R.drawable.ic_clear) as Drawable
+        clearButton = ContextCompat.getDrawable(context, R.drawable.ic_clear) as Drawable
 
         setOnTouchListener(this)
 
@@ -53,32 +49,17 @@ class EmailEditText : TextInputEditText, View.OnTouchListener {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
             }
 
             override fun afterTextChanged(s: Editable) {
                 if (s.toString().isNotEmpty()) showClearButton() else hideClearButton()
-
-                emailValid = isEmailValid(s)
-
-                if (!emailValid) {
-                    showError()
-                }
-
+                if (s.toString().isEmpty()) showError()
             }
         })
     }
 
-    fun isEmailValid(email: CharSequence): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    fun emailValid(): Boolean {
-        return emailValid
-    }
-
     private fun showError() {
-        error = context.getString(R.string.email_invalid)
+        error = context.getString(R.string.field_can_not_be_empty)
     }
 
     private fun showClearButton() {
@@ -103,7 +84,7 @@ class EmailEditText : TextInputEditText, View.OnTouchListener {
         )
     }
 
-    override fun onTouch(p0: View?, event: MotionEvent): Boolean {
+    override fun onTouch(v: View?, event: MotionEvent): Boolean {
         if (compoundDrawables[2] != null) {
             val clearButtonStart: Float
             val clearButtonEnd: Float

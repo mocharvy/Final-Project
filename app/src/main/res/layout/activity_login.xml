@@ -29,12 +29,12 @@
         android:id="@+id/iv_login"
         android:layout_width="200dp"
         android:layout_height="250dp"
-        android:src="@drawable/login_now"
+        android:importantForAccessibility="no"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_now"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/login_now"
         app:layout_constraintEnd_toEndOf="parent"
-        android:importantForAccessibility="no" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_now" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_email"
@@ -53,14 +53,14 @@
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:hint="@string/enter_your_email"
-        android:paddingStart="10dp"
-        android:inputType="textEmailAddress"
         android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/light_grey"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_email"
         tools:ignore="TextContrastCheck" />
 
@@ -69,8 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/password"
         android:imeOptions="actionDone"
+        android:text="@string/password"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -92,23 +92,36 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_password"
         tools:ignore="TextContrastCheck" />
 
+    <TextView
+        android:id="@+id/tv_forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/forgot_password"
+        android:textSize="12sp"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="@id/et_password"
+        app:layout_constraintTop_toBottomOf="@id/et_password" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_login"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/light_blue_alt"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
-        app:cornerRadius="20dp"
+        android:backgroundTint="@color/light_blue_alt"
         android:enabled="true"
         android:text="@string/log_in"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        tools:ignore="TextContrastCheck" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -129,11 +142,11 @@
         android:id="@+id/not_have"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/bt_login"
-        app:layout_constraintStart_toStartOf="@id/bt_login"
+        android:layout_marginTop="10dp"
         android:text="@string/don_t_have"
         android:textSize="10sp"
-        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/bt_login"
+        app:layout_constraintTop_toBottomOf="@id/bt_login"
         tools:ignore="SmallSp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -148,5 +161,17 @@
         app:layout_constraintEnd_toEndOf="@id/bt_login"
         app:layout_constraintTop_toBottomOf="@id/bt_login"
         tools:ignore="SmallSp,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/tv_guest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/enter_as_guest"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/not_have" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

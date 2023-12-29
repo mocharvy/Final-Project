@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/kelasFragment"
-        android:name="com.programmer.finalproject.ui.fragment.KelasFragment"
+        android:name="com.programmer.finalproject.ui.fragment.kelas.KelasFragment"
         android:label="fragment_kelas"
         tools:layout="@layout/fragment_kelas" >
         <action
@@ -92,9 +92,6 @@
             android:id="@+id/action_akunFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
-            android:id="@+id/action_akunFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_akunFragment_to_mustLoginBottomSheet"
             app:destination="@id/mustLoginBottomSheet" />
     </fragment>
@@ -119,15 +116,12 @@
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.programmer.finalproject.ui.fragment.EditProfileFragment"
+        android:name="com.programmer.finalproject.ui.fragment.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
             android:id="@+id/action_editProfileFragment_to_akunFragment"
             app:destination="@id/akunFragment" />
-        <action
-            android:id="@+id/action_editProfileFragment_self"
-            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyPaymentFragment"
@@ -148,69 +142,6 @@
         android:name="com.programmer.finalproject.ui.fragment.DetailPaymentFragment"
         android:label="fragment_detail_payment"
         tools:layout="@layout/fragment_detail_payment" />
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.programmer.finalproject.ui.fragment.auth.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_berandaFragment"
-            app:destination="@id/berandaFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.programmer.finalproject.ui.fragment.auth.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_registerFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/otpFragment"
-        android:name="com.programmer.finalproject.ui.fragment.otp.OtpFragment"
-        android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" >
-        <action
-            android:id="@+id/action_otpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/walkThroughFragment"
-        android:name="com.programmer.finalproject.WalkThroughFragment"
-        android:label="fragment_walk_through"
-        tools:layout="@layout/fragment_walk_through" >
-        <action
-            android:id="@+id/action_walkThroughFragment_to_berandaFragment"
-            app:destination="@id/berandaFragment" />
-        <action
-            android:id="@+id/action_walkThroughFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.programmer.finalproject.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
-        <action
-            android:id="@+id/action_splashScreenFragment_to_berandaFragment"
-            app:destination="@id/berandaFragment" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_walkThroughFragment"
-            app:destination="@id/walkThroughFragment" />
-    </fragment>
     <dialog
         android:id="@+id/mustLoginBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
@@ -219,9 +150,6 @@
         <action
             android:id="@+id/action_mustLoginBottomSheet_to_berandaFragment"
             app:destination="@id/berandaFragment" />
-        <action
-            android:id="@+id/action_mustLoginBottomSheet_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </dialog>
     <fragment
         android:id="@+id/searchFragment"
