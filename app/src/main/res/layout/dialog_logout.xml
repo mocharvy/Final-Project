@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -14,7 +15,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apakah Anda Ingin Keluar dari Akun Ini ?"
+        android:text="@string/are_you_sure"
         android:textSize="18sp"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -52,9 +53,10 @@
             android:layout_weight="1"
             app:strokeColor="@color/bluesea"
             app:cornerRadius="4dp"
-            android:text="Keluar"
+            android:text="@string/log_out"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="VisualLintButtonSize" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_dismiss"
@@ -63,10 +65,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
+            android:backgroundTint="@color/dark_blue"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="Batal"
-            android:textSize="16sp"/>
+            android:text="@string/cancel"
+            android:textSize="16sp"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
 </LinearLayout>

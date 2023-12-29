@@ -1,6 +1,5 @@
-package com.programmer.finalproject.ui.fragment
+package com.programmer.finalproject.ui.fragment.kelas
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,15 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.programmer.finalproject.R
-import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentKelasBinding
-import com.programmer.finalproject.ui.DetailKelasActivity
-import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.beranda.BerandaViewModel
-import com.programmer.finalproject.ui.kelas.KelasViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

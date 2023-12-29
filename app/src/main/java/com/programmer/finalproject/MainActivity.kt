@@ -12,13 +12,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.programmer.finalproject.databinding.ActivityMainBinding
 import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
     private val authViewModel: AuthViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLogin() {
-        authViewModel.token.observe(this) {
-        Log.d("TOKEN", "$it")
+        loginViewModel.token.observe(this) {
+            Log.d("TOKEN", "$it")
             if (it == null) {
                 navController = findNavController(R.id.nav_host)
 
@@ -44,10 +47,8 @@ class MainActivity : AppCompatActivity() {
                                 supportFragmentManager,
                                 bottomSheetFragmentMustLogin.tag
                             )
-
                         }
                     }
-
                 }
             }
         }
@@ -73,19 +74,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        /*binding.apply {
-            navController = findNavController(R.id.nav_host)
-
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (destination.id == R.id.kelasFragment || destination.id == R.id.berandaFragment || destination.id == R.id.notifikasiFragment||destination.id == R.id.akunFragment||destination.id == R.id.kursusFragment) {
-                    binding.navBottom.setupWithNavController(navController)
-                    binding.navBottom.visibility = View.VISIBLE
-
-                } else {
-                    binding.navBottom.visibility = View.GONE
-                }
-            }
-        }*/
     }
 }
