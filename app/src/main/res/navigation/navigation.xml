@@ -182,7 +182,11 @@
         android:id="@+id/otpFragment"
         android:name="com.programmer.finalproject.ui.fragment.otp.OtpFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp" />
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_otpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/walkThroughFragment"
         android:name="com.programmer.finalproject.WalkThroughFragment"
@@ -259,4 +263,8 @@
         android:label="fragment_video"
         tools:layout="@layout/fragment_video" >
     </fragment>
+    <activity
+        android:id="@+id/detailPaymentActivity"
+        android:name="com.programmer.finalproject.ui.fragment.DetailPaymentActivity"
+        android:label="DetailPaymentActivity" />
 </navigation>

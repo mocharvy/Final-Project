@@ -1,6 +1,7 @@
 package com.programmer.finalproject.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,48 +13,35 @@ import com.programmer.finalproject.model.courses.Courses
 import com.programmer.finalproject.model.courses.DataItem
 import com.programmer.finalproject.model.courses.me.Data
 
-class TrackerClassAdapter(
-    private val context: Context,
-    private val onItemClick: (String) -> Unit
-) : ListAdapter<Data, TrackerClassAdapter.TrackerViewHolder>(Differ()) {
-
-    var course = emptyList<Data>()
+class TrackerClassAdapter : ListAdapter<Data, TrackerClassAdapter.TrackerViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackerViewHolder {
-        return TrackerViewHolder.from(parent, context)
+        val binding =
+            ItemCourseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TrackerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TrackerViewHolder, position: Int) {
-        val currentCourse = course[position]
-        holder.bindData(currentCourse, onItemClick)
+        holder.bindData(getItem(position))
     }
 
-    class TrackerViewHolder private constructor(
-        private val binding: ItemCourseBinding,
-        private val context: Context
+
+    inner class TrackerViewHolder(
+        private val binding: ItemCourseBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(tracker: Data, onItemClick: (String) -> Unit) {
+        fun bindData(tracker: Data) {
             binding.apply {
                 tvAuthor.text = tracker.course.facilitator
                 tvDesc.text = tracker.course.name
                 ivCourseImage.load(tracker.course.category.image)
-                tvLevel.text = tracker.course.level
+                tvLevel.text= tracker.course.level
                 tvModule.text = tracker.course.total_chapter.toString()
                 tvTime.text = tracker.course.total_duration.toString()
                 btPrice.text = tracker.progress_course.toString() + "%"
             }
 
             binding.root.setOnClickListener {
-                onItemClick(tracker.course.id)
-            }
-        }
-
-        companion object {
-            fun from(parent: ViewGroup, context: Context): TrackerViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemCourseBinding.inflate(layoutInflater, parent, false)
-                return TrackerViewHolder(binding, context)
             }
         }
     }
@@ -67,4 +55,6 @@ class TrackerClassAdapter(
             return oldItem == newItem
         }
     }
+
+
 }

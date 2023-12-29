@@ -216,7 +216,7 @@
         android:layout_height="60dp"
         android:layout_margin="30dp"
         android:backgroundTint="@color/dark_blue"
-        android:text="Login"
+        android:text="Beli"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
