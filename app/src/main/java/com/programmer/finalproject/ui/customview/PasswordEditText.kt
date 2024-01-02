@@ -57,7 +57,7 @@ class PasswordEditText : TextInputEditText, View.OnTouchListener {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                isPasswordValid = s.length >= 5
+                isPasswordValid = s.length >= 8
             }
 
             override fun afterTextChanged(s: Editable) {
