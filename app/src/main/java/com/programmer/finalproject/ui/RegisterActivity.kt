@@ -48,8 +48,8 @@ class RegisterActivity : AppCompatActivity() {
 
             val userEmail = binding.etEmail.text.toString()
             val userPassword = binding.etPassword.text.toString()
-            val userName = binding.tvUsername.text.toString()
-            val userPhone = binding.tvPhone.text.toString()
+            val userName = binding.etUsername.text.toString()
+            val userPhone = binding.etPhone.text.toString()
 
             val registerRequest = RegisterRequest(
                 name = userName,

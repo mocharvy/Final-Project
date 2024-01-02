@@ -362,6 +362,18 @@
                         app:layout_constraintStart_toStartOf="@id/tv_total_transfer"
                         app:layout_constraintTop_toBottomOf="@id/tv_total_transfer" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt_transfer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/dark_blue"
+                        android:text="@string/choose_methode"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/total_transfer" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -532,6 +544,18 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_card_cvv"
                         tools:ignore="LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt_credit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/dark_blue"
+                        android:text="@string/choose_methode"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/et_expire" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -548,21 +572,12 @@
         android:backgroundTint="@color/red"
         android:drawableEnd="@drawable/ic_forward"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/bayar_dan_ikuti"
+        android:text="@string/pay_and_enjoy_the_course_forever"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="VisualLintButtonSize" />
-
-    <TextView
-        android:id="@+id/course_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/course_id"
-        app:layout_constraintBottom_toTopOf="@+id/bt_pay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.programmer.finalproject.MainActivity
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.PremiumBottomSheetBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.payment.OrderRequest
-import com.programmer.finalproject.ui.DetailKelasActivity.Companion.COURSE_ID
-import com.programmer.finalproject.ui.fragment.DetailPaymentActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasViewModel
 import com.programmer.finalproject.ui.orders.OrdersViewModel
@@ -71,10 +69,13 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-                        val intent = Intent(context, DetailPaymentActivity::class.java)
-                            .apply {
-                                putExtra("courseId", courseID)
-                            }
+                        Toast.makeText(
+                            requireContext(),
+                            "Order has been placed. Please check your order history in Account",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        val intent = Intent(context, MainActivity::class.java)
                         startActivity(intent)
                     }
                 }
@@ -114,8 +115,6 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
                 }
             }
         }
-
-
     }
 
     private fun updateUI(detailCourse: DetailCourseResponse3) {
@@ -131,9 +130,7 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
                 append(detailCourse.data?.price.toString())
 
             }
-
         }
-
     }
 }
 
