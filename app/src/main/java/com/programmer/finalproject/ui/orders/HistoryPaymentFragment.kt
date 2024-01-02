@@ -58,10 +58,7 @@ class HistoryPaymentFragment : Fragment() {
                                     putExtra("courseId", courseID)
                                 }
                             startActivity(intent)
-
                         }
-
-
 
                         binding.rvHistoryPayment.adapter = historyPaymentAdapter
                         binding.rvHistoryPayment.layoutManager = LinearLayoutManager(

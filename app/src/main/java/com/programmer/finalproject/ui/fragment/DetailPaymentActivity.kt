@@ -38,6 +38,8 @@ class DetailPaymentActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private val orderViewModel: OrdersViewModel by viewModels()
 
+    private var methode = "Credit Card"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPaymentBinding.inflate(layoutInflater)
@@ -88,6 +90,20 @@ class DetailPaymentActivity : AppCompatActivity() {
             putOrder()
         }
 
+        binding.btCredit.setOnClickListener {
+            methode = "Credit Card"
+            Log.d("METHOD", methode)
+            Toast.makeText(this, "Credit card payment chosen", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+        binding.btTransfer.setOnClickListener {
+            methode = "Bank Transfer"
+            Log.d("METHOD", methode)
+            Toast.makeText(this, "Bank Transfer payment chosen", Toast.LENGTH_SHORT)
+                .show()
+        }
+
     }
 
     private fun putOrder() {
@@ -97,20 +113,42 @@ class DetailPaymentActivity : AppCompatActivity() {
                     val detailCourse = response.data!!
                     val orderID = detailCourse.data?.id
 
+                    if (methode == "Credit Card") {
+                        if (validateMethode()) {
+                            val putOrderRequest =
+                                PutOrderRequest(HistoryPaymentFragment.COURSEID, methode)
 
-                    val putOrderRequest =
-                        PutOrderRequest(HistoryPaymentFragment.COURSEID, "Credit Card")
+                            if (orderID != null) {
+                                showLoading(true)
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
+                                }, DELAY_TIME)
+                                showLoading(false)
 
-                    if (orderID != null) {
+                                val dialogFragment = PaymentSuccessDialog()
+                                dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
+                            }
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Please fill all the data necessary",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        val putOrderRequest =
+                            PutOrderRequest(HistoryPaymentFragment.COURSEID, methode)
 
-                        showLoading(true)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
-                        }, DELAY_TIME)
-                        showLoading(false)
+                        if (orderID != null) {
+                            showLoading(true)
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
+                            }, DELAY_TIME)
+                            showLoading(false)
 
-                        val dialogFragment = PaymentSuccessDialog()
-                        dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
+                            val dialogFragment = PaymentSuccessDialog()
+                            dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
+                        }
                     }
                 }
             }
@@ -159,9 +197,7 @@ class DetailPaymentActivity : AppCompatActivity() {
 
     private fun updateUI(detailCourse: DetailCourseResponse3) {
         val fullPrice = detailCourse.data?.price
-        Log.d("FULL PRICE", "$fullPrice")
         val ppn = fullPrice?.times(0.10)
-        Log.d("PPN", "$ppn")
         val ppnPrice = ppn?.let {
             fullPrice.plus(it)
         }
@@ -177,7 +213,6 @@ class DetailPaymentActivity : AppCompatActivity() {
         binding.tvHarga.text = detailCourse.data?.price.toString()
         binding.tvPpn.text = formattedPpn.toString()
         binding.tvTotal.text = formattedPpnPrice.toString()
-        binding.courseId.text = detailKelasViewModel.courseId.value
 
     }
 
@@ -204,6 +239,7 @@ class DetailPaymentActivity : AppCompatActivity() {
             }
         }
 
+
         expandLayout.visibility = if (expandedLayout) View.VISIBLE else View.GONE
         arrow.setImageResource(if (expandedLayout) expandLessIcon else expandIcon)
     }
@@ -222,6 +258,20 @@ class DetailPaymentActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun validateMethode(): Boolean {
+        val cardNumber = binding.etCardNumber.text.toString()
+        val cardHolder = binding.etCardHolder.text.toString()
+        val cardCVV = binding.etCardCvv.text.toString()
+        val cardExpire = binding.etExpire.text.toString()
+
+        return if (cardNumber.isEmpty() || cardHolder.isEmpty() || cardCVV.isEmpty() || cardExpire.isEmpty()) {
+            Toast.makeText(this, "All field should be filled", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
+        }
     }
 
     companion object {

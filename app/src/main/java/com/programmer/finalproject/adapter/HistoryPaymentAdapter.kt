@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.payment.Data
 
-class HistoryPaymentAdapter (private val onPaymentClick: (Data) -> Unit): ListAdapter<Data, HistoryPaymentAdapter.HistoryPaymentViewHolder>(Differ()) {
+class HistoryPaymentAdapter(private val onPaymentClick: (Data) -> Unit) :
+    ListAdapter<Data, HistoryPaymentAdapter.HistoryPaymentViewHolder>(Differ()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryPaymentViewHolder {
         val binding =
@@ -37,17 +39,14 @@ class HistoryPaymentAdapter (private val onPaymentClick: (Data) -> Unit): ListAd
                 tvDesc.text = payment.course.name
                 ivCourseImage.load(payment.course.category.image)
 
-                if(payment.status == "BELUM BAYAR"){
+                if (payment.status == "BELUM BAYAR") {
                     btPrice.setBackgroundColor(Color.parseColor("#EF4444"))
-                    btPrice.text = "BELUM BAYAR"
+                    btPrice.text = itemView.context.getString(R.string.waiting_for_payment)
 
-                }else{
+                } else {
                     btPrice.setBackgroundColor(Color.parseColor("#73CA5C"))
-                    btPrice.text = "SUDAH BAYAR"
+                    btPrice.text = itemView.context.getString(R.string.paid)
                 }
-            }
-
-            binding.root.setOnClickListener {
             }
         }
     }

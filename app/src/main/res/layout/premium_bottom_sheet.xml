@@ -217,6 +217,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/mulai_kelas"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_level"
                 tools:ignore="TouchTargetSizeCheck" />
