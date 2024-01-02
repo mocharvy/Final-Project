@@ -25,14 +25,13 @@ class OrdersViewModel @Inject constructor(
     var isError = MutableLiveData<Boolean>()
 
 
-    val _getListHistoryPayment= MutableLiveData<HistoryPaymentResponse?>()
+    val _getListHistoryPayment = MutableLiveData<HistoryPaymentResponse?>()
 
     val getListHistoryPayment: LiveData<HistoryPaymentResponse?>
         get() = _getListHistoryPayment
 
 
-
-    fun getHistoryPayment(token:String) {
+    fun getHistoryPayment(token: String) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
         apiRepository.getHistoryPayment(token).enqueue(
@@ -65,10 +64,10 @@ class OrdersViewModel @Inject constructor(
         )
     }
 
-    fun  orderCourses(token: String,orderRequest: OrderRequest){
+    fun orderCourses(token: String, orderRequest: OrderRequest) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
-        apiRepository.orderCourses(token,orderRequest).enqueue(
+        apiRepository.orderCourses(token, orderRequest).enqueue(
             object : Callback<OrderResponse> {
                 override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
                     viewModelScope.launch {
@@ -96,10 +95,10 @@ class OrdersViewModel @Inject constructor(
         )
     }
 
-    fun  putOrder(token: String,order_id:String,putOrderRequest: PutOrderRequest){
+    fun putOrder(token: String, orderId: String, putOrderRequest: PutOrderRequest) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
-        apiRepository.putOrder(token,order_id,putOrderRequest).enqueue(
+        apiRepository.putOrder(token, orderId, putOrderRequest).enqueue(
             object : Callback<OrderResponse> {
                 override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
                     viewModelScope.launch {
@@ -126,7 +125,6 @@ class OrdersViewModel @Inject constructor(
             }
         )
     }
-
 
 
 }

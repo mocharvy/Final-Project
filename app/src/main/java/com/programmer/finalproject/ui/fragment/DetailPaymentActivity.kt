@@ -1,51 +1,48 @@
 package com.programmer.finalproject.ui.fragment
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import coil.load
 import com.programmer.finalproject.R
-import com.programmer.finalproject.databinding.ActivityDetailKelasBinding
 import com.programmer.finalproject.databinding.ActivityDetailPaymentBinding
-import com.programmer.finalproject.databinding.FragmentDetailPaymentBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
-import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.order.PutOrderRequest
-import com.programmer.finalproject.ui.DetailKelasActivity
-import com.programmer.finalproject.ui.DetailKelasActivity.Companion.COURSE_ID
-import com.programmer.finalproject.ui.bottomsheet.PurchasedBottomSheet
-import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import com.programmer.finalproject.ui.customlayout.PaymentSuccessDialog
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasViewModel
 import com.programmer.finalproject.ui.orders.HistoryPaymentFragment
-import com.programmer.finalproject.ui.orders.HistoryPaymentFragment.Companion.COURSEID
 import com.programmer.finalproject.ui.orders.HistoryPaymentFragment.Companion.ORDER_ID
 import com.programmer.finalproject.ui.orders.OrdersViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class DetailPaymentActivity : AppCompatActivity() {
     private var expandedLayoutBank = false
     private var expandedLayoutCredit = false
-    private lateinit var binding: ActivityDetailPaymentBinding
-    private val detailKelasViewModel: DetailKelasViewModel by viewModels()
 
-    private val authViewModel: AuthViewModel by viewModels()
+    private lateinit var binding: ActivityDetailPaymentBinding
+
+    private val detailKelasViewModel: DetailKelasViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
     private val orderViewModel: OrdersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setupExpandableLayout(
             binding.cvBank,
             binding.ivExpand,
@@ -84,65 +81,75 @@ class DetailPaymentActivity : AppCompatActivity() {
             }
         }
 
+        detailKelasViewModel.courseId.value = intent.extras?.getString("courseId")
+        requestDetailClassFromApi()
+
         binding.btPay.setOnClickListener {
             putOrder()
         }
-        requestDetailClassFromApi()
 
     }
 
     private fun putOrder() {
         detailKelasViewModel.detailCourseResponse.observe(this) { response ->
-            authViewModel.token.observe(this) { it ->
+            loginViewModel.token.observe(this) {
                 if (it != null) {
                     val detailCourse = response.data!!
-                    val order_id = detailCourse.data?.id
+                    val orderID = detailCourse.data?.id
 
 
-                    val putOrderRequest = PutOrderRequest(HistoryPaymentFragment.COURSEID,"Credit Card")
+                    val putOrderRequest =
+                        PutOrderRequest(HistoryPaymentFragment.COURSEID, "Credit Card")
 
-                    if (order_id != null) {
-                        orderViewModel.putOrder("Bearer " +it,ORDER_ID,putOrderRequest)
-                        val navController = findNavController(R.id.nav_host)
-                        navController.popBackStack()
+                    if (orderID != null) {
+
+                        showLoading(true)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
+                        }, DELAY_TIME)
+                        showLoading(false)
+
+                        val dialogFragment = PaymentSuccessDialog()
+                        dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
                     }
-
-
                 }
             }
         }
     }
 
     private fun requestDetailClassFromApi() {
-        if(COURSEID == ""){
-            detailKelasViewModel.getDetailCourse(COURSE_ID)
+        val courseId = detailKelasViewModel.courseId.value
 
-        }else{
-            detailKelasViewModel.getDetailCourse(COURSEID)
-
+        if (courseId != null) {
+            detailKelasViewModel.getDetailCourse(courseId)
+            observeDetailCourse()
+        } else {
+            Toast.makeText(this, "Course id is null", Toast.LENGTH_SHORT).show()
         }
-
-        observeDetailCourse()
     }
 
     private fun observeDetailCourse() {
         detailKelasViewModel.detailCourseResponse.observe(this) { response ->
             when (response) {
                 is NetworkResult.Success -> {
+                    showLoading(false)
                     val detailCourse = response.data!!
                     updateUI(detailCourse)
+
                 }
 
                 is NetworkResult.Loading -> {
+                    showLoading(true)
                 }
 
                 is NetworkResult.Error -> {
+                    showLoading(false)
                     Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                    Log.e("DetailKelasFragment", "Error: ${response.message}")
+                    Log.e("DetailPaymentFragment", "Error: ${response.message}")
                 }
 
                 else -> {
-                    Log.e("DetailKelasFragment", "Error: ${response.message}")
+                    Log.e("DetailPaymentFragment", "Error: ${response.message}")
                 }
             }
         }
@@ -151,12 +158,26 @@ class DetailPaymentActivity : AppCompatActivity() {
 
 
     private fun updateUI(detailCourse: DetailCourseResponse3) {
-        binding.apply {
-            ivCourseImage.load(detailCourse.data?.category?.image)
-            tvTitle.text = detailCourse.data?.name
-            tvAuthor.text = detailCourse.data?.facilitator
-            tvHarga.text=detailCourse.data?.price.toString()
+        val fullPrice = detailCourse.data?.price
+        Log.d("FULL PRICE", "$fullPrice")
+        val ppn = fullPrice?.times(0.10)
+        Log.d("PPN", "$ppn")
+        val ppnPrice = ppn?.let {
+            fullPrice.plus(it)
         }
+
+        val decimalFormat = DecimalFormat("#.##")
+        val formattedPpn = decimalFormat.format(ppn)
+        val formattedPpnPrice = decimalFormat.format(ppnPrice)
+
+        binding.tvDesc.text = detailCourse.data?.name
+        binding.tvTitle.text = detailCourse.data?.name
+        binding.tvAuthor.text = detailCourse.data?.facilitator
+        binding.ivCourseImage.load(detailCourse.data?.category?.image)
+        binding.tvHarga.text = detailCourse.data?.price.toString()
+        binding.tvPpn.text = formattedPpn.toString()
+        binding.tvTotal.text = formattedPpnPrice.toString()
+        binding.courseId.text = detailKelasViewModel.courseId.value
 
     }
 
@@ -197,5 +218,13 @@ class DetailPaymentActivity : AppCompatActivity() {
         TransitionManager.beginDelayedTransition(cardView, transition)
         expandLayout.visibility = View.GONE
         arrow.setImageResource(expandIcon)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val DELAY_TIME: Long = 2000
     }
 }

@@ -18,7 +18,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
 import com.programmer.finalproject.ui.DetailKelasActivity
-import com.programmer.finalproject.ui.fragment.DetailPaymentActivity
+import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -109,10 +109,15 @@ class KursusFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("courseId", courseId)
             }
-            COURSES_ID = courseId
-            val intent = Intent(activity, DetailPaymentActivity::class.java)
-            startActivity(intent)
-//            findNavController().navigate(R.id.action_kursusFragment_to_detailPaymentFragment, bundle)
+
+            val premiumBottomSheet = PremiumBottomSheet()
+            premiumBottomSheet.arguments = bundle
+
+            premiumBottomSheet.show(
+                requireActivity().supportFragmentManager,
+                premiumBottomSheet.tag
+            )
+
             dialog.dismiss()
         }
 

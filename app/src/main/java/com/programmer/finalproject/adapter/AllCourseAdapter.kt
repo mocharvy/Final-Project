@@ -1,15 +1,11 @@
 package com.programmer.finalproject.adapter
 
-import android.app.Dialog
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.google.android.material.button.MaterialButton
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ItemCourseBinding
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
@@ -23,9 +19,8 @@ class AllCourseAdapter(
     var course = emptyList<DataItem>()
 
     class MyViewHolder(
-        private val binding: ItemCourseBinding,
-        private val context: Context
-        ) : RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemCourseBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataCourse: DataItem, onItemClick: (String) -> Unit) {
             binding.apply {
@@ -72,25 +67,11 @@ class AllCourseAdapter(
             }
         }
 
-        private fun showPaymentConfirmationDialog() {
-            val dialog = Dialog(context)
-            dialog.setContentView(R.layout.dialog_confirmation_order)
-
-            val btnCancel = dialog.findViewById<MaterialButton>(R.id.btn_batal)
-            val btnBuy = dialog.findViewById<MaterialButton>(R.id.btn_beli_kelas)
-
-            btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.show()
-        }
-
         companion object {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCourseBinding.inflate(layoutInflater, parent, false)
-                return MyViewHolder(binding, parent.context)
+                return MyViewHolder(binding)
             }
         }
 
