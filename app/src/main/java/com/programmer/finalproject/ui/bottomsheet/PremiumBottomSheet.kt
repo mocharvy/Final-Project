@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PremiumBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var binding : PremiumBottomSheetBinding
+    private lateinit var binding: PremiumBottomSheetBinding
     private val detailKelasViewModel: DetailKelasViewModel by viewModels()
 
     private val authViewModel: AuthViewModel by viewModels()
@@ -46,6 +46,7 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        detailKelasViewModel.courseId.value = arguments?.getString("courseId")
         requestDetailClassFromApi()
 
         binding.btnOrderCourse.setOnClickListener {
@@ -54,45 +55,57 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun orderCourse() {
-            authViewModel.token.observe(viewLifecycleOwner){ it ->
-                if (it != null) {
-                    val orderRequest = OrderRequest(COURSE_ID)
-                    orderViewModel.orderCourses("Bearer $it",orderRequest)
-                    orderViewModel.isError.observe(viewLifecycleOwner){isError->
-                        if(isError){
-                            Toast.makeText(requireContext(), "gagal melakukan order kursus", Toast.LENGTH_SHORT).show()
-                        }else{
-//                            val intent = Intent(requireContext(), DetailPaymentActivity::class.java)
-//                            startActivity(intent)
-                            findNavController().navigate(R.id.action_premiumBottomSheet_to_historyPaymentFragment)
-                            dismiss()
-                        }
+        authViewModel.token.observe(viewLifecycleOwner) {
+            if (it != null) {
+                val courseID = detailKelasViewModel.courseId.value
+                val orderRequest = courseID?.let { it1 -> OrderRequest(it1) }
+                if (orderRequest != null) {
+                    orderViewModel.orderCourses("Bearer $it", orderRequest)
+                }
 
+                orderViewModel.isError.observe(viewLifecycleOwner) { isError ->
+                    if (isError) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Order Failed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val intent = Intent(context, DetailPaymentActivity::class.java)
+                            .apply {
+                                putExtra("courseId", courseID)
+                            }
+                        startActivity(intent)
                     }
                 }
             }
-
+        }
     }
 
     private fun requestDetailClassFromApi() {
+        val courseId = detailKelasViewModel.courseId.value
 
-        detailKelasViewModel.getDetailCourse(COURSE_ID)
-        observeDetailCourse()
+        if (courseId != null) {
+            detailKelasViewModel.getDetailCourse(courseId)
+            observeDetailCourse()
+        } else {
+            Toast.makeText(requireContext(), "Course id is null", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun observeDetailCourse() {
         detailKelasViewModel.detailCourseResponse.observe(this) { response ->
             when (response) {
                 is NetworkResult.Success -> {
-                     val detailCourse = response.data!!
+                    val detailCourse = response.data!!
                     updateUI(detailCourse)
                 }
 
                 is NetworkResult.Loading -> {
-                 }
+                }
 
                 is NetworkResult.Error -> {
-                     Toast.makeText(requireContext(), "Error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.e("DetailKelasFragment", "Error: ${response.message}")
                 }
 
@@ -109,11 +122,16 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
         binding.apply {
             tvTitle.text = detailCourse.data?.name
             tvAuthor.text = detailCourse.data?.facilitator
-            tvTime.text = "${detailCourse.data?.totalDuration.toString()}Menit"
-            tvModule.text = "${detailCourse.data?.totalChapter.toString()}Modul"
+            tvTime.text = detailCourse.data?.totalDuration.toString()
+            tvModule.text = detailCourse.data?.totalChapter.toString()
             tvLevel.text = detailCourse.data?.level
             ivCourseImage.load(detailCourse.data?.category?.image)
-            btPrice.text = "Rp${detailCourse.data?.price.toString()}"
+            btPrice.text = buildString {
+                append(context?.getString(R.string.beli_rp) ?: "Rp. ")
+                append(detailCourse.data?.price.toString())
+
+            }
+
         }
 
     }

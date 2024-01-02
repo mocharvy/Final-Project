@@ -1,10 +1,12 @@
 package com.programmer.finalproject.ui.fragment.kelas
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +16,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentKelasBinding
+import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.beranda.BerandaViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,18 +24,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class KelasFragment : Fragment() {
     private lateinit var binding: FragmentKelasBinding
+
     private val viewModel: BerandaViewModel by viewModels()
     private val trackerViewModel: KelasViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
+
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var trackerAdapter: TrackerClassAdapter
-    private  val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        binding = FragmentKelasBinding.inflate(layoutInflater,container,false)
+        binding = FragmentKelasBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -67,13 +72,15 @@ class KelasFragment : Fragment() {
     }
 
     private fun getTrackerClass(selectedProgress: String) {
-        authViewModel.token.observe(viewLifecycleOwner){
-            if(it != null){
+        authViewModel.token.observe(viewLifecycleOwner) {
+            if (it != null) {
 
-                trackerViewModel.getTrackerClass("Bearer $it",selectedProgress)
+                trackerViewModel.getTrackerClass("Bearer $it", selectedProgress)
 
                 trackerViewModel.getListTrackerClass.observe(viewLifecycleOwner) { list ->
-                    trackerAdapter = TrackerClassAdapter()
+                    trackerAdapter = TrackerClassAdapter { courseId ->
+                        navigateToDetailKelas(courseId)
+                    }
 
                     binding.recycleviewClassProses.adapter = trackerAdapter
                     binding.recycleviewClassProses.layoutManager = LinearLayoutManager(
@@ -90,19 +97,20 @@ class KelasFragment : Fragment() {
                     }
 
                 }
-            }else{
-                checkLogin()
+            } else {
+                Toast.makeText(requireContext(), "You need to log in first", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
-    private fun checkLogin() {
-        authViewModel.token.observe(requireActivity()) { token ->
-            if (token == null) {
-//                findNavController().navigate(R.id.action_kelasFragment_to_mustLoginBottomSheet)
-            }
+    private fun navigateToDetailKelas(courseId: String) {
+        val intent = Intent(context, DetailKelasActivity::class.java).apply {
+            putExtra("courseId", courseId)
         }
+        startActivity(intent)
     }
+
     private fun showTabLayout() {
         val tabLayout = binding.tabLayout
 
