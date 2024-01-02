@@ -127,4 +127,19 @@
     <string name="send_link">Send Link</string>
     <string name="link_sent">Link sent. Please log in back to your  account</string>
     <string name="back_to_log_in">Back to Log in</string>
+    <string name="persiapan">Persiapan</string>
+    <string name="buy_course">Buy Course</string>
+    <string name="premium_class">Premium Class</string>
+    <string name="one_step_closer_to">One Step Closer To</string>
+    <string name="place_order">Place Order</string>
+    <string name="join_class">Are you sure to join this class?</string>
+    <string name="join">Join Class</string>
+    <string name="payment_successful">Payment successful</string>
+    <string name="yeay">Yeay!</string>
+    <string name="your_order_is_complete">Your order is complete</string>
+    <string name="go_to_class">Go to class</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="find_your_dream_course">Find your dream course...</string>
+    <string name="category">Category</string>
+    <string name="joined_class">Joined Class</string>
 </resources>

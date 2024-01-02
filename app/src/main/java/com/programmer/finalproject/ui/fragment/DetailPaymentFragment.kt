@@ -82,7 +82,7 @@ class DetailPaymentFragment : Fragment() {
             }
         }
 
-        detailKelasViewModel.courseId.value  = arguments?.getString("courseId")
+        detailKelasViewModel.courseId.value = arguments?.getString("courseId")
         requestDetailClassFromApi()
 
         binding.btPay.setOnClickListener {
@@ -158,7 +158,8 @@ class DetailPaymentFragment : Fragment() {
     private fun orderCourses() {
         authViewModel.token.observe(viewLifecycleOwner) {
             if (it != null) {
-                binding.courseId.text= detailKelasViewModel.courseId.value
+                binding.courseId.text = detailKelasViewModel.courseId.value
+                
                 val orderRequest = OrderRequest(binding.courseId.text.toString())
                 orderViewModel.orderCourses("Bearer $it", orderRequest)
                 orderViewModel.isError.observe(viewLifecycleOwner) { isError ->
