@@ -19,6 +19,7 @@ import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
 import com.programmer.finalproject.ui.DetailKelasActivity
 import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,7 @@ class KursusFragment : Fragment() {
     private lateinit var binding: FragmentKursusBinding
     private lateinit var allCoursesAdapter: AllCourseAdapter
 
+    private val loginViewModel: LoginViewModel by viewModels()
     private val kursusViewModel: KursusViewModel by viewModels()
     private val filterViewModel: FilterViewModel by viewModels({ requireActivity() })
 
@@ -44,13 +46,24 @@ class KursusFragment : Fragment() {
         allCoursesAdapter = AllCourseAdapter { courseId ->
             val clickedCourse = allCoursesAdapter.course.firstOrNull { it.id == courseId }
             clickedCourse?.let { course ->
-                if (course.type == "Free") {
-                    val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-                    intent.putExtra("courseId", courseId)
-                    startActivity(intent)
-                } else {
-                    showPaymentConfirmationDialog(courseId)
+                loginViewModel.token.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        if (course.type == "Free") {
+                            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
+                            intent.putExtra("courseId", courseId)
+                            startActivity(intent)
+                        } else {
+                            showPaymentConfirmationDialog(courseId)
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Anda harus masuk terlebih dahulu.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
+
             }
         }
 
@@ -67,7 +80,12 @@ class KursusFragment : Fragment() {
 
         filterViewModel.filterLiveData.observe(viewLifecycleOwner) { filterData ->
             Log.d("FILTER DATA", "${filterData.first}, ${filterData.second}, ${filterData.third}")
-            requestCourseFromApiByFilter(filterData.first, filterData.second, filterData.third, null)
+            requestCourseFromApiByFilter(
+                filterData.first,
+                filterData.second,
+                filterData.third,
+                null
+            )
         }
 
         binding.recChipGroup.setOnCheckedStateChangeListener { group, selectedChipId ->
@@ -79,11 +97,13 @@ class KursusFragment : Fragment() {
                         typeChipId = selectedChipId.first()
                         requestCourseFromApiByType(typeChipText)
                     }
+
                     "Kelas gratis" -> {
                         typeChipText = "Free"
                         typeChipId = selectedChipId.first()
                         requestCourseFromApiByType(typeChipText)
                     }
+
                     "Semua kelas" -> {
                         requestCourseFromApi()
                     }
@@ -123,6 +143,7 @@ class KursusFragment : Fragment() {
 
         dialog.show()
     }
+
     private fun readCourseFromDatabase() {
         Log.d("Read course database", "read course database called")
         kursusViewModel.readCourse.observe(viewLifecycleOwner) { database ->
@@ -136,7 +157,7 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApi() {
-        kursusViewModel.getListCourse(null,null,null, null)
+        kursusViewModel.getListCourse(null, null, null, null)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
@@ -169,8 +190,13 @@ class KursusFragment : Fragment() {
         }
     }
 
-    private fun requestCourseFromApiByFilter(filter: String?, category: String?, level: String?, type: String?) {
-        kursusViewModel.getListCourse(filter,category,level, type)
+    private fun requestCourseFromApiByFilter(
+        filter: String?,
+        category: String?,
+        level: String?,
+        type: String?
+    ) {
+        kursusViewModel.getListCourse(filter, category, level, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
@@ -203,7 +229,7 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApiByType(type: String?) {
-        kursusViewModel.getListCourse(null,null,null, type)
+        kursusViewModel.getListCourse(null, null, null, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
@@ -263,7 +289,7 @@ class KursusFragment : Fragment() {
         binding.rvCourse.visibility = View.VISIBLE
     }
 
-    companion object{
+    companion object {
         var COURSES_ID = ""
     }
 }

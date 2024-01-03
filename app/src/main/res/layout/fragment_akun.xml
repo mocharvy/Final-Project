@@ -133,7 +133,7 @@
             android:id="@+id/tv_akun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/account"
@@ -284,6 +284,39 @@
                 android:background="@color/very_light_gray"
                 app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
 
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_settings"
+                android:importantForAccessibility="no"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4"/>
+
+            <TextView
+                android:id="@+id/tv_app_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/pengaturan"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_setting"
+                app:layout_constraintStart_toEndOf="@+id/iv_setting"
+                app:layout_constraintTop_toTopOf="@+id/iv_setting" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/iv_setting" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -304,7 +337,7 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="40dp"
             android:indeterminateTint="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
