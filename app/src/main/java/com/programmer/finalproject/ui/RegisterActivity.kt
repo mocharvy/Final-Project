@@ -10,6 +10,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ActivityRegisterBinding
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.ui.fragment.auth.RegisterViewModel
+import com.programmer.finalproject.ui.fragment.otp.OtpActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,15 +68,15 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.registerResponse.observe(this) {
             showLoading(false)
-            showToast("Register successful. Please log in using your registered account")
+            showToast("Silahkan cek email anda untuk verifikasi.")
 
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, OtpActivity::class.java)
             startActivity(intent)
         }
 
         registerViewModel.errorState.observe(this) { throwable ->
             showLoading(false)
-            showToast("Register failed: ${throwable.message}")
+            showToast("Register gagal: ${throwable.message}")
         }
 
     }

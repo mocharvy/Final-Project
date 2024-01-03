@@ -52,7 +52,7 @@ class OtpActivity : AppCompatActivity() {
                     }
 
 
-                    Toast.makeText(this@OtpActivity, "Verification Success", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@OtpActivity, "Verifikasi berhasil. Silahkan masuk menggunakan akun anda", Toast.LENGTH_SHORT)
                         .show()
                     val intent = Intent(this@OtpActivity, LoginActivity::class.java)
                     startActivity(intent)
@@ -82,13 +82,13 @@ class OtpActivity : AppCompatActivity() {
                         if (it) {
                             Toast.makeText(
                                 this@OtpActivity,
-                                "Failed sending OTP",
+                                "Gagal mengirim OTP",
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             Toast.makeText(
                                 this@OtpActivity,
-                                "OTP sent to your email",
+                                "OTP terkirim ke email anda",
                                 Toast.LENGTH_SHORT
                             ).show()
 

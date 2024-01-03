@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/very_light_blue"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/very_light_blue"
     tools:context=".ui.fragment.search.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/IllustrationEmpty"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lySearch">
 
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/empty"
+            android:importantForAccessibility="no"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Kelas yang kamu cari tidak ada"
+            android:text="@string/kelas_yang_kamu_cari_tidak_ada"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_empty_state"
             app:layout_constraintStart_toStartOf="@+id/iv_empty_state"
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:text="Coba cari kelas lain yang ada"
+            android:text="@string/coba_dengan_pencarian_yang_berbeda"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -53,27 +54,31 @@
         android:id="@+id/lySearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginTop="5dp">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_margin="10dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="8dp"
-            android:hint="Cari kursus terbaik..."
-            android:textSize="12sp"
+            android:background="@drawable/input"
             android:drawableEnd="@drawable/search"
             android:fontFamily="@font/montserrat_medium"
-            android:background="@drawable/input"/>
+            android:hint="@string/cari_kursus_terbaik"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingEnd="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            tools:ignore="VisualLintTextFieldSize" />
 
 
     </LinearLayout>
@@ -82,13 +87,13 @@
         android:id="@+id/rvSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lySearch"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lySearch" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

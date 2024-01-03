@@ -12,7 +12,7 @@
         android:id="@+id/title_purchased"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat!"
+        android:text="@string/selamat"
         android:textSize="40sp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_bold"
@@ -30,14 +30,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_purchased" />
+        app:layout_constraintTop_toBottomOf="@+id/title_purchased"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/subtitle_purchased"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Transaksi pembayaran kelas premium berhasil!"
+        android:text="@string/transaksi_pembayaran_kelas_premium_berhasil"
         android:textSize="12sp"
         android:fontFamily="@font/montserrat_bold"
         app:layout_constraintTop_toBottomOf="@id/img_purchased"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="12sp"
-        android:text="E-receipt telah dikirimkan ke email."
+        android:text="@string/e_receipt_telah_dikirimkan_ke_email"
         android:fontFamily="@font/montserrat_medium"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/subtitle_purchased"
@@ -69,19 +70,6 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         android:backgroundTint="@color/dark_blue"
-        android:text="Mulai Belajar"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_back_to_home"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_purchased"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/light_blue_alt"
-        android:text="Kembali ke Beranda"/>
+        android:text="@string/kembali_ke_beranda"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

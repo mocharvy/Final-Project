@@ -71,14 +71,11 @@
             android:id="@+id/action_kursusFragment_to_filterBottomSheet"
             app:destination="@id/filterBottomSheet" />
         <action
-            android:id="@+id/action_kursusFragment_to_detailPaymentFragment"
-            app:destination="@id/detailPaymentFragment" />
-        <action
             android:id="@+id/action_kursusFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_kursusFragment_to_materiKelasFragment"-->
-<!--            app:destination="@id/materiKelasFragment" />-->
+        <action
+            android:id="@+id/action_kursusFragment_to_berandaFragment"
+            app:destination="@id/berandaFragment" />
     </fragment>
     <fragment
         android:id="@+id/akunFragment"
@@ -137,14 +134,9 @@
     </fragment>
     <activity
         android:id="@+id/detailKelasActivity"
-        android:name="com.programmer.finalproject.ui.DetailKelasActivity"
+        android:name="com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasActivity"
         android:label="activity_detail_kelas"
         tools:layout="@layout/activity_detail_kelas" />
-    <fragment
-        android:id="@+id/detailPaymentFragment"
-        android:name="com.programmer.finalproject.ui.fragment.DetailPaymentFragment"
-        android:label="fragment_detail_payment"
-        tools:layout="@layout/fragment_detail_payment" />
     <dialog
         android:id="@+id/mustLoginBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet"
@@ -174,11 +166,7 @@
         android:id="@+id/premiumBottomSheet"
         android:name="com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet"
         android:label="PremiumBottomSheet"
-        tools:layout="@layout/premium_bottom_sheet">
-        <action
-            android:id="@+id/action_premiumBottomSheet_to_detailPaymentFragment"
-            app:destination="@id/detailPaymentFragment" />
-    </dialog>
+        tools:layout="@layout/premium_bottom_sheet"/>
     <fragment
         android:id="@+id/materiKelasFragment"
         android:name="com.programmer.finalproject.ui.fragment.detailkelas.MateriKelasFragment"

@@ -18,6 +18,7 @@ import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import com.programmer.finalproject.ui.LoginActivity
+import com.programmer.finalproject.ui.SettingActivity
 import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,10 @@ class AkunFragment : Fragment() {
             }
             tvLogout.setOnClickListener {
                 showDialogLogout()
+            }
+            tvAppSetting.setOnClickListener {
+                val intent = Intent(context, SettingActivity::class.java)
+                startActivity(intent)
             }
         }
     }
