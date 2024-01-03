@@ -1,4 +1,4 @@
-package com.programmer.finalproject.ui
+package com.programmer.finalproject.ui.fragment.detailkelas
 
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +13,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.programmer.finalproject.adapter.PagerAdapter
 import com.programmer.finalproject.databinding.ActivityDetailKelasBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
-import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
-import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasViewModel
-import com.programmer.finalproject.ui.fragment.detailkelas.MateriKelasFragment
-import com.programmer.finalproject.ui.fragment.detailkelas.TentangKelasFragment
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -39,16 +35,6 @@ class DetailKelasActivity : AppCompatActivity() {
 
         requestDetailClassFromApi()
 
-        binding.beliKelas.setOnClickListener {
-            COURSE_ID = detailKelasViewModel.courseId.value!!
-            toOrderCourse()
-
-        }
-    }
-
-    private fun toOrderCourse() {
-        val bottomSheetFragment = PremiumBottomSheet()
-        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 
     private fun requestDetailClassFromApi() {
@@ -66,7 +52,6 @@ class DetailKelasActivity : AppCompatActivity() {
         detailKelasViewModel.detailCourseResponse.observe(this) { response ->
             when (response) {
                 is NetworkResult.Success -> {
-                    //hideLoading()
                     val detailCourse = response.data!!
                     videoUrl = detailCourse.data?.introductionVideo.toString()
                     updateUI(detailCourse)
@@ -110,7 +95,6 @@ class DetailKelasActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Loading -> {
-                    //showLoading()
                 }
 
                 is NetworkResult.Error -> {
@@ -163,7 +147,4 @@ class DetailKelasActivity : AppCompatActivity() {
         youtubePlayerView.release()
     }
 
-    companion object {
-        var COURSE_ID = ""
-    }
 }

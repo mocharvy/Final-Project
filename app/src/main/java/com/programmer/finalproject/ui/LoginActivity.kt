@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.loginResponse.observe(this) {
             showLoading(false)
-            showToast("Login successful")
+            showToast("Login berhasil")
 
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.errorState.observe(this) { throwable ->
             showLoading(false)
-            showToast("Login failed: ${throwable.message}")
+            showToast("Login gagal: ${throwable.message}")
         }
 
     }

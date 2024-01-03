@@ -16,7 +16,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.CategoryAdapter
 import com.programmer.finalproject.adapter.TrackerClassAdapter
 import com.programmer.finalproject.databinding.FragmentKelasBinding
-import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasActivity
 import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.beranda.BerandaViewModel
 import dagger.hilt.android.AndroidEntryPoint

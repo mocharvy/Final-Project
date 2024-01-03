@@ -46,7 +46,6 @@
             android:layout_weight="1"
             android:text="@string/cancel"
             android:textSize="14sp"
-            android:textColor="@color/black"
             app:cornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:strokeColor="@color/bluesea" />
@@ -54,6 +53,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_beli_kelas"
             style="@style/Widget.Material3.Button"
+            android:backgroundTint="@color/dark_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

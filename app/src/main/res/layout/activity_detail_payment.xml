@@ -40,10 +40,11 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/ui_ux_design"
-                android:textColor="@color/dark_blue"
+                android:textColor="@color/light_blue_alt"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_course_image" />
+                app:layout_constraintTop_toBottomOf="@id/iv_course_image"
+                tools:ignore="TextContrastCheck" />
 
             <ImageView
                 android:id="@+id/iv_star"
@@ -64,7 +65,6 @@
                 android:layout_marginStart="3dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/_5_0"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/iv_star"
                 app:layout_constraintTop_toTopOf="@id/iv_star" />
@@ -76,7 +76,6 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/membuat_ui_ux_design"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -87,7 +86,6 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/john_doe"
-                android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_desc" />
@@ -111,7 +109,6 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/harga"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -123,7 +120,6 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/rp"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@id/text_harga"
                 app:layout_constraintTop_toBottomOf="@id/text_harga" />
 
@@ -134,7 +130,6 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/_123456"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/rp_harga"
                 app:layout_constraintTop_toTopOf="@id/rp_harga" />
 
@@ -145,7 +140,6 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/ppn_11"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/rp_total"
                 app:layout_constraintStart_toEndOf="@id/tv_harga"
@@ -158,7 +152,6 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/rp"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@id/text_ppn"
                 app:layout_constraintTop_toBottomOf="@id/text_ppn" />
 
@@ -169,7 +162,6 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/_123456"
-                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/rp_ppn"
                 app:layout_constraintTop_toTopOf="@id/rp_ppn" />
 
@@ -181,7 +173,6 @@
                 android:layout_marginEnd="60dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/total"
-                android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -193,9 +184,10 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/rp"
-                android:textColor="@color/dark_blue"
+                android:textColor="@color/light_blue_alt"
                 app:layout_constraintStart_toStartOf="@id/text_total"
-                app:layout_constraintTop_toBottomOf="@id/text_total" />
+                app:layout_constraintTop_toBottomOf="@id/text_total"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/tv_total"
@@ -204,9 +196,10 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/_123456"
-                android:textColor="@color/dark_blue"
+                android:textColor="@color/light_blue_alt"
                 app:layout_constraintStart_toEndOf="@id/rp_total"
-                app:layout_constraintTop_toTopOf="@id/rp_total" />
+                app:layout_constraintTop_toTopOf="@id/rp_total"
+                tools:ignore="TextContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -577,7 +570,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="VisualLintButtonSize" />
+        tools:ignore="VisualLintButtonSize,TextSizeCheck" />
 
     <ProgressBar
         android:id="@+id/progressBar"

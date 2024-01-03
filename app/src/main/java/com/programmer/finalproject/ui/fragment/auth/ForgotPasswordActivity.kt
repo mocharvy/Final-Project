@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -52,7 +53,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
                 authViewModel.isError.observe(this@ForgotPasswordActivity) {
                     if (it)
-                        tilEmail.error = "Email Not Found"
+                        binding.errorEmail.visibility = View.VISIBLE
                 }
 
             }
