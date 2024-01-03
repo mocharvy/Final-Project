@@ -17,7 +17,7 @@ import com.google.android.material.chip.Chip
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
-import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasActivity
 import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult

@@ -170,4 +170,12 @@
     <string name="pref_key_notify">key_notification</string>
     <string name="pref_notify_name">Raih impianmu dengan belajar setiap hari</string>
     <string name="pengaturan">Pengaturan</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="anda_belum">Anda Belum Memiliki Notifikasi Masuk</string>
+    <string name="kelas_yang_kamu_cari_tidak_ada">Kelas yang kamu cari tidak ada</string>
+    <string name="coba_dengan_pencarian_yang_berbeda">Coba dengan pencarian yang berbeda</string>
+    <string name="kembali_ke_beranda">Kembali ke Beranda</string>
+    <string name="e_receipt_telah_dikirimkan_ke_email">E-receipt telah dikirimkan ke email.</string>
+    <string name="transaksi_pembayaran_kelas_premium_berhasil">Transaksi pembayaran kelas premium berhasil!</string>
+    <string name="selamat">Selamat!</string>
 </resources>

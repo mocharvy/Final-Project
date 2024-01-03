@@ -57,7 +57,7 @@
             android:name=".ui.fragment.DetailPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DetailKelasActivity"
+            android:name=".ui.fragment.detailkelas.DetailKelasActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

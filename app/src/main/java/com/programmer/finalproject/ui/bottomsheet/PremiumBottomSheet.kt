@@ -65,13 +65,13 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
                     if (isError) {
                         Toast.makeText(
                             requireContext(),
-                            "Order Failed",
+                            "Order gagal. Kamu sudah bergabung dengan kelas ini",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         Toast.makeText(
                             requireContext(),
-                            "Order has been placed. Please check your order history in Account",
+                            "Order berhasil. Silahkan cek Riwayat pesanan di Akun anda.",
                             Toast.LENGTH_LONG
                         ).show()
 

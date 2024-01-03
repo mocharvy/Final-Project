@@ -14,11 +14,6 @@ class OnboardingBottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: OnboardingBottomSheetBinding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -17,7 +17,7 @@ import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.ActivityDetailPaymentBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.payment.order.PutOrderRequest
-import com.programmer.finalproject.ui.customlayout.PaymentSuccessDialog
+import com.programmer.finalproject.ui.bottomsheet.PurchasedBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasViewModel
 import com.programmer.finalproject.ui.orders.HistoryPaymentFragment
@@ -92,15 +92,13 @@ class DetailPaymentActivity : AppCompatActivity() {
 
         binding.btCredit.setOnClickListener {
             methode = "Credit Card"
-            Log.d("METHOD", methode)
-            Toast.makeText(this, "Credit card payment chosen", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Pembayaran menggunakan kartu kredit dipilih", Toast.LENGTH_SHORT)
                 .show()
         }
 
         binding.btTransfer.setOnClickListener {
             methode = "Bank Transfer"
-            Log.d("METHOD", methode)
-            Toast.makeText(this, "Bank Transfer payment chosen", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Pembayaran menggunakan bank transfer dipilih", Toast.LENGTH_SHORT)
                 .show()
         }
 
@@ -119,19 +117,22 @@ class DetailPaymentActivity : AppCompatActivity() {
                                 PutOrderRequest(HistoryPaymentFragment.COURSEID, methode)
 
                             if (orderID != null) {
-                                showLoading(true)
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
+                                    showLoading(true)
                                 }, DELAY_TIME)
+                                orderViewModel.putOrder("Bearer $it", ORDER_ID, putOrderRequest)
                                 showLoading(false)
 
-                                val dialogFragment = PaymentSuccessDialog()
-                                dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
+                                val purchasedBottomSheet = PurchasedBottomSheet()
+                                purchasedBottomSheet.show(
+                                    this.supportFragmentManager,
+                                    purchasedBottomSheet.tag
+                                )
                             }
                         } else {
                             Toast.makeText(
                                 this,
-                                "Please fill all the data necessary",
+                                "Mohon lengkapi kembali data yang diperlukan",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -146,8 +147,11 @@ class DetailPaymentActivity : AppCompatActivity() {
                             }, DELAY_TIME)
                             showLoading(false)
 
-                            val dialogFragment = PaymentSuccessDialog()
-                            dialogFragment.show(supportFragmentManager, "PaymentSuccessDialog")
+                            val purchasedBottomSheet = PurchasedBottomSheet()
+                            purchasedBottomSheet.show(
+                                this.supportFragmentManager,
+                                purchasedBottomSheet.tag
+                            )
                         }
                     }
                 }
@@ -162,7 +166,7 @@ class DetailPaymentActivity : AppCompatActivity() {
             detailKelasViewModel.getDetailCourse(courseId)
             observeDetailCourse()
         } else {
-            Toast.makeText(this, "Course id is null", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Course id kosong", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -182,8 +186,7 @@ class DetailPaymentActivity : AppCompatActivity() {
 
                 is NetworkResult.Error -> {
                     showLoading(false)
-                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                    Log.e("DetailPaymentFragment", "Error: ${response.message}")
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
 
                 else -> {
@@ -267,7 +270,7 @@ class DetailPaymentActivity : AppCompatActivity() {
         val cardExpire = binding.etExpire.text.toString()
 
         return if (cardNumber.isEmpty() || cardHolder.isEmpty() || cardCVV.isEmpty() || cardExpire.isEmpty()) {
-            Toast.makeText(this, "All field should be filled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Semua data harus diisi", Toast.LENGTH_SHORT).show()
             false
         } else {
             true
@@ -275,6 +278,6 @@ class DetailPaymentActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val DELAY_TIME: Long = 2000
+        const val DELAY_TIME: Long = 1000
     }
 }
