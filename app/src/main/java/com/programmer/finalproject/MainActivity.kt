@@ -1,7 +1,6 @@
 package com.programmer.finalproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.programmer.finalproject.databinding.ActivityMainBinding
 import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
-import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
 import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkLogin() {
         loginViewModel.token.observe(this) {
-            Log.d("TOKEN", "$it")
             if (it == null) {
                 navController = findNavController(R.id.nav_host)
 

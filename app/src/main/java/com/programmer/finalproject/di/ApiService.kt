@@ -163,6 +163,7 @@ interface ApiService {
 
     @POST("trackers")
     suspend fun postTracker(
+        @Header("Authorization") token: String,
         @Body trackerRequest: TrackerRequest
     ): Response<TrackerResponse>
 

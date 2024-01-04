@@ -13,6 +13,9 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.programmer.finalproject.adapter.PagerAdapter
 import com.programmer.finalproject.databinding.ActivityDetailKelasBinding
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+import com.programmer.finalproject.model.tracker.TrackerRequest
+import com.programmer.finalproject.ui.coursetracker.CourseTrackerViewModel
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
@@ -21,7 +24,10 @@ import java.util.regex.Pattern
 class DetailKelasActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailKelasBinding
+
     private val detailKelasViewModel: DetailKelasViewModel by viewModels()
+    private val trackerViewModel: CourseTrackerViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var youtubePlayerView: YouTubePlayerView
     private var videoUrl: String = ""
@@ -34,6 +40,7 @@ class DetailKelasActivity : AppCompatActivity() {
         detailKelasViewModel.courseId.value = intent.getStringExtra("courseId") ?: ""
 
         requestDetailClassFromApi()
+        //postTracker()
 
     }
 
@@ -44,7 +51,42 @@ class DetailKelasActivity : AppCompatActivity() {
             detailKelasViewModel.getDetailCourse(courseId)
             observeDetailCourse()
         } else {
-            Toast.makeText(this, "Course id is null", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Course id kosong", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun postTracker() {
+        val courseId = detailKelasViewModel.courseId.value
+
+        loginViewModel.token.observe(this) {token ->
+            if (token != null) {
+                if (courseId != null) {
+                    val trackerRequest = TrackerRequest(
+                        course_id = courseId
+                    )
+                    trackerViewModel.postTracker("Bearer $token", trackerRequest)
+                    Log.d("POST", "$token")
+                    Log.d("REQUEST", "$trackerRequest")
+                    observePostTracker()
+                }
+            }
+        }
+
+    }
+
+    private fun observePostTracker() {
+        trackerViewModel.postTrackerResult.observe(this) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    Toast.makeText(this,"Tracker berhasil dikirm", Toast.LENGTH_SHORT).show()
+                }
+                is NetworkResult.Loading -> {
+
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(this,"Gagal mengirim tracker", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -98,13 +140,11 @@ class DetailKelasActivity : AppCompatActivity() {
                 }
 
                 is NetworkResult.Error -> {
-                    //hideLoading()
                     Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                    Log.e("DetailKelasFragment", "Error: ${response.message}")
                 }
 
                 else -> {
-                    Log.e("DetailKelasFragment", "Error: ${response.message}")
+                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
                 }
             }
         }

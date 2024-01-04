@@ -32,11 +32,11 @@ class CourseTrackerViewModel @Inject constructor(
     private val _putTrackerResult = MutableLiveData<NetworkResult<PutTrackerByIdResponse>>()
     val putTrackerResult: LiveData<NetworkResult<PutTrackerByIdResponse>> = _putTrackerResult
 
-    fun postTracker(trackerRequest: TrackerRequest) {
+    fun postTracker(token: String, trackerRequest: TrackerRequest) {
         viewModelScope.launch {
             _postTrackerResult.value = NetworkResult.Loading()
             try {
-                val response = repository.remote.postTracker(trackerRequest)
+                val response = repository.remote.postTracker(token, trackerRequest)
                 _postTrackerResult.value = handleResponse(response)
             } catch (e: Exception) {
                 _postTrackerResult.value = NetworkResult.Error(e.message ?: "An error occurred")

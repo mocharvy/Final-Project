@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
@@ -84,22 +83,14 @@ class AkunFragment : Fragment() {
     }
 
     private fun getUserDetail() {
-        Log.d("Get User Detail", "getUserDetail fun called")
         loginViewModel.token.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d("TOKEN", it)
                 binding.clAkun.visibility = View.VISIBLE
                 binding.toLogin.visibility = View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
                 observeUserDetailResponse()
 
-                val mustLoginBottomSheet =
-                    requireActivity().supportFragmentManager.findFragmentByTag("mustLoginBottomSheet")
-                if (mustLoginBottomSheet != null && mustLoginBottomSheet is BottomSheetDialogFragment) {
-                    mustLoginBottomSheet.dismiss()
-                }
             } else {
-                findNavController().navigate(R.id.action_akunFragment_to_mustLoginBottomSheet)
                 binding.toLogin.visibility = View.VISIBLE
                 binding.clAkun.visibility = View.GONE
                 binding.toLogin.setOnClickListener {
@@ -107,7 +98,7 @@ class AkunFragment : Fragment() {
                     startActivity(intent)
                     activity?.finish()
                 }
-                Toast.makeText(requireActivity(), "You are Unauthorized", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Anda harus masuk terlebih dahulu", Toast.LENGTH_SHORT).show()
                 hideLoading()
             }
         }

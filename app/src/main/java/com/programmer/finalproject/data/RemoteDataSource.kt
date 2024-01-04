@@ -52,8 +52,8 @@ class RemoteDataSource @Inject constructor(
         return apiService.getChaptersById(chapterId)
     }
 
-    suspend fun postTracker(trackerRequest: TrackerRequest): Response<TrackerResponse> {
-        return apiService.postTracker(trackerRequest)
+    suspend fun postTracker(token: String, trackerRequest: TrackerRequest): Response<TrackerResponse> {
+        return apiService.postTracker(token, trackerRequest)
     }
 
     suspend fun getTrackerById(courseId: String): Response<GetTrackerByIdResponse> {
