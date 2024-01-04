@@ -39,6 +39,7 @@ class DetailPaymentActivity : AppCompatActivity() {
     private val orderViewModel: OrdersViewModel by viewModels()
 
     private var methode = "Credit Card"
+    private var typeClass = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +111,10 @@ class DetailPaymentActivity : AppCompatActivity() {
                 if (it != null) {
                     val detailCourse = response.data!!
                     val orderID = detailCourse.data?.id
+
+                    if (typeClass == "Free") {
+                        methode = "Bank Transfer"
+                    }
 
                     if (methode == "Credit Card") {
                         if (validateMethode()) {
@@ -209,6 +214,9 @@ class DetailPaymentActivity : AppCompatActivity() {
         val formattedPpn = decimalFormat.format(ppn)
         val formattedPpnPrice = decimalFormat.format(ppnPrice)
 
+        val type = detailCourse.data?.type
+        typeClass = type.toString()
+
         binding.tvDesc.text = detailCourse.data?.name
         binding.tvTitle.text = detailCourse.data?.name
         binding.tvAuthor.text = detailCourse.data?.facilitator
@@ -216,6 +224,10 @@ class DetailPaymentActivity : AppCompatActivity() {
         binding.tvHarga.text = detailCourse.data?.price.toString()
         binding.tvPpn.text = formattedPpn.toString()
         binding.tvTotal.text = formattedPpnPrice.toString()
+
+        if (type == "Free") {
+            binding.btPay.text = getString(R.string.ikuti_kelas)
+        }
 
     }
 

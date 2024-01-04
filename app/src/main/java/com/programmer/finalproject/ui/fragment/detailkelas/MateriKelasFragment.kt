@@ -2,7 +2,6 @@ package com.programmer.finalproject.ui.fragment.detailkelas
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class MateriKelasFragment : Fragment() {
 
         @Suppress("DEPRECATION")
         detailCourse = arguments?.getParcelable(ARG_DETAIL_COURSE)
-        Log.d("MateriKelasFragment", "Detail Course: $detailCourse")
 
         val chapterAdapter =
             ChapterAdapter(requireContext(), detailCourse?.data?.chapters, { chapterId ->

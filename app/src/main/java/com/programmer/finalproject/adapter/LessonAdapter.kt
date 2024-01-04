@@ -1,7 +1,6 @@
 package com.programmer.finalproject.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +13,7 @@ class LessonAdapter(
     private val onLessonClick: ((String) -> Unit?)? = null
 ) : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         val binding = ItemLessonBinding.inflate(LayoutInflater.from(context), parent, false)
         return LessonViewHolder(binding)
@@ -25,12 +25,14 @@ class LessonAdapter(
         holder.binding.tvIndex.text = lesson?.index.toString()
 
         holder.itemView.setOnClickListener {
-            Log.d("LESSON ADAPTER", "ITEM CLICKED BEFORE")
             val videoUrl = lesson?.video
-            if (videoUrl != null) {
-                onLessonClick?.let { it1 -> it1(videoUrl) }
+            val moduleId = lesson?.id
+
+            if (videoUrl != null && moduleId != null) {
+                onLessonClick?.let { it1 ->
+                    it1(videoUrl)
+                }
             }
-            Log.d("LESSON ADAPTER", "ITEM CLICKED AFTER")
         }
 
     }

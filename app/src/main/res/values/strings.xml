@@ -178,4 +178,7 @@
     <string name="e_receipt_telah_dikirimkan_ke_email">E-receipt telah dikirimkan ke email.</string>
     <string name="transaksi_pembayaran_kelas_premium_berhasil">Transaksi pembayaran kelas premium berhasil!</string>
     <string name="selamat">Selamat!</string>
+    <string name="menuju_course_impianmu">Menuju course impianmu</string>
+    <string name="gabung_kelas">Gabung kelas</string>
+    <string name="ikuti_kelas">Ikuti kelas (gratis)</string>
 </resources>

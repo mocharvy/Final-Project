@@ -1,7 +1,6 @@
 package com.programmer.finalproject.ui.fragment.kursus
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +16,6 @@ import com.google.android.material.chip.Chip
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
-import com.programmer.finalproject.ui.fragment.detailkelas.DetailKelasActivity
 import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
 import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
@@ -45,16 +43,10 @@ class KursusFragment : Fragment() {
 
         allCoursesAdapter = AllCourseAdapter { courseId ->
             val clickedCourse = allCoursesAdapter.course.firstOrNull { it.id == courseId }
-            clickedCourse?.let { course ->
+            clickedCourse?.let { _ ->
                 loginViewModel.token.observe(viewLifecycleOwner) {
                     if (it != null) {
-                        if (course.type == "Free") {
-                            val intent = Intent(requireContext(), DetailKelasActivity::class.java)
-                            intent.putExtra("courseId", courseId)
-                            startActivity(intent)
-                        } else {
-                            showPaymentConfirmationDialog(courseId)
-                        }
+                        showPaymentConfirmationDialog(courseId)
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -287,9 +279,5 @@ class KursusFragment : Fragment() {
         binding.shimmerFrameLayout.stopShimmer()
         binding.shimmerFrameLayout.visibility = View.GONE
         binding.rvCourse.visibility = View.VISIBLE
-    }
-
-    companion object {
-        var COURSES_ID = ""
     }
 }
