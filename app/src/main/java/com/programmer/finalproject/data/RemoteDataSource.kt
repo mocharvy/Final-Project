@@ -3,7 +3,12 @@ package com.programmer.finalproject.data
 import com.programmer.finalproject.di.ApiService
 import com.programmer.finalproject.model.chapter.ChapterResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
+import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
+import com.programmer.finalproject.model.tracker.GetTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerRequest
+import com.programmer.finalproject.model.tracker.TrackerRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import com.programmer.finalproject.model.user.update.ProfileResponse
@@ -43,12 +48,20 @@ class RemoteDataSource @Inject constructor(
         return apiService.changePassword(token, changePasswordRequest)
     }
 
-//    suspend fun getHistoryPayment(token: String): Response<OrdersResponse> {
-//        return apiService.getHistoryPayment(token)
-//    }
-
     suspend fun getChapterById(chapterId: String): Response<ChapterResponse> {
         return apiService.getChaptersById(chapterId)
+    }
+
+    suspend fun postTracker(trackerRequest: TrackerRequest): Response<TrackerResponse> {
+        return apiService.postTracker(trackerRequest)
+    }
+
+    suspend fun getTrackerById(courseId: String): Response<GetTrackerByIdResponse> {
+        return apiService.getTrackerById(courseId)
+    }
+
+    suspend fun putTrackerById(courseId: String, putTrackerRequest: PutTrackerRequest): Response<PutTrackerByIdResponse> {
+        return apiService.putTrackerById(courseId, putTrackerRequest)
     }
 
 

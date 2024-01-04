@@ -19,6 +19,10 @@ import com.programmer.finalproject.model.payment.OrderResponse
 import com.programmer.finalproject.model.payment.order.PutOrderRequest
 import com.programmer.finalproject.model.register.RegisterRequest
 import com.programmer.finalproject.model.register.RegisterResponse
+import com.programmer.finalproject.model.tracker.GetTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerRequest
+import com.programmer.finalproject.model.tracker.TrackerRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
 import com.programmer.finalproject.model.user.password.ResetPasswordRequest
@@ -156,5 +160,21 @@ interface ApiService {
     suspend fun getChaptersById(
         @Path("chapterId") chapterId: String
     ): Response<ChapterResponse>
+
+    @POST("trackers")
+    suspend fun postTracker(
+        @Body trackerRequest: TrackerRequest
+    ): Response<TrackerResponse>
+
+    @GET("trackers/{course_id}")
+    suspend fun getTrackerById(
+        @Path("course_id") courseId: String
+    ): Response<GetTrackerByIdResponse>
+
+    @PUT("trackers/{course_id}")
+    suspend fun putTrackerById(
+        @Path("course_id") courseId: String,
+        @Body putTrackerRequest: PutTrackerRequest
+    ): Response<PutTrackerByIdResponse>
 
 }

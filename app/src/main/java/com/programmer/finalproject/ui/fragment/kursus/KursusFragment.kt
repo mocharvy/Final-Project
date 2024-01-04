@@ -48,13 +48,14 @@ class KursusFragment : Fragment() {
             clickedCourse?.let { course ->
                 loginViewModel.token.observe(viewLifecycleOwner) {
                     if (it != null) {
-                        if (course.type == "Free") {
+                        /*if (course.type == "Free") {
                             val intent = Intent(requireContext(), DetailKelasActivity::class.java)
                             intent.putExtra("courseId", courseId)
                             startActivity(intent)
                         } else {
                             showPaymentConfirmationDialog(courseId)
-                        }
+                        }*/
+                        showPaymentConfirmationDialog(courseId)
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -287,9 +288,5 @@ class KursusFragment : Fragment() {
         binding.shimmerFrameLayout.stopShimmer()
         binding.shimmerFrameLayout.visibility = View.GONE
         binding.rvCourse.visibility = View.VISIBLE
-    }
-
-    companion object {
-        var COURSES_ID = ""
     }
 }
