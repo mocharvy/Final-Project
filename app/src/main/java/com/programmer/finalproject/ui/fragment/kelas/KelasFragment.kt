@@ -98,7 +98,7 @@ class KelasFragment : Fragment() {
 
                 }
             } else {
-                Toast.makeText(requireContext(), "You need to log in first", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Anda perlu masuk terlebih dahulu", Toast.LENGTH_SHORT)
                     .show()
             }
         }

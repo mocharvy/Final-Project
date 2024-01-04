@@ -26,8 +26,10 @@ class TrackerClassAdapter(
 
 
     inner class TrackerViewHolder(
-        private val binding: ItemCourseBinding
+        val binding: ItemCourseBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        var progress: Int = 0
 
         @SuppressLint("SetTextI18n")
         fun bindData(tracker: Data, onItemClick: (String) -> Unit) {
@@ -38,12 +40,22 @@ class TrackerClassAdapter(
                 tvLevel.text = tracker.course.level
                 tvModule.text = tracker.course.total_chapter.toString()
                 tvTime.text = tracker.course.total_duration.toString()
-                btPrice.text = tracker.progress_course.toString() + "%"
+                btPrice.text = "$progress%"
             }
 
             binding.root.setOnClickListener {
                 onItemClick(tracker.course.id)
             }
+        }
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun updateProgress(progress: Int) {
+        for (i in 0 until itemCount) {
+            val holder = currentList[i] as? TrackerViewHolder
+            holder?.progress = progress
+            holder?.binding?.btPrice?.text = "$progress%"
         }
     }
 
@@ -56,6 +68,5 @@ class TrackerClassAdapter(
             return oldItem == newItem
         }
     }
-
 
 }

@@ -90,7 +90,7 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
             detailKelasViewModel.getDetailCourse(courseId)
             observeDetailCourse()
         } else {
-            Toast.makeText(requireContext(), "Course id is null", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Course id kosong", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -119,6 +119,8 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
 
     private fun updateUI(detailCourse: DetailCourseResponse3) {
         binding.apply {
+            val type = detailCourse.data?.type
+
             tvTitle.text = detailCourse.data?.name
             tvAuthor.text = detailCourse.data?.facilitator
             tvTime.text = detailCourse.data?.totalDuration.toString()
@@ -128,7 +130,10 @@ class PremiumBottomSheet : BottomSheetDialogFragment() {
             btPrice.text = buildString {
                 append(context?.getString(R.string.beli_rp) ?: "Rp. ")
                 append(detailCourse.data?.price.toString())
+            }
 
+            if (type == "Free") {
+                btnOrderCourse.text = getString(R.string.gabung_kelas)
             }
         }
     }
