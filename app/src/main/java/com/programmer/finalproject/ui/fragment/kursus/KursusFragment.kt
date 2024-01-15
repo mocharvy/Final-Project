@@ -1,6 +1,6 @@
 package com.programmer.finalproject.ui.fragment.kursus
 
-import android.content.Intent
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.programmer.finalproject.R
 import com.programmer.finalproject.adapter.AllCourseAdapter
 import com.programmer.finalproject.databinding.FragmentKursusBinding
-import com.programmer.finalproject.ui.DetailKelasActivity
+import com.programmer.finalproject.ui.bottomsheet.PremiumBottomSheet
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +27,7 @@ class KursusFragment : Fragment() {
     private lateinit var binding: FragmentKursusBinding
     private lateinit var allCoursesAdapter: AllCourseAdapter
 
+    private val loginViewModel: LoginViewModel by viewModels()
     private val kursusViewModel: KursusViewModel by viewModels()
     private val filterViewModel: FilterViewModel by viewModels({ requireActivity() })
 
@@ -39,9 +42,21 @@ class KursusFragment : Fragment() {
 
 
         allCoursesAdapter = AllCourseAdapter { courseId ->
-            val intent = Intent(context, DetailKelasActivity::class.java)
-            intent.putExtra("courseId", courseId)
-            context?.startActivity(intent)
+            val clickedCourse = allCoursesAdapter.course.firstOrNull { it.id == courseId }
+            clickedCourse?.let { _ ->
+                loginViewModel.token.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        showPaymentConfirmationDialog(courseId)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Anda harus masuk terlebih dahulu.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+            }
         }
 
         setupRecyclerView()
@@ -57,28 +72,68 @@ class KursusFragment : Fragment() {
 
         filterViewModel.filterLiveData.observe(viewLifecycleOwner) { filterData ->
             Log.d("FILTER DATA", "${filterData.first}, ${filterData.second}, ${filterData.third}")
-            requestCourseFromApiByFilter(filterData.first, filterData.second, filterData.third, null)
+            requestCourseFromApiByFilter(
+                filterData.first,
+                filterData.second,
+                filterData.third,
+                null
+            )
         }
 
         binding.recChipGroup.setOnCheckedStateChangeListener { group, selectedChipId ->
             if (selectedChipId.isNotEmpty()) {
                 val chip = group.findViewById<Chip>(selectedChipId.first())
-                val selectedRecType = chip.text.toString()
-                if (selectedRecType == "Kelas premium") {
-                    typeChipText = "Premium"
-                    typeChipId = selectedChipId.first()
-                    requestCourseFromApiByType(typeChipText)
-                } else if(selectedRecType == "Kelas gratis") {
-                    typeChipText = "Free"
-                    typeChipId = selectedChipId.first()
-                    requestCourseFromApiByType(typeChipText)
-                } else if (selectedRecType == "Semua kelas") {
-                    requestCourseFromApi()
+                when (chip.text.toString()) {
+                    "Kelas premium" -> {
+                        typeChipText = "Premium"
+                        typeChipId = selectedChipId.first()
+                        requestCourseFromApiByType(typeChipText)
+                    }
+
+                    "Kelas gratis" -> {
+                        typeChipText = "Free"
+                        typeChipId = selectedChipId.first()
+                        requestCourseFromApiByType(typeChipText)
+                    }
+
+                    "Semua kelas" -> {
+                        requestCourseFromApi()
+                    }
                 }
             }
         }
 
         return binding.root
+    }
+
+    private fun showPaymentConfirmationDialog(courseId: String) {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_confirmation_order)
+
+        val btnCancel = dialog.findViewById<MaterialButton>(R.id.btn_batal)
+        val btnBuy = dialog.findViewById<MaterialButton>(R.id.btn_beli_kelas)
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnBuy.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("courseId", courseId)
+            }
+
+            val premiumBottomSheet = PremiumBottomSheet()
+            premiumBottomSheet.arguments = bundle
+
+            premiumBottomSheet.show(
+                requireActivity().supportFragmentManager,
+                premiumBottomSheet.tag
+            )
+
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun readCourseFromDatabase() {
@@ -94,18 +149,14 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApi() {
-        Log.d("Call course API", "api course called")
-        kursusViewModel.getListCourse(null,null,null, null)
+        kursusViewModel.getListCourse(null, null, null, null)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
+
                     response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
                         allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
                     }
                 }
@@ -131,20 +182,20 @@ class KursusFragment : Fragment() {
         }
     }
 
-    private fun requestCourseFromApiByFilter(filter: String?, category: String?, level: String?, type: String?) {
-        Log.d("Call course filter", "api course called")
-        kursusViewModel.getListCourse(filter,category,level, type)
+    private fun requestCourseFromApiByFilter(
+        filter: String?,
+        category: String?,
+        level: String?,
+        type: String?
+    ) {
+        kursusViewModel.getListCourse(filter, category, level, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
-                    response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
-                        allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
+                    response.data?.let {
+                        allCoursesAdapter.setData(it)
                     }
                 }
 
@@ -170,19 +221,14 @@ class KursusFragment : Fragment() {
     }
 
     private fun requestCourseFromApiByType(type: String?) {
-        Log.d("Call course filter", "api course called")
-        kursusViewModel.getListCourse(null,null,null, type)
+        kursusViewModel.getListCourse(null, null, null, type)
         kursusViewModel.listAllCoursesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    Log.d("Call success", "api called successfully")
-                    response.data?.let {
-                        Log.d("Adapter Debug", "Size before setData: ${allCoursesAdapter.itemCount}")
-                        Log.d("DataDetailCourse2 debug", "${response.data}")
-                        allCoursesAdapter.setData(it)
-                        Log.d("Adapter Debug", "Size after setData: ${allCoursesAdapter.itemCount}")
 
+                    response.data?.let {
+                        allCoursesAdapter.setData(it)
                     }
                 }
 

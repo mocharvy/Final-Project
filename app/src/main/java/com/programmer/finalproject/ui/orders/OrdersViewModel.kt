@@ -8,6 +8,7 @@ import com.programmer.finalproject.di.ApiRepository
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -24,14 +25,13 @@ class OrdersViewModel @Inject constructor(
     var isError = MutableLiveData<Boolean>()
 
 
-    val _getListHistoryPayment= MutableLiveData<HistoryPaymentResponse?>()
+    val _getListHistoryPayment = MutableLiveData<HistoryPaymentResponse?>()
 
     val getListHistoryPayment: LiveData<HistoryPaymentResponse?>
         get() = _getListHistoryPayment
 
 
-
-    fun getHistoryPayment(token:String) {
+    fun getHistoryPayment(token: String) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
         apiRepository.getHistoryPayment(token).enqueue(
@@ -64,10 +64,10 @@ class OrdersViewModel @Inject constructor(
         )
     }
 
-    fun  orderCourses(token: String,orderRequest: OrderRequest){
+    fun orderCourses(token: String, orderRequest: OrderRequest) {
         loadingState.postValue(true)
         errorState.postValue(Pair(false, null))
-        apiRepository.orderCourses(token,orderRequest).enqueue(
+        apiRepository.orderCourses(token, orderRequest).enqueue(
             object : Callback<OrderResponse> {
                 override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
                     viewModelScope.launch {
@@ -94,5 +94,37 @@ class OrdersViewModel @Inject constructor(
             }
         )
     }
+
+    fun putOrder(token: String, orderId: String, putOrderRequest: PutOrderRequest) {
+        loadingState.postValue(true)
+        errorState.postValue(Pair(false, null))
+        apiRepository.putOrder(token, orderId, putOrderRequest).enqueue(
+            object : Callback<OrderResponse> {
+                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                    viewModelScope.launch {
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+
+                override fun onResponse(
+                    call: Call<OrderResponse>,
+                    response: Response<OrderResponse>
+                ) {
+
+                    viewModelScope.launch {
+                        if (response.code() == 400 || response.code() == 401 || response.code() == 500) {
+                            isError.postValue(true)
+                        } else {
+                            isError.postValue(false)
+                        }
+                        loadingState.postValue(false)
+                        errorState.postValue(Pair(false, null))
+                    }
+                }
+            }
+        )
+    }
+
 
 }

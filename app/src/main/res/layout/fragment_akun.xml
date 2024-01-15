@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAccessibility="no" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:elevation="1dp"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="20dp"
             app:layout_constraintTop_toBottomOf="@id/tv_akun">
 
@@ -132,10 +134,10 @@
             android:id="@+id/tv_akun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/akun"
+            android:text="@string/account"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="@string/profile_saya"
+                android:text="@string/change_profile"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_edit"
                 app:layout_constraintStart_toEndOf="@+id/btn_edit"
@@ -189,7 +191,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/ic_settings"
+                android:src="@drawable/ic_password"
+                app:tint="@color/dark_blue"
                 android:importantForAccessibility="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -200,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="@string/ubah_password"
+                android:text="@string/change_password"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_setting"
                 app:layout_constraintStart_toEndOf="@+id/btn_setting"
@@ -233,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="@string/riwayat_pembayaran"
+                android:text="@string/order_history"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_history"
                 app:layout_constraintStart_toEndOf="@+id/btn_history"
@@ -266,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="@string/keluar"
+                android:text="@string/log_out"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
                 app:layout_constraintStart_toEndOf="@+id/btn_logout"
@@ -281,6 +284,40 @@
                 android:layout_marginEnd="10dp"
                 android:background="@color/very_light_gray"
                 app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_settings"
+                android:importantForAccessibility="no"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4"/>
+
+            <TextView
+                android:id="@+id/tv_app_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/pengaturan"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_setting"
+                app:layout_constraintStart_toEndOf="@+id/iv_setting"
+                app:layout_constraintTop_toTopOf="@+id/iv_setting" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/iv_setting" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -301,12 +338,11 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="40dp"
             android:indeterminateTint="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,6 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/ui_ux_design"
-            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_category" />

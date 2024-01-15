@@ -1,29 +1,32 @@
 package com.programmer.finalproject.di
 
-import com.programmer.finalproject.model.courses.CategoryResponse
+
+import com.programmer.finalproject.model.chapter.ChapterResponse
 import com.programmer.finalproject.model.courses.AllCoursesResponse2
+import com.programmer.finalproject.model.courses.CategoryResponse
 import com.programmer.finalproject.model.courses.CoursesResponse
 import com.programmer.finalproject.model.courses.me.TrackerResponse
 import com.programmer.finalproject.model.detailcourse.DetailCourseResponse3
 import com.programmer.finalproject.model.login.LoginRequest
 import com.programmer.finalproject.model.login.LoginResponse
-import com.programmer.finalproject.model.register.RegisterRequest
-import com.programmer.finalproject.model.register.RegisterResponse
-import retrofit2.http.Header
-import retrofit2.http.Query
-
-
+import com.programmer.finalproject.model.notification.NotificationResponse
+import com.programmer.finalproject.model.notification.UpdateNotifResponse
 import com.programmer.finalproject.model.otp.OTPRequest
 import com.programmer.finalproject.model.otp.OTPResponse
 import com.programmer.finalproject.model.payment.HistoryPaymentResponse
 import com.programmer.finalproject.model.payment.OrderRequest
 import com.programmer.finalproject.model.payment.OrderResponse
-
-import com.programmer.finalproject.model.user.UserDetailResponse
+import com.programmer.finalproject.model.payment.order.PutOrderRequest
+import com.programmer.finalproject.model.register.RegisterRequest
+import com.programmer.finalproject.model.register.RegisterResponse
+import com.programmer.finalproject.model.tracker.GetTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerByIdResponse
+import com.programmer.finalproject.model.tracker.PutTrackerRequest
+import com.programmer.finalproject.model.tracker.TrackerRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordRequest
 import com.programmer.finalproject.model.user.password.ChangePasswordResponse
-import com.programmer.finalproject.model.user.password.ResetPasswordResponse
 import com.programmer.finalproject.model.user.password.ResetPasswordRequest
+import com.programmer.finalproject.model.user.password.ResetPasswordResponse
 import com.programmer.finalproject.model.user.update.ProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -31,11 +34,13 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -49,9 +54,10 @@ interface ApiService {
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
 
-
     @GET("courses")
-    fun getCourses(): Call<CoursesResponse>
+    fun getCourses(
+        @Query("category") categoryFilter: String?
+    ): Call<CoursesResponse>
 
     @GET("categories")
     fun getCategories(): Call<CategoryResponse>
@@ -130,4 +136,46 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("progress") progress: String
     ): Call<TrackerResponse>
+
+    @GET("notifications")
+    fun getNotification(
+        @Header("Authorization") token: String,
+    ): Call<NotificationResponse>
+
+
+    @PUT("notifications/{notif_id}")
+    fun readNotification(
+        @Header("Authorization") token: String,
+        @Path("notif_id") notif_id: String
+    ): Call<UpdateNotifResponse>
+
+    @PUT("orders/{order_id}")
+    fun putOrder(
+        @Header("Authorization") token: String,
+        @Path("order_id") order_id: String,
+        @Body putOrderRequest: PutOrderRequest
+    ): Call<OrderResponse>
+
+    @GET("chapters/{chapterId}")
+    suspend fun getChaptersById(
+        @Path("chapterId") chapterId: String
+    ): Response<ChapterResponse>
+
+    @POST("trackers")
+    suspend fun postTracker(
+        @Header("Authorization") token: String,
+        @Body trackerRequest: TrackerRequest
+    ): Response<TrackerResponse>
+
+    @GET("trackers/{course_id}")
+    suspend fun getTrackerById(
+        @Path("course_id") courseId: String
+    ): Response<GetTrackerByIdResponse>
+
+    @PUT("trackers/{course_id}")
+    suspend fun putTrackerById(
+        @Path("course_id") courseId: String,
+        @Body putTrackerRequest: PutTrackerRequest
+    ): Response<PutTrackerByIdResponse>
+
 }

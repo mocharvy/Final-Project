@@ -1,27 +1,23 @@
 package com.programmer.finalproject.ui.bottomsheet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.MustLoginBottomSheetBinding
-import com.programmer.finalproject.databinding.OnboardingBottomSheetBinding
+import com.programmer.finalproject.ui.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MustLoginBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: MustLoginBottomSheetBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = MustLoginBottomSheetBinding.inflate(inflater, container, false)
@@ -31,11 +27,16 @@ class MustLoginBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             btLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_mustLoginBottomSheet_to_loginFragment)
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
             }
-
+            close.setOnClickListener{
+                dismiss()
+            }
         }
     }
 }

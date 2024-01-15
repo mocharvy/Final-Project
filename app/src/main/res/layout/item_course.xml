@@ -80,7 +80,7 @@
             android:id="@+id/iv_level"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_level"
@@ -95,16 +95,17 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/intermediate"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/light_blue_alt"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_level"
-            app:layout_constraintTop_toTopOf="@id/iv_level" />
+            app:layout_constraintTop_toTopOf="@id/iv_level"
+            tools:ignore="TextContrastCheck" />
 
         <ImageView
             android:id="@+id/iv_module"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_module"
             app:layout_constraintStart_toEndOf="@id/tv_level"
@@ -119,7 +120,6 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/_5_0"
-            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_module"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -131,7 +131,6 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/modul"
-            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/tv_module"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -155,7 +154,6 @@
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/_5_0"
-            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/text_time"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -167,7 +165,6 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/menit"
-            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_level" />
@@ -182,6 +179,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/mulai_kelas"
             android:textStyle="bold"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_level"
             tools:ignore="TouchTargetSizeCheck" />

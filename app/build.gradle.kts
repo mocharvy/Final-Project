@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.media3:media3-exoplayer-hls:1.2.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -104,11 +106,9 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("com.github.appsfeature:otp-view:1.0")
 
-    //Media3 ExoPlayer
-    implementation ("androidx.media3:media3-exoplayer:1.2.0")
-    implementation ("androidx.media3:media3-exoplayer-dash:1.2.0")
-    implementation ("androidx.media3:media3-ui:1.2.0")
+    //Youtube player
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
-    //Material Design
-    implementation ("com.google.android.material:material:1.10.0")
+    //Lottie
+    implementation ("com.airbnb.android:lottie:5.0.3")
 }

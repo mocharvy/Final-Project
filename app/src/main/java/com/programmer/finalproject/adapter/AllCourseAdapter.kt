@@ -16,10 +16,11 @@ class AllCourseAdapter(
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<AllCourseAdapter.MyViewHolder>() {
 
-    private var course = emptyList<DataItem>()
+    var course = emptyList<DataItem>()
 
-    class MyViewHolder(private val binding: ItemCourseBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(
+        private val binding: ItemCourseBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dataCourse: DataItem, onItemClick: (String) -> Unit) {
             binding.apply {
@@ -35,6 +36,11 @@ class AllCourseAdapter(
 
                 if (type == "Free") {
                     btPrice.text = itemView.context.getString(R.string.mulai_kelas)
+                    btPrice.setOnClickListener {
+                        dataCourse.id?.let { courseId ->
+                            onItemClick(courseId)
+                        }
+                    }
                 } else {
                     btPrice.text = buildString {
                         append(itemView.context.getString(R.string.beli_rp))
@@ -46,6 +52,11 @@ class AllCourseAdapter(
                             R.color.light_blue_alt
                         )
                     )
+                    btPrice.setOnClickListener {
+                        dataCourse.id?.let { courseId ->
+                            onItemClick(courseId)
+                        }
+                    }
                 }
 
                 itemView.setOnClickListener {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final Project</string>
+    <string name="app_name" translatable="false">Final Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="cari_kursus_terbaik">Cari kursus terbaik...</string>
     <string name="topik_kelas">Topik Kelas</string>
@@ -7,63 +7,66 @@
     <string name="semua_kelas">Semua kelas</string>
     <string name="kelas_gratis">Kelas gratis</string>
     <string name="kelas_premium">Kelas premium</string>
-    <string name="ui_ux_design">UI/UX</string>
-    <string name="membuat_ui_ux_design">Membuat UI/UX Design</string>
-    <string name="john_doe">John Doe</string>
-    <string name="beginner">Beginner</string>
+    <string name="ui_ux_design" translatable="false">UI/UX</string>
+    <string name="membuat_ui_ux_design" translatable="false">Membuat UI/UX Design</string>
+    <string name="john_doe" translatable="false">John Doe</string>
+    <string name="beginner">Pemula</string>
     <string name="_60_menit">60 Menit</string>
     <string name="_10_modul">10 Modul</string>
     <string name="_5_0">5.0</string>
     <string name="mulai_kelas">Mulai kelas</string>
-    <string name="course_image">Course image</string>
-    <string name="tab_layout">Tab layout</string>
-    <string name="gabung_group_telegram">Gabung Group Telegram</string>
-    <string name="tentang_kelas">Tentang Kelas</string>
-    <string name="text_desc">Ini adalah penjelasan tentang kelas. Apa saja boleh ditulis disini asalkan rapih.</string>
-    <string name="kelas_ini_ditujukan">Kelas ini ditujukan untuk</string>
-    <string name="rekomendasi">Rekomendasi</string>
-    <string name="terbaru">Paling Baru</string>
-    <string name="terpopuler">Terpopuler</string>
-    <string name="promo">Promo</string>
-    <string name="kategori">Kategori</string>
-    <string name="web_development">Web Development</string>
-    <string name="android_development">Android</string>
-    <string name="data_science">Data Science</string>
-    <string name="business_intelligent">Business Intelligent</string>
-    <string name="level">Level</string>
-    <string name="advanced">Advanced</string>
-    <string name="intermediate">Intermediate</string>
-    <string name="semua_level">Semua level</string>
-    <string name="terapkan_filter">Terapkan Filter</string>
-    <string name="akun">Akun</string>
-    <string name="profile_saya">Ubah Profile</string>
-    <string name="riwayat_pembayaran">Riwayat Pembayaran</string>
-    <string name="version">Version 1.0</string>
-    <string name="keluar">Keluar</string>
-    <string name="masukkan_password_baru">Masukkan Password Baru</string>
-    <string name="ulangi_password_baru">Ulangi Password Baru</string>
-    <string name="masukkan_password_lama">Masukkan Password Lama</string>
-    <string name="email">Email</string>
-    <string name="nomor_telepon">Nomor Telepon</string>
-    <string name="masukan_negara_tempat_tinggal">Masukan Negara tempat tinggal</string>
-    <string name="simpan_profile_saya">Simpan Profile Saya</string>
-    <string name="harga">Harga</string>
-    <string name="rp">Rp.</string>
-    <string name="_123456">123456</string>
-    <string name="ppn_11">PPN 11%</string>
-    <string name="total">Total</string>
-    <string name="bank_transfer">Bank Transfer</string>
-    <string name="account_number">Account number</string>
-    <string name="_012345678">012345678</string>
-    <string name="account_name">Account name</string>
-    <string name="binar">Binar</string>
-    <string name="binar_bank">Binar Bank</string>
-    <string name="total_transfer">Total transfer</string>
-    <string name="credit_card">Credit Card</string>
-    <string name="card_number">Card number</string>
-    <string name="card_holder_name">Card holder name</string>
+    <string name="course_image">Gambar kursus</string>
+    <string name="tab_layout" translatable="false">Tab layout</string>
+    <string name="gabung_group_telegram" translatable="false">Gabung Group Telegram</string>
+    <string name="tentang_kelas" translatable="false">Tentang Kelas</string>
+    <string name="text_desc" translatable="false">Ini adalah penjelasan tentang kelas. Apa saja boleh ditulis disini asalkan rapih.</string>
+    <string name="kelas_ini_ditujukan" translatable="false">Kelas ini ditujukan untuk</string>
+    <string name="rekomendasi" translatable="false">Rekomendasi</string>
+    <string name="terbaru" translatable="false">Paling Baru</string>
+    <string name="terpopuler" translatable="false">Terpopuler</string>
+    <string name="promo" translatable="false">Promo</string>
+    <string name="kategori" translatable="false">Kategori</string>
+    <string name="web_development" translatable="false">Web Development</string>
+    <string name="android_development" translatable="false">Android</string>
+    <string name="data_science" translatable="false">Data Science</string>
+    <string name="business_intelligent" translatable="false">Business Intelligent</string>
+    <string name="level" translatable="false">Level</string>
+    <string name="advanced" translatable="false">Advanced</string>
+    <string name="intermediate" translatable="false">Intermediate</string>
+    <string name="semua_level" translatable="false">Semua level</string>
+    <string name="terapkan_filter" translatable="false">Terapkan Filter</string>
+    <string name="akun" translatable="false">Akun</string>
+    <string name="profile_saya" translatable="false">Ubah Profile</string>
+    <string name="riwayat_pembayaran" translatable="false">Riwayat Pembayaran</string>
+    <string name="version" translatable="false">Version 1.0</string>
+    <string name="keluar" translatable="false">Keluar</string>
+    <string name="masukkan_password_baru" translatable="false">Masukkan Password Baru</string>
+    <string name="ulangi_password_baru" translatable="false">Ulangi Password Baru</string>
+    <string name="masukkan_password_lama" translatable="false">Masukkan Password Lama</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="nomor_telepon" translatable="false">Nomor Telepon</string>
+    <string name="masukan_negara_tempat_tinggal" translatable="false">Masukan Negara tempat tinggal</string>
+    <string name="simpan_profile_saya" translatable="false">Simpan Profile Saya</string>
+    <string name="harga" translatable="false">Harga</string>
+    <string name="rp" translatable="false">Rp.</string>
+    <string name="_123456" translatable="false">123456</string>
+    <string name="ppn_11" translatable="false">PPN 10%</string>
+    <string name="total" translatable="false">Total</string>
+    <string name="bank_transfer" translatable="false">Bank Transfer</string>
+    <string name="account_number" translatable="false">Account number</string>
+    <string name="_012345678" translatable="false">012345678</string>
+    <string name="account_name" translatable="false">Account name</string>
+    <string name="binar" translatable="false">Binar</string>
+    <string name="binar_bank" translatable="false">Binar Bank</string>
+    <string name="total_transfer" translatable="false">Total transfer</string>
+    <string name="credit_card">Kartu Kredit</string>
+    <string name="welcome">Selama Datang!</string>
+    <string name="welcome_messages">Tingkatkan skill mu bersama kami</string>
+    <string name="dev" translatable="false">Dev Academy</string>
+    <string name="card_number">Nomor kartu</string>
+    <string name="card_holder_name">Nama pemegang kartu</string>
     <string name="cvv">CVV</string>
-    <string name="expire_date">Expire date</string>
+    <string name="expire_date">Tanggal kadaluarsa</string>
     <string name="bayar_dan_ikuti">Bayar dan Ikuti kelas selamanya</string>
     <string name="_10">10</string>
     <string name="modul">Modul</string>
@@ -72,13 +75,110 @@
     <string name="nama">Nama</string>
     <string name="beli_rp">Beli Rp.</string>
     <string name="no_telepon">No telepon</string>
-    <string name="logit">Jika Anda yakin untuk keluar sekarang, silahkan klik tombol Keluar, tetapi Anda dapat kembali lagi nanti</string>
+    <string name="logit">Sepi ni gak ada kamu. Cepet balik ya</string>
     <string name="history_payment">Kamu belum punya riwayat transaksi..</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="txt_email">Masukan Email anda untuk mengatur ulang\nkata sandi</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="email_invalid">Email tidak valid</string>
+    <string name="login_now">Masuk dan mulai perjalananmu!</string>
+    <string name="enter_your_email">Masukan email</string>
+    <string name="enter_your_password">Masukan password</string>
+    <string name="join_us">Bergabung dan tingkatkan skill mu</string>
+    <string name="don_t_have">Belum punya akun?</string>
+    <string name="invalid_password">Password harus >= 8 karakter</string>
+    <string name="field_can_not_be_empty">Field tidak boleh kosong</string>
+    <string name="already_have_an_account">Sudah punya akun?</string>
+    <string name="txt_email">Masukan email untuk mereset passwrod mu</string>
     <string name="verif_email">Cek Email Anda untuk memverifikasi Akun</string>
     <string name="pendaftaran_berhasil">Pendaftaran Akun anda Berhasil</string>
-    <string name="product_manager">Product Manager</string>
+    <string name="product_manager" translatable="false">Product Manager</string>
     <string name="ios">IOS</string>
+    <string name="selangkah_lagi_menuju">Selangkah Lagi Menuju</string>
+    <string name="materi_belajar">Materi Belajar</string>
+    <string name="chapter">Chapter</string>
+    <string name="pendahuluan">Pendahuluan</string>
+    <string name="strip">-</string>
+    <string name="_1">1</string>
+    <string name="pelajaran_dasar">Pelajaran dasar</string>
+    <string name="course_id">Course ID</string>
+    <string name="password">Password</string>
+    <string name="log_in">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="nama_lengkap">Nama</string>
+    <string name="enter_your_name">Masukan nama mu</string>
+    <string name="enter_your_phone_number">Nomor telepon (tanpa 0)</string>
+    <string name="phone_number">Nomor telepon</string>
+    <string name="enter_as_guest">Masuk sebagai tamu</string>
+    <string name="logo_image" translatable="false">Logo image</string>
+    <string name="explore_the_possibility">Jelajahi semua kemungkinan!</string>
+    <string name="please_wait">Mohon tunggu...</string>
+    <string name="enter_your_otp_code">Masukan kode OTP</string>
+    <string name="otp_code_confirmation">Konfirmasi kode OTP</string>
+    <string name="timer">Waktu</string>
+    <string name="re_send_code">Kirim ulang kode</string>
+    <string name="learn_from_the_best_expert">Belajar dari ahli terbaik</string>
+    <string name="skip" translatable="false">Skip</string>
+    <string name="skip_button" translatable="false">Skip button</string>
+    <string name="are_you_sure">Apakah kamu yakin?</string>
+    <string name="log_out">Keluar</string>
+    <string name="waiting_for_payment">Menunggu pembayaran</string>
+    <string name="paid">Lunas</string>
+    <string name="cancel">Batal</string>
+    <string name="forgot_password">Lupa password?</string>
+    <string name="email_not_found">Email tidak ditemukan</string>
+    <string name="send_link">Kirim link</string>
+    <string name="link_sent">Link terkirim. Silahkan masuk kembali dengan akun anda</string>
+    <string name="back_to_log_in">Kembali ke log in</string>
+    <string name="persiapan">Persiapan</string>
+    <string name="buy_course">Beli Course</string>
+    <string name="premium_class">Kelas Premium</string>
+    <string name="one_step_closer_to">Selangkah lebih dekat</string>
+    <string name="place_order">Pesan course</string>
+    <string name="join_class">Apakah anda ingin bergabung dalam kelas ini?</string>
+    <string name="join">Gabung kelas</string>
+    <string name="payment_successful">Pembayaran sukses</string>
+    <string name="yeay">Yeay!</string>
+    <string name="your_order_is_complete">Ordermu selesai</string>
+    <string name="go_to_class">Pergi ke Kelas</string>
+    <string name="back_to_home">Kembali ke Home</string>
+    <string name="find_your_dream_course">Temukan course impianmu...</string>
+    <string name="category">Kategori</string>
+    <string name="joined_class">Progress Kelas</string>
+    <string name="order_history">Riwayat pesanan</string>
+    <string name="join_class_and_explore_the_possibility">Gabung kelas dan tingkatkan skillm mu!</string>
+    <string name="your_order_is_empty">Pesananmu kosong...</string>
+    <string name="change_profile">Rubah profil</string>
+    <string name="account">Akun</string>
+    <string name="change_password">Ubah password</string>
+    <string name="choose_methode">Pillih methode</string>
+    <string name="pay_and_enjoy_the_course_forever">Bayar dan pelajari course selamanya</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+
+
+    <string name="pengingat">Pengingat</string>
+    <string name="notif_title">Pengingat untuk belajar harian</string>
+    <string name="pref_dark_title">Dark mode</string>
+    <string name="pref_key_dark" translatable="false">key_dark_mode</string>
+    <string name="pref_dark_auto" translatable="false">auto</string>
+    <string name="pref_dark_on" translatable="false">on</string>
+    <string name="pref_dark_off" translatable="false">off</string>
+    <string name="dark_mode_auto">Automatic</string>
+    <string name="dark_mode_on">Dark mode</string>
+    <string name="dark_mode_off">Light mode</string>
+    <string name="pref_key_notify">key_notification</string>
+    <string name="pref_notify_name">Raih impianmu dengan belajar setiap hari</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="anda_belum">Anda Belum Memiliki Notifikasi Masuk</string>
+    <string name="kelas_yang_kamu_cari_tidak_ada">Kelas yang kamu cari tidak ada</string>
+    <string name="coba_dengan_pencarian_yang_berbeda">Coba dengan pencarian yang berbeda</string>
+    <string name="kembali_ke_beranda">Kembali ke Beranda</string>
+    <string name="e_receipt_telah_dikirimkan_ke_email">E-receipt telah dikirimkan ke email.</string>
+    <string name="transaksi_pembayaran_kelas_premium_berhasil">Transaksi pembayaran kelas premium berhasil!</string>
+    <string name="selamat">Selamat!</string>
+    <string name="menuju_course_impianmu">Menuju course impianmu</string>
+    <string name="gabung_kelas">Gabung kelas</string>
+    <string name="ikuti_kelas">Ikuti kelas (gratis)</string>
 </resources>

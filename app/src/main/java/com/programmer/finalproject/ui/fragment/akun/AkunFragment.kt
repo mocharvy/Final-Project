@@ -11,14 +11,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.bumptech.glide.Glide
 import com.programmer.finalproject.R
 import com.programmer.finalproject.databinding.DialogLogoutBinding
 import com.programmer.finalproject.databinding.FragmentAkunBinding
-import com.programmer.finalproject.model.user.UserDetailResponse
 import com.programmer.finalproject.model.user.update.ProfileResponse
-import com.programmer.finalproject.ui.fragment.auth.AuthViewModel
+import com.programmer.finalproject.ui.LoginActivity
+import com.programmer.finalproject.ui.SettingActivity
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import com.programmer.finalproject.utils.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +27,7 @@ class AkunFragment : Fragment() {
     private lateinit var binding: FragmentAkunBinding
 
     private val akunViewModel: AkunViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +36,12 @@ class AkunFragment : Fragment() {
         binding = FragmentAkunBinding.inflate(layoutInflater, container, false)
 
         getUserDetail()
-        //observeUserDetailResponse()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             tvProfile.setOnClickListener {
                 findNavController().navigate(R.id.action_akunFragment_to_editProfileFragment)
@@ -56,6 +55,10 @@ class AkunFragment : Fragment() {
             tvLogout.setOnClickListener {
                 showDialogLogout()
             }
+            tvAppSetting.setOnClickListener {
+                val intent = Intent(context, SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -66,9 +69,12 @@ class AkunFragment : Fragment() {
         logoutDialogBuilder.setCancelable(true)
         val logoutDialog = logoutDialogBuilder.show()
         logout.btnLogout.setOnClickListener {
-          authViewModel.logout()
+            loginViewModel.logout()
 
             logoutDialog.dismiss()
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
 
         }
         logout.btnDismiss.setOnClickListener {
@@ -77,25 +83,27 @@ class AkunFragment : Fragment() {
     }
 
     private fun getUserDetail() {
-        Log.d("Get User Detail", "getUserDetail fun called")
-        authViewModel.token.observe(viewLifecycleOwner) {
+        loginViewModel.token.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d("TOKEN", it)
                 binding.clAkun.visibility = View.VISIBLE
-                binding.toLogin.visibility=View.GONE
+                binding.toLogin.visibility = View.GONE
                 akunViewModel.getUserDetail("Bearer $it")
                 observeUserDetailResponse()
+
             } else {
-                binding.toLogin.visibility=  View.VISIBLE
+                binding.toLogin.visibility = View.VISIBLE
                 binding.clAkun.visibility = View.GONE
                 binding.toLogin.setOnClickListener {
-                    findNavController().navigate(R.id.action_akunFragment_to_loginFragment)
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
-                Toast.makeText(requireActivity(), "Access token is null", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Anda harus masuk terlebih dahulu", Toast.LENGTH_SHORT).show()
                 hideLoading()
             }
         }
     }
+
 
     private fun observeUserDetailResponse() {
         akunViewModel.userDetailResponse.observe(viewLifecycleOwner) { result ->
@@ -133,9 +141,9 @@ class AkunFragment : Fragment() {
         Glide.with(requireActivity())
             .load(userDetail.data.photo)
             .centerCrop()
-            .into(binding.ivProfile);
+            .into(binding.ivProfile)
         binding.tvName.text = userDetail.data.name
         binding.tvEmail.text = userDetail.data.email
-        binding.tvPhone.text = "+62${userDetail.data.phone_number}"
+        binding.tvPhone.text = userDetail.data.phone_number
     }
 }

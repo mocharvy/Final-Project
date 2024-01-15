@@ -1,35 +1,71 @@
 package com.programmer.finalproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.programmer.finalproject.databinding.ActivityMainBinding
+import com.programmer.finalproject.ui.bottomsheet.MustLoginBottomSheet
+import com.programmer.finalproject.ui.fragment.auth.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
+
+    private val loginViewModel: LoginViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBottomNav()
+        checkLogin()
+
     }
+
+    private fun checkLogin() {
+        loginViewModel.token.observe(this) {
+            if (it == null) {
+                navController = findNavController(R.id.nav_host)
+
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    when (destination.id) {
+                        R.id.notifikasiFragment, R.id.akunFragment, R.id.kelasFragment -> {
+                            val bottomSheetFragmentMustLogin = MustLoginBottomSheet()
+                            bottomSheetFragmentMustLogin.show(
+                                supportFragmentManager,
+                                bottomSheetFragmentMustLogin.tag
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun setupBottomNav() {
-        binding.apply {
-            navController = findNavController(R.id.nav_host)
 
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (destination.id == R.id.kelasFragment || destination.id == R.id.berandaFragment || destination.id == R.id.notifikasiFragment||destination.id == R.id.akunFragment||destination.id == R.id.kursusFragment) {
-                    binding.navBottom.setupWithNavController(navController)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+
+        val navController = navHostFragment.navController
+        binding.navBottom.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.berandaFragment, R.id.notifikasiFragment, R.id.kelasFragment, R.id.kursusFragment, R.id.akunFragment -> {
                     binding.navBottom.visibility = View.VISIBLE
+                }
 
-                } else {
+                else -> {
                     binding.navBottom.visibility = View.GONE
                 }
             }
